@@ -26,7 +26,7 @@ namespace Droid_Infra
         public DockerMachine()
         {
             _machines = new List<Machine>();
-            LoadMachines();
+            //LoadMachines();
         }
         #endregion
 

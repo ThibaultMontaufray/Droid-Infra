@@ -25,19 +25,19 @@
         public DockerManagerView()
         {
             InitializeComponent();
-            InitializeEnvironment();
+            //InitializeEnvironment();
         }
         #endregion
 
         #region Methods public
-        #endregion
-
-        #region Methods private
-        private void InitializeEnvironment()
+        public void InitializeEnvironment()
         {
             _dockerMachine = new DockerMachine();
             RefreshMachineList();
         }
+        #endregion
+
+        #region Methods private
         private void BuildMachineCreator()
         {
             ListViewItem lvi = new ListViewItem("Create new docker machine");

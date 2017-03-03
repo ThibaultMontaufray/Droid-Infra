@@ -16,7 +16,7 @@ namespace Droid_Infra
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new DisplayDeployerPreview());
-            Application.Run(new DemoSyncany());
+            Application.Run(new Demo());
         }
     }
 }

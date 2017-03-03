@@ -65,7 +65,7 @@
         #region Constructor
         public Boot2Docker()
         {
-            RefreshInfo();
+            //RefreshInfo();
         }
         #endregion
 

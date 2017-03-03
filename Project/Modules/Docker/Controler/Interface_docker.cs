@@ -25,9 +25,9 @@
         #region ACTIONS
         public static void ACTION_lancer_docker_130()
         {
-            DisplayDeployerPreview ddp = new DisplayDeployerPreview();
-            ddp.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            ddp.ShowDialog();
+            ViewDocker ddp = new ViewDocker();
+            //ddp.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            //ddp.ShowDialog();
         }
         #endregion
 

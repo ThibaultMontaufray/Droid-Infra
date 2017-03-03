@@ -1,6 +1,6 @@
 ﻿namespace Droid_Infra
 {
-    partial class DisplayDeployerPreview
+    partial class ViewDocker
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             Droid_Infra.DockerMachine dockerMachine1 = new Droid_Infra.DockerMachine();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DisplayDeployerPreview));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewDocker));
             dockerManagerView1 = new Droid_Infra.DockerManagerView();
             SuspendLayout();
             // 
@@ -48,7 +48,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1008, 561);
             Controls.Add(dockerManagerView1);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            //FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             Name = "DEMO";
             Text = "DEMO Docker";
             ResumeLayout(false);

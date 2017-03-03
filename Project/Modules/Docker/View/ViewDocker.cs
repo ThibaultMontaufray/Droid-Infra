@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace Droid_Infra
 {
-    public partial class DisplayDeployerPreview : Form
+    public partial class ViewDocker : UserControl
     {
-        public DisplayDeployerPreview()
+        public ViewDocker()
         {
             InitializeComponent();
         }
