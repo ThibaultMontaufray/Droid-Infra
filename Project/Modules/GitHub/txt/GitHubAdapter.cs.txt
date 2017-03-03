@@ -1,0 +1,80 @@
+﻿using Octokit;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Manager_deployer
+{
+    public delegate void GitHubAdapterEventHandler();
+    public class GitHubAdapter
+    {
+        #region Attribute
+        public event GitHubAdapterEventHandler StatusChanged;
+        public event GitHubAdapterEventHandler ConnectionFailled;
+        private bool _isLoggedIn;
+        private Octokit.User _currentUser;
+        private GitHubClient _client;
+        #endregion
+
+        #region Properties
+        public bool IsLoggedIn
+        {
+            get { return _isLoggedIn; }
+            set { _isLoggedIn = value; }
+        }
+        public Octokit.User CurrentUser
+        {
+            get { return _currentUser; } 
+        }
+        #endregion
+
+        #region Constructor
+        public GitHubAdapter()
+        {
+            _isLoggedIn = false;
+        }
+        #endregion
+
+        #region Methods public
+        public async void LogUser(string user, string pwd, string url)
+        {
+            try
+            {
+                var ghe = new Uri(url);
+                _client = new GitHubClient(new ProductHeaderValue("TIGitHubBOT"), ghe);
+                var basicAuth = new Credentials(user, pwd);
+                _client.Credentials = basicAuth;
+
+                _currentUser = await _client.User.Current();
+                _isLoggedIn = true;
+
+                if (StatusChanged != null)
+                {
+                    StatusChanged();
+                }
+            }
+            catch (Exception)
+            {
+                if (ConnectionFailled != null)
+                { 
+                    ConnectionFailled();
+                }
+            }
+        }
+        public void LogOff()
+        {
+            _client = null;
+            _isLoggedIn = false;
+
+            if (StatusChanged != null)
+            {
+                StatusChanged();
+            }
+        }
+        #endregion
+
+        #region Methods private
+        #endregion
+    }
+}

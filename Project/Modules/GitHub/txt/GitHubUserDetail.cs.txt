@@ -1,0 +1,62 @@
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Net;
+
+namespace Manager_deployer.GitHub
+{
+    public partial class GitHubUserDetail : UserControl
+    {
+        #region Attribute
+        private GitHubAdapter _gha;
+        #endregion
+
+        #region Properties
+        public GitHubAdapter GitHubAdapter
+        {
+            get { return _gha; }
+            set
+            {
+                _gha = value;
+                LoadData();
+            }
+        }
+        #endregion
+
+        #region Constructor
+        public GitHubUserDetail()
+        {
+            InitializeComponent();
+        }
+        #endregion
+
+        #region Methods private
+        private void LoadData()
+        {
+            if (_gha != null)
+            { 
+                labelUserName.Text = _gha.CurrentUser.Name;
+                labelInfoRepository.Text = string.Format("Repositories [{0}]", _gha.CurrentUser.OwnedPrivateRepos);
+                labelInfoFollower.Text = string.Format("Followers [{0}]", _gha.CurrentUser.Followers);
+                labelInfoFollowing.Text = string.Format("Following [{0}]", _gha.CurrentUser.Following);
+                labelUserLocation.Text = "From : " + _gha.CurrentUser.Location;
+                labelUserArrival.Text = "Insciption : " + _gha.CurrentUser.CreatedAt.ToString("dd/MM/yyyy hh:mm:ss");
+
+                var request = WebRequest.Create(_gha.CurrentUser.AvatarUrl);
+                using (var response = request.GetResponse())
+                using (var stream = response.GetResponseStream())
+                {
+                    pictureBoxAvatar.Image = Bitmap.FromStream(stream);
+                }
+            }
+        }
+        #endregion
+
+        #region Event
+        private void buttonLogOff_Click(object sender, EventArgs e)
+        {
+            _gha.LogOff();
+        }
+        #endregion
+    }
+}

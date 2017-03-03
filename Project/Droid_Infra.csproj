@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6827572C-022E-4C94-8E6C-4F4FC7AEAB18}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Droid_Infra</RootNamespace>
+    <AssemblyName>Droid_Infra</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>lib\4.5.1\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Atlassian.Jira, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Atlassian.SDK.5.10.0\lib\Atlassian.Jira.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Octokit, Version=0.24.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Octokit.0.24.0\lib\net45\Octokit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\RestSharp.105.2.2\lib\net451\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tools4Libraries, Version=1.0.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Tools4Libraries.1.0.17\lib\4.5.1\Tools4Libraries.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Tools4Libraries.Slider, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Tools4Libraries.1.0.17\lib\4.5.1\Tools4Libraries.Slider.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Infra\Controler\Interface_Infra.cs" />
+    <Compile Include="Modules\Syncany\View\CloudStatus.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Syncany\View\CloudStatus.Designer.cs">
+      <DependentUpon>CloudStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\Controler\Command.cs" />
+    <Compile Include="Modules\Docker\Model\Authentication.cs" />
+    <Compile Include="Modules\Docker\Model\Boot2Docker.cs" />
+    <Compile Include="Modules\Docker\Model\DockerMachine.cs" />
+    <Compile Include="Modules\Docker\Model\Engine.cs" />
+    <Compile Include="Modules\Docker\Model\Machine.cs" />
+    <Compile Include="Modules\Docker\Model\Swarm.cs" />
+    <Compile Include="Modules\Docker\Model\VirtualMachine.cs" />
+    <Compile Include="Modules\Docker\Model\Driver.cs" />
+    <Compile Include="Modules\Docker\Model\Host.cs" />
+    <Compile Include="Modules\GitHub\Controler\CreateGitHubIssue.cs" />
+    <Compile Include="Modules\GitHub\Controler\GitHubAdapter.cs" />
+    <Compile Include="Modules\GitHub\View\GitHubGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\GitHub\View\GitHubGUI.Designer.cs">
+      <DependentUpon>GitHubGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\GitHub\View\GitHubUserDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\GitHub\View\GitHubUserDetail.Designer.cs">
+      <DependentUpon>GitHubUserDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\GitHub\View\GitHubLogger.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\GitHub\View\GitHubLogger.Designer.cs">
+      <DependentUpon>GitHubLogger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\Controler\Interface_docker.cs" />
+    <Compile Include="Modules\Jira\JiraAdapter.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Modules\Docker\View\DisplayDeployerPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\View\DisplayDeployerPreview.Designer.cs">
+      <DependentUpon>DisplayDeployerPreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\View\DockerManagerView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\View\DockerManagerView.Designer.cs">
+      <DependentUpon>DockerManagerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ConsoleLauncher.cs" />
+    <Compile Include="Modules\Syncany\Controler\Interface_syncany.cs" />
+    <Compile Include="Modules\Syncany\Model\Daemon.cs" />
+    <Compile Include="Modules\Syncany\Controler\SyncanyAdapter.cs" />
+    <Compile Include="Modules\Syncany\Model\Plugin.cs" />
+    <Compile Include="Modules\Syncany\Model\Watch.cs" />
+    <Compile Include="Modules\Syncany\View\CloudView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Syncany\View\CloudView.Designer.cs">
+      <DependentUpon>CloudView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Syncany\View\DemoSyncany.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Syncany\View\DemoSyncany.Designer.cs">
+      <DependentUpon>DemoSyncany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Syncany\View\SyncanyAdaptaterView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Syncany\View\SyncanyAdaptaterView.Designer.cs">
+      <DependentUpon>SyncanyAdaptaterView.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\Syncany\View\CloudStatus.resx">
+      <DependentUpon>CloudStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\GitHub\Controler\CreateGitHubIssue.resx">
+      <DependentUpon>CreateGitHubIssue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\GitHub\View\GitHubGUI.resx">
+      <DependentUpon>GitHubGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\GitHub\View\GitHubUserDetail.resx">
+      <DependentUpon>GitHubUserDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\GitHub\View\GitHubLogger.resx">
+      <DependentUpon>GitHubLogger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\View\DisplayDeployerPreview.resx">
+      <DependentUpon>DisplayDeployerPreview.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\View\DockerManagerView.resx">
+      <DependentUpon>DockerManagerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Syncany\View\CloudView.resx">
+      <DependentUpon>CloudView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Syncany\View\DemoSyncany.resx">
+      <DependentUpon>DemoSyncany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Syncany\View\SyncanyAdaptaterView.resx">
+      <DependentUpon>SyncanyAdaptaterView.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infra\Model\" />
+    <Folder Include="Infra\View\" />
+    <Folder Include="Modules\Jenkins\" />
+    <Folder Include="Modules\Sonar\" />
+    <Folder Include="Modules\TeamCity\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
