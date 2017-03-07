@@ -13,6 +13,8 @@ namespace Droid_Infra
     public partial class Demo : Form
     {
         #region Attribute
+        private readonly string WORKING_DIRECTORY = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Servodroid\Droid-Infra";
+
         private Ribbon _ribbon;
         private Interface_infra _intInf;
 
@@ -26,7 +28,7 @@ namespace Droid_Infra
         #region Constructor
         public Demo()
         {
-            Tools4Libraries.Log.ApplicationAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Servodroid\Droid-Infra";
+            Tools4Libraries.Log.ApplicationAppData = WORKING_DIRECTORY;
 
             InitializeComponent();
             Init();

@@ -5,5 +5,11 @@
     <Setting Name="Language" Type="System.String" Scope="User">
       <Value Profile="(Default)">English</Value>
     </Setting>
+    <Setting Name="User" Type="System.String" Scope="User">
+      <Value Profile="(Default)">TobiAssistant</Value>
+    </Setting>
+    <Setting Name="Password" Type="System.String" Scope="User">
+      <Value Profile="(Default)">t0b!PWD!!!</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

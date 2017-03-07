@@ -63,6 +63,7 @@ namespace Droid_Infra
             set
             {
                 _infraModules = value;
+                LoadModules();
             }
         }
         #endregion
@@ -96,20 +97,20 @@ namespace Droid_Infra
         }
         private void LoadModules()
         {
-            _panelSyncany.Visible = _infraModules.Contains(INFRA_MODULE.CLOUD);
-            _panelDocker.Visible = _infraModules.Contains(INFRA_MODULE.DOCKER);
-            _panelGitHub.Visible = _infraModules.Contains(INFRA_MODULE.GITHUB);
-            _panelJenkins.Visible = _infraModules.Contains(INFRA_MODULE.JENKINS);
-            _panelJira.Visible = _infraModules.Contains(INFRA_MODULE.JIRA);
-            _panelSonar.Visible = _infraModules.Contains(INFRA_MODULE.SONAR);
-            _panelTeamCity.Visible = _infraModules.Contains(INFRA_MODULE.TEAMCITY);
+            if (_panelSyncany != null) _panelSyncany.Visible = _infraModules.Contains(INFRA_MODULE.CLOUD);
+            if (_panelDocker != null) _panelDocker.Visible = _infraModules.Contains(INFRA_MODULE.DOCKER);
+            if (_panelGitHub != null) _panelGitHub.Visible = _infraModules.Contains(INFRA_MODULE.GITHUB);
+            if (_panelJenkins != null) _panelJenkins.Visible = _infraModules.Contains(INFRA_MODULE.JENKINS);
+            if (_panelJira != null) _panelJira.Visible = _infraModules.Contains(INFRA_MODULE.JIRA);
+            if (_panelSonar != null) _panelSonar.Visible = _infraModules.Contains(INFRA_MODULE.SONAR);
+            if (_panelTeamCity != null) _panelTeamCity.Visible = _infraModules.Contains(INFRA_MODULE.TEAMCITY);
         }
 
         private void BuildPanelDocker()
         {
             _dockerManage = new RibbonButton("Manage");
-            _dockerManage.Image = Tools4Libraries.Resources.ResourceIconSet32Default.application_view_tile;
-            _dockerManage.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.application_view_tile;
+            _dockerManage.Image = Properties.Resources.docker;
+            _dockerManage.SmallImage = Properties.Resources.docker;
             _dockerManage.Click += _DockerClick;
 
             _dockerInit = new RibbonButton("Init");
@@ -138,8 +139,8 @@ namespace Droid_Infra
         private void BuildPanelSyncany()
         {
             _syncanyManage = new RibbonButton("Manage");
-            _syncanyManage.Image = Tools4Libraries.Resources.ResourceIconSet32Default.application_view_tile;
-            _syncanyManage.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.application_view_tile;
+            _syncanyManage.Image = Properties.Resources.syncany;
+            _syncanyManage.SmallImage = Properties.Resources.syncany;
             _syncanyManage.Click += _SyncanyClick;
 
             _syncanyCreate = new RibbonButton("Create");
@@ -168,8 +169,8 @@ namespace Droid_Infra
         private void BuildPanelGitHub()
         {
             _githubManage = new RibbonButton("Manage");
-            _githubManage.Image = Tools4Libraries.Resources.ResourceIconSet32Default.application_view_tile;
-            _githubManage.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.application_view_tile;
+            _githubManage.Image = Properties.Resources.github;
+            _githubManage.SmallImage = Properties.Resources.github;
             _githubManage.Click += _GithubClick;
 
             _githubCreateIssue = new RibbonButton("Create issue");
@@ -198,8 +199,8 @@ namespace Droid_Infra
         private void BuildPanelJenkins()
         {
             _jenkinsManage = new RibbonButton("Manage");
-            _jenkinsManage.Image = Tools4Libraries.Resources.ResourceIconSet32Default.application_view_tile;
-            _jenkinsManage.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.application_view_tile;
+            _jenkinsManage.Image = Properties.Resources.jenkins;
+            _jenkinsManage.SmallImage = Properties.Resources.jenkins;
             _jenkinsManage.Click += _JenkinsClick;
 
             _panelJenkins = new RibbonPanel("Jenkins");
@@ -209,8 +210,8 @@ namespace Droid_Infra
         private void BuildPanelJira()
         {
             _jiraManage = new RibbonButton("Manage");
-            _jiraManage.Image = Tools4Libraries.Resources.ResourceIconSet32Default.application_view_tile;
-            _jiraManage.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.application_view_tile;
+            _jiraManage.Image = Properties.Resources.jira;
+            _jiraManage.SmallImage = Properties.Resources.jira;
             _jiraManage.Click += _JiraClick;
 
             _panelJira = new RibbonPanel("Jira");
@@ -220,8 +221,8 @@ namespace Droid_Infra
         private void BuildPanelSonar()
         {
             _sonarManage = new RibbonButton("Manage");
-            _sonarManage.Image = Tools4Libraries.Resources.ResourceIconSet32Default.application_view_tile;
-            _sonarManage.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.application_view_tile;
+            _sonarManage.Image = Properties.Resources.sonar;
+            _sonarManage.SmallImage = Properties.Resources.sonar;
             _sonarManage.Click += _SonarClick;
 
             _panelSonar = new RibbonPanel("Sonar");
@@ -231,8 +232,8 @@ namespace Droid_Infra
         private void BuildPanelTeamCity()
         {
             _teamcityManage = new RibbonButton("Manage");
-            _teamcityManage.Image = Tools4Libraries.Resources.ResourceIconSet32Default.application_view_tile;
-            _teamcityManage.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.application_view_tile;
+            _teamcityManage.Image = Properties.Resources.teamcity;
+            _teamcityManage.SmallImage = Properties.Resources.teamcity;
             _teamcityManage.Click += _TeamCityClick;
 
             _panelTeamCity = new RibbonPanel("TeamCity");

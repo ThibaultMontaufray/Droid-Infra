@@ -19,7 +19,7 @@ namespace Droid_Infra
         #region Constructor
         public GitHubGUI()
         {
-            CreateGitHubIssue.ShowDialog("ThibaultMontaufray", "Androi7#", new System.Collections.Generic.List<string>() { "Explorer", "Video", "Images", "Audio", "Communication", "Deployer", "Calendar", "Litterature", "Weather" });
+            //GitHubIssue.ShowDialog("ThibaultMontaufray", "pouey!", new System.Collections.Generic.List<string>() { "Explorer", "Video", "Images", "Audio", "Communication", "Deployer", "Calendar", "Litterature", "Weather" });
             InitializeComponent();
             Init();
         }

@@ -5,15 +5,20 @@ using Tools4Libraries;
 
 namespace Droid_Infra
 {
+    public delegate void InterfaceEventHandler();
     public class Interface_infra : GPInterface
     {
         #region Attribute
+        public readonly int TOP_OFFSET = 175;
+        public event InterfaceEventHandler SheetDisplayRequested;
+
         private Boot2Docker _docker;
         private ToolStripMenuInfra _tsm;
         private Panel _sheet;
 
         private ViewDocker _viewDocker;
         private ViewSyncany _viewSyncany;
+        private GitHubIssue _viewGithubIssue;
         #endregion
 
         #region Properties
@@ -110,6 +115,7 @@ namespace Droid_Infra
                     LaunchGithubManage();
                     break;
                 case "Github_Create issue":
+                    LaunchGithubIssue();
                     break;
                 case "Github_User detail":
                     break;
@@ -135,7 +141,8 @@ namespace Droid_Infra
             _docker = new Boot2Docker();
 
             _sheet = new Panel();
-            _sheet.BackColor = System.Drawing.Color.FromArgb(255, 64, 64, 64);
+            _sheet.BackgroundImage = Properties.Resources.ShieldTileBg;
+            _sheet.BackgroundImageLayout = ImageLayout.Tile;
             _sheet.Dock = DockStyle.Fill;
             _sheet.Resize += _sheet_Resize;
 
@@ -144,6 +151,11 @@ namespace Droid_Infra
 
             _viewSyncany = new ViewSyncany();
             _viewSyncany.Name = "CurrentView";
+
+            _viewGithubIssue = new GitHubIssue();
+            _viewGithubIssue.User = Properties.Settings.Default.User;
+            _viewGithubIssue.Password = Properties.Settings.Default.Password;
+            _viewGithubIssue.Repositories = new List<string>() { "Booking", "Financial", "People", "Infra" };
 
             BuildToolBar();
         }
@@ -172,6 +184,7 @@ namespace Droid_Infra
 
             _viewDocker.Dock = DockStyle.Fill;
             _sheet.Controls.Add(_viewDocker);
+            if (SheetDisplayRequested != null) SheetDisplayRequested();
         }
 
         private void LaunchSyncanyManage()
@@ -180,36 +193,61 @@ namespace Droid_Infra
 
             if (_viewSyncany == null) _viewSyncany = new ViewSyncany();
 
-            _viewSyncany.Top = 76;
+            _viewSyncany.Top = TOP_OFFSET;
             //_viewSyncany.RefreshData();
             _viewSyncany.Left = (_sheet.Width / 2) - (_viewSyncany.Width / 2);
             //_viewSyncany.ChangeLanguage();
             _sheet.Controls.Add(_viewSyncany);
+            if (SheetDisplayRequested != null) SheetDisplayRequested();
         }
 
         private void LaunchGithubManage()
         {
             _sheet.Controls.Clear();
+            if (SheetDisplayRequested != null) SheetDisplayRequested();
+        }
+
+        private void LaunchGithubIssue()
+        {
+            _sheet.Controls.Clear();
+
+            if (_viewGithubIssue == null)
+            {
+                _viewGithubIssue = new GitHubIssue();
+                _viewGithubIssue.User = Properties.Settings.Default.User;
+                _viewGithubIssue.Password = Properties.Settings.Default.Password;
+                _viewGithubIssue.Repositories = new List<string>() { "Booking", "Financial", "People", "Infra" };
+            }
+
+            _viewGithubIssue.Top = TOP_OFFSET;
+            _viewGithubIssue.Left = (_sheet.Width / 2) - (_viewGithubIssue.Width / 2);
+            //_viewGithubIssue.ChangeLanguage();
+            _sheet.Controls.Add(_viewGithubIssue);
+            if (SheetDisplayRequested != null) SheetDisplayRequested();
         }
 
         private void LaunchJiraManage()
         {
             _sheet.Controls.Clear();
+            if (SheetDisplayRequested != null) SheetDisplayRequested();
         }
 
         private void LaunchTeamCityManage()
         {
             _sheet.Controls.Clear();
+            if (SheetDisplayRequested != null) SheetDisplayRequested();
         }
 
         private void LaunchSonarManage()
         {
             _sheet.Controls.Clear();
+            if (SheetDisplayRequested != null) SheetDisplayRequested();
         }
 
         private void LaunchJenkinsManage()
         {
             _sheet.Controls.Clear();
+            if (SheetDisplayRequested != null) SheetDisplayRequested();
         }
         #endregion
 
