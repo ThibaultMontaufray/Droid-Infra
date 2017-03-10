@@ -40,7 +40,7 @@ namespace Droid_Infra.Syncany
         }
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            SyncanyAdapter.Starts();
+            SyncanyCommander.Starts();
         }
         private void buttonConnect_Click(object sender, EventArgs e)
         {
@@ -48,15 +48,15 @@ namespace Droid_Infra.Syncany
         }
         private void buttonRestores_Click(object sender, EventArgs e)
         {
-            SyncanyAdapter.Restores(textBoxRestores.Text);
+            SyncanyCommander.Restores(textBoxRestores.Text);
         }
         private void buttonPlugin_Click(object sender, EventArgs e)
         {
-            SyncanyAdapter.PluginInstall(textBoxPlugin.Text);
+            SyncanyCommander.PluginInstall(textBoxPlugin.Text);
         }
         private void buttonListPlugins_Click(object sender, EventArgs e)
         {
-            dataGridViewPlugins.DataSource = SyncanyAdapter.AvalailablePlugins;
+            dataGridViewPlugins.DataSource = SyncanyCommander.AvalailablePlugins;
         }
         private void buttonDaemon_Click(object sender, EventArgs e)
         {

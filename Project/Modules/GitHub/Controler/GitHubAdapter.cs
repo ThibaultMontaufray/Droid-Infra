@@ -51,7 +51,7 @@ namespace Droid_Infra
                 _user = user;
                 _password = pwd;
                 var ghe = new Uri(url);
-                _client = new GitHubClient(new ProductHeaderValue("Droid-Deployer"), ghe);
+                _client = new GitHubClient(new ProductHeaderValue("Droid-Infra"), ghe);
                 var basicAuth = new Credentials(user, pwd);
                 _client.Credentials = basicAuth;
 
@@ -77,7 +77,7 @@ namespace Droid_Infra
                 _user = user;
                 _password = pwd;
                 var ghe = new Uri(url);
-                _client = new GitHubClient(new ProductHeaderValue("Droid-Deployer"), ghe);
+                _client = new GitHubClient(new ProductHeaderValue("Droid-Infra"), ghe);
                 var basicAuth = new Credentials(user, pwd);
                 _client.Credentials = basicAuth;
 

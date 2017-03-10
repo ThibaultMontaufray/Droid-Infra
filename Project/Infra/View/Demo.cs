@@ -47,7 +47,7 @@ namespace Droid_Infra
         #region Methods private
         private void Init()
         {
-            _intInf = new Interface_infra();
+            _intInf = new Interface_infra(WORKING_DIRECTORY);
             this.Controls.Add(_intInf.Sheet);
 
             BuildRibbon();

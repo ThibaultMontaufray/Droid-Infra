@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 using Tools4Libraries;
 
 namespace Droid_Infra
@@ -15,13 +18,27 @@ namespace Droid_Infra
         private Boot2Docker _docker;
         private ToolStripMenuInfra _tsm;
         private Panel _sheet;
-
+        private string _workingDirectory;
+        
         private ViewDocker _viewDocker;
-        private ViewSyncany _viewSyncany;
+        private PanelCustom _viewSyncanyManage;
+        private PanelCustom _viewSyncanyCreate;
         private GitHubIssue _viewGithubIssue;
+
+        private SyncanyAdapter _infraSyncany;
         #endregion
 
         #region Properties
+        public SyncanyAdapter InfraSyncany
+        {
+            get { return _infraSyncany; }
+            set { _infraSyncany = value; }
+        }
+        public string WorkingDirectory
+        {
+            get { return _workingDirectory; }
+            set { _workingDirectory = value; }
+        }
         public Boot2Docker Docker
         {
             get { return _docker; }
@@ -40,8 +57,9 @@ namespace Droid_Infra
         #endregion
 
         #region Constructor
-        public Interface_infra()
+        public Interface_infra(string workingDirectory)
         {
+            _workingDirectory = workingDirectory;
             Init();
         }
         #endregion
@@ -97,8 +115,15 @@ namespace Droid_Infra
                     LaunchSyncanyManage();
                     break;
                 case "Syncany_Create":
+                    LaunchSyncanyCreate();
                     break;
                 case "Syncany_Folder":
+                    break;
+                case "Syncany_Load":
+                    LaunchSyncanyLoad();
+                    break;
+                case "Syncany_Save":
+                    LaunchSyncanySave();
                     break;
                 case "Docker_Manage":
                     LaunchDockerManage();
@@ -138,19 +163,21 @@ namespace Droid_Infra
         #region Methods private
         private void Init()
         {
-            _docker = new Boot2Docker();
-
             _sheet = new Panel();
             _sheet.BackgroundImage = Properties.Resources.ShieldTileBg;
             _sheet.BackgroundImageLayout = ImageLayout.Tile;
             _sheet.Dock = DockStyle.Fill;
             _sheet.Resize += _sheet_Resize;
 
+            _docker = new Boot2Docker();
             _viewDocker = new ViewDocker();
             _viewDocker.Name = "CurrentView";
-
-            _viewSyncany = new ViewSyncany();
-            _viewSyncany.Name = "CurrentView";
+            
+            _infraSyncany = new SyncanyAdapter();
+            _viewSyncanyManage = new PanelCustom(new CloudView(_infraSyncany, _workingDirectory));
+            _viewSyncanyManage.Name = "CurrentView";
+            _viewSyncanyCreate = new PanelCustom(new CloudCreate(_infraSyncany, _workingDirectory));
+            _viewSyncanyCreate.Name = "CurrentView";
 
             _viewGithubIssue = new GitHubIssue();
             _viewGithubIssue.User = Properties.Settings.Default.User;
@@ -191,16 +218,36 @@ namespace Droid_Infra
         {
             _sheet.Controls.Clear();
 
-            if (_viewSyncany == null) _viewSyncany = new ViewSyncany();
+            if (_viewSyncanyManage == null) _viewSyncanyManage = new PanelCustom(new CloudView(_infraSyncany, _workingDirectory));
 
-            _viewSyncany.Top = TOP_OFFSET;
-            //_viewSyncany.RefreshData();
-            _viewSyncany.Left = (_sheet.Width / 2) - (_viewSyncany.Width / 2);
-            //_viewSyncany.ChangeLanguage();
-            _sheet.Controls.Add(_viewSyncany);
+            _viewSyncanyManage.Top = TOP_OFFSET;
+            _viewSyncanyManage.RefreshData();
+            _viewSyncanyManage.Left = (_sheet.Width / 2) - (_viewSyncanyManage.Width / 2);
+            _viewSyncanyManage.ChangeLanguage();
+            _sheet.Controls.Add(_viewSyncanyManage);
             if (SheetDisplayRequested != null) SheetDisplayRequested();
         }
+        private void LaunchSyncanyCreate()
+        {
+            _sheet.Controls.Clear();
 
+            if (_viewSyncanyCreate == null) _viewSyncanyCreate = new PanelCustom(new CloudCreate(_infraSyncany, _workingDirectory));
+
+            _viewSyncanyCreate.Top = TOP_OFFSET;
+            _viewSyncanyCreate.RefreshData();
+            _viewSyncanyCreate.Left = (_sheet.Width / 2) - (_viewSyncanyCreate.Width / 2);
+            _viewSyncanyCreate.ChangeLanguage();
+            _sheet.Controls.Add(_viewSyncanyCreate);
+            if (SheetDisplayRequested != null) SheetDisplayRequested();
+        }
+        private void LaunchSyncanyLoad()
+        {
+            _infraSyncany.LoadCloud(_workingDirectory);
+        }
+        private void LaunchSyncanySave()
+        {
+            _infraSyncany.SaveCloud(_workingDirectory);
+        }
         private void LaunchGithubManage()
         {
             _sheet.Controls.Clear();

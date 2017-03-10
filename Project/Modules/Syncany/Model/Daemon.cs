@@ -68,6 +68,19 @@ namespace Droid_Infra
         public static void AddWatch(string folder)
         {
             ConsoleLauncher.ExecuteCommand("sy daemon add " + folder);
+        }
+        public static void AddWatchImmediate(string folder)
+        {
+            ConsoleLauncher.ExecuteCommand("sy daemon add " + folder);
+            ConsoleLauncher.ExecuteCommand("sy daemon reload");
+        }
+        public static void DeleteWatch(string folder)
+        {
+            ConsoleLauncher.ExecuteCommand("sy daemon remove " + folder);
+        }
+        public static void DeleteWatchImmediate(string folder)
+        {
+            ConsoleLauncher.ExecuteCommand("sy daemon remove " + folder);
             ConsoleLauncher.ExecuteCommand("sy daemon reload");
         }
         #endregion

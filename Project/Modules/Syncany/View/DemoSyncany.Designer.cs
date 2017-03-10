@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Droid_Infra.Interface_syncany interface_syncany1 = new Droid_Infra.Interface_syncany();
+            Droid_Infra.SyncanyAdapter interface_syncany1 = new Droid_Infra.SyncanyAdapter();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DemoSyncany));
-            this.cloudView1 = new Droid_Infra.CloudView();
+            this.cloudView1 = new Droid_Infra.CloudView(_intSyn, _workingDirectory);
             this.SuspendLayout();
             // 
             // cloudView1
@@ -43,8 +43,7 @@
             interface_syncany1.DirectoryToAssociate = null;
             interface_syncany1.Login = null;
             interface_syncany1.Password = null;
-            interface_syncany1.WorkingDirectory = null;
-            this.cloudView1.InterficeSyncany = interface_syncany1;
+            this.cloudView1.SyncanyAdapter = interface_syncany1;
             this.cloudView1.Location = new System.Drawing.Point(0, 0);
             this.cloudView1.Name = "cloudView1";
             this.cloudView1.Size = new System.Drawing.Size(719, 336);

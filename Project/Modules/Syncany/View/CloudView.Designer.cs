@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBoxCreation = new System.Windows.Forms.GroupBox();
             this.buttonAddRepo = new System.Windows.Forms.Button();
             this.dataGridViewRepo = new System.Windows.Forms.DataGridView();
@@ -39,41 +38,31 @@
             this.ColumnEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.comboBoxConnectionAddedRepo = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.buttonBrowseNewRepo = new System.Windows.Forms.Button();
             this.textBoxRepoToAssociate = new System.Windows.Forms.TextBox();
-            this.label = new System.Windows.Forms.Label();
-            this.buttonUpdate = new System.Windows.Forms.Button();
-            this.textBoxConfigPath = new System.Windows.Forms.TextBox();
-            this.comboBoxConnectionType = new System.Windows.Forms.ComboBox();
-            this.buttonBrowseConfigPath = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.buttonBrowseOriginPath = new System.Windows.Forms.Button();
-            this.textBoxOriginPath = new System.Windows.Forms.TextBox();
+            this.labelDaemonStatus = new System.Windows.Forms.Label();
+            this.labelDaemonStatusValue = new System.Windows.Forms.Label();
+            this.labelConfigFolderPath = new System.Windows.Forms.Label();
+            this.labelConfigFileValue = new System.Windows.Forms.Label();
             this.groupBoxCreation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRepo)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxCreation
             // 
+            this.groupBoxCreation.Controls.Add(this.labelConfigFileValue);
+            this.groupBoxCreation.Controls.Add(this.labelConfigFolderPath);
+            this.groupBoxCreation.Controls.Add(this.labelDaemonStatusValue);
+            this.groupBoxCreation.Controls.Add(this.labelDaemonStatus);
             this.groupBoxCreation.Controls.Add(this.buttonAddRepo);
             this.groupBoxCreation.Controls.Add(this.dataGridViewRepo);
             this.groupBoxCreation.Controls.Add(this.comboBoxConnectionAddedRepo);
             this.groupBoxCreation.Controls.Add(this.label2);
-            this.groupBoxCreation.Controls.Add(this.buttonBrowseNewRepo);
             this.groupBoxCreation.Controls.Add(this.textBoxRepoToAssociate);
-            this.groupBoxCreation.Controls.Add(this.label);
-            this.groupBoxCreation.Controls.Add(this.buttonUpdate);
-            this.groupBoxCreation.Controls.Add(this.textBoxConfigPath);
-            this.groupBoxCreation.Controls.Add(this.comboBoxConnectionType);
-            this.groupBoxCreation.Controls.Add(this.buttonBrowseConfigPath);
-            this.groupBoxCreation.Controls.Add(this.label1);
-            this.groupBoxCreation.Controls.Add(this.buttonBrowseOriginPath);
-            this.groupBoxCreation.Controls.Add(this.textBoxOriginPath);
             this.groupBoxCreation.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxCreation.ForeColor = System.Drawing.Color.White;
             this.groupBoxCreation.Location = new System.Drawing.Point(3, 3);
             this.groupBoxCreation.Name = "groupBoxCreation";
-            this.groupBoxCreation.Size = new System.Drawing.Size(711, 330);
+            this.groupBoxCreation.Size = new System.Drawing.Size(716, 359);
             this.groupBoxCreation.TabIndex = 15;
             this.groupBoxCreation.TabStop = false;
             this.groupBoxCreation.Text = "Cloud";
@@ -82,7 +71,7 @@
             // 
             this.buttonAddRepo.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAddRepo.ForeColor = System.Drawing.Color.Black;
-            this.buttonAddRepo.Location = new System.Drawing.Point(608, 83);
+            this.buttonAddRepo.Location = new System.Drawing.Point(611, 22);
             this.buttonAddRepo.Name = "buttonAddRepo";
             this.buttonAddRepo.Size = new System.Drawing.Size(94, 27);
             this.buttonAddRepo.TabIndex = 14;
@@ -105,15 +94,7 @@
             this.ColumnPath,
             this.ColumnTypeName,
             this.ColumnEnabled});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewRepo.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewRepo.Location = new System.Drawing.Point(10, 117);
+            this.dataGridViewRepo.Location = new System.Drawing.Point(13, 56);
             this.dataGridViewRepo.Name = "dataGridViewRepo";
             this.dataGridViewRepo.RowHeadersVisible = false;
             this.dataGridViewRepo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -162,7 +143,7 @@
             this.comboBoxConnectionAddedRepo.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxConnectionAddedRepo.ForeColor = System.Drawing.Color.Black;
             this.comboBoxConnectionAddedRepo.FormattingEnabled = true;
-            this.comboBoxConnectionAddedRepo.Location = new System.Drawing.Point(387, 84);
+            this.comboBoxConnectionAddedRepo.Location = new System.Drawing.Point(390, 23);
             this.comboBoxConnectionAddedRepo.Name = "comboBoxConnectionAddedRepo";
             this.comboBoxConnectionAddedRepo.Size = new System.Drawing.Size(125, 27);
             this.comboBoxConnectionAddedRepo.TabIndex = 12;
@@ -172,119 +153,64 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(7, 87);
+            this.label2.Location = new System.Drawing.Point(10, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 19);
             this.label2.TabIndex = 9;
             this.label2.Text = "Add repository";
             // 
-            // buttonBrowseNewRepo
-            // 
-            this.buttonBrowseNewRepo.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonBrowseNewRepo.ForeColor = System.Drawing.Color.Black;
-            this.buttonBrowseNewRepo.Location = new System.Drawing.Point(513, 83);
-            this.buttonBrowseNewRepo.Name = "buttonBrowseNewRepo";
-            this.buttonBrowseNewRepo.Size = new System.Drawing.Size(94, 28);
-            this.buttonBrowseNewRepo.TabIndex = 11;
-            this.buttonBrowseNewRepo.Text = "Browse";
-            this.buttonBrowseNewRepo.UseVisualStyleBackColor = true;
-            this.buttonBrowseNewRepo.Click += new System.EventHandler(this.buttonBrowseAddRepository_Click);
-            // 
             // textBoxRepoToAssociate
             // 
             this.textBoxRepoToAssociate.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxRepoToAssociate.ForeColor = System.Drawing.Color.Black;
-            this.textBoxRepoToAssociate.Location = new System.Drawing.Point(175, 84);
+            this.textBoxRepoToAssociate.Location = new System.Drawing.Point(178, 23);
             this.textBoxRepoToAssociate.Name = "textBoxRepoToAssociate";
             this.textBoxRepoToAssociate.Size = new System.Drawing.Size(209, 27);
             this.textBoxRepoToAssociate.TabIndex = 10;
             // 
-            // label
+            // labelDaemonStatus
             // 
-            this.label.AutoSize = true;
-            this.label.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label.ForeColor = System.Drawing.Color.White;
-            this.label.Location = new System.Drawing.Point(6, 29);
-            this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(122, 19);
-            this.label.TabIndex = 0;
-            this.label.Text = "Cloud config path";
+            this.labelDaemonStatus.AutoSize = true;
+            this.labelDaemonStatus.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDaemonStatus.ForeColor = System.Drawing.Color.White;
+            this.labelDaemonStatus.Location = new System.Drawing.Point(10, 276);
+            this.labelDaemonStatus.Name = "labelDaemonStatus";
+            this.labelDaemonStatus.Size = new System.Drawing.Size(107, 19);
+            this.labelDaemonStatus.TabIndex = 15;
+            this.labelDaemonStatus.Text = "Daemon status";
             // 
-            // buttonUpdate
+            // labelDaemonStatusValue
             // 
-            this.buttonUpdate.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonUpdate.ForeColor = System.Drawing.Color.Black;
-            this.buttonUpdate.Location = new System.Drawing.Point(608, 26);
-            this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(94, 56);
-            this.buttonUpdate.TabIndex = 8;
-            this.buttonUpdate.Text = "Create cloud";
-            this.buttonUpdate.UseVisualStyleBackColor = true;
-            this.buttonUpdate.Click += new System.EventHandler(this.buttonCreateCloud_Click);
+            this.labelDaemonStatusValue.AutoSize = true;
+            this.labelDaemonStatusValue.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDaemonStatusValue.ForeColor = System.Drawing.Color.White;
+            this.labelDaemonStatusValue.Location = new System.Drawing.Point(174, 276);
+            this.labelDaemonStatusValue.Name = "labelDaemonStatusValue";
+            this.labelDaemonStatusValue.Size = new System.Drawing.Size(65, 19);
+            this.labelDaemonStatusValue.TabIndex = 16;
+            this.labelDaemonStatusValue.Text = "_______";
             // 
-            // textBoxConfigPath
+            // labelConfigFolderPath
             // 
-            this.textBoxConfigPath.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxConfigPath.ForeColor = System.Drawing.Color.Black;
-            this.textBoxConfigPath.Location = new System.Drawing.Point(175, 26);
-            this.textBoxConfigPath.Name = "textBoxConfigPath";
-            this.textBoxConfigPath.Size = new System.Drawing.Size(337, 27);
-            this.textBoxConfigPath.TabIndex = 1;
+            this.labelConfigFolderPath.AutoSize = true;
+            this.labelConfigFolderPath.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelConfigFolderPath.ForeColor = System.Drawing.Color.White;
+            this.labelConfigFolderPath.Location = new System.Drawing.Point(10, 311);
+            this.labelConfigFolderPath.Name = "labelConfigFolderPath";
+            this.labelConfigFolderPath.Size = new System.Drawing.Size(125, 19);
+            this.labelConfigFolderPath.TabIndex = 17;
+            this.labelConfigFolderPath.Text = "Config folder path";
             // 
-            // comboBoxConnectionType
+            // labelConfigFileValue
             // 
-            this.comboBoxConnectionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxConnectionType.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxConnectionType.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxConnectionType.FormattingEnabled = true;
-            this.comboBoxConnectionType.Location = new System.Drawing.Point(387, 55);
-            this.comboBoxConnectionType.Name = "comboBoxConnectionType";
-            this.comboBoxConnectionType.Size = new System.Drawing.Size(125, 27);
-            this.comboBoxConnectionType.TabIndex = 7;
-            // 
-            // buttonBrowseConfigPath
-            // 
-            this.buttonBrowseConfigPath.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonBrowseConfigPath.ForeColor = System.Drawing.Color.Black;
-            this.buttonBrowseConfigPath.Location = new System.Drawing.Point(513, 26);
-            this.buttonBrowseConfigPath.Name = "buttonBrowseConfigPath";
-            this.buttonBrowseConfigPath.Size = new System.Drawing.Size(94, 27);
-            this.buttonBrowseConfigPath.TabIndex = 2;
-            this.buttonBrowseConfigPath.Text = "Browse";
-            this.buttonBrowseConfigPath.UseVisualStyleBackColor = true;
-            this.buttonBrowseConfigPath.Click += new System.EventHandler(this.buttonBrowseConfigPath_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(7, 58);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 19);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Origin path";
-            // 
-            // buttonBrowseOriginPath
-            // 
-            this.buttonBrowseOriginPath.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonBrowseOriginPath.ForeColor = System.Drawing.Color.Black;
-            this.buttonBrowseOriginPath.Location = new System.Drawing.Point(513, 54);
-            this.buttonBrowseOriginPath.Name = "buttonBrowseOriginPath";
-            this.buttonBrowseOriginPath.Size = new System.Drawing.Size(94, 28);
-            this.buttonBrowseOriginPath.TabIndex = 5;
-            this.buttonBrowseOriginPath.Text = "Browse";
-            this.buttonBrowseOriginPath.UseVisualStyleBackColor = true;
-            this.buttonBrowseOriginPath.Click += new System.EventHandler(this.buttonBrowseOriginPath_Click);
-            // 
-            // textBoxOriginPath
-            // 
-            this.textBoxOriginPath.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxOriginPath.ForeColor = System.Drawing.Color.Black;
-            this.textBoxOriginPath.Location = new System.Drawing.Point(175, 55);
-            this.textBoxOriginPath.Name = "textBoxOriginPath";
-            this.textBoxOriginPath.Size = new System.Drawing.Size(209, 27);
-            this.textBoxOriginPath.TabIndex = 4;
+            this.labelConfigFileValue.AutoSize = true;
+            this.labelConfigFileValue.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelConfigFileValue.ForeColor = System.Drawing.Color.White;
+            this.labelConfigFileValue.Location = new System.Drawing.Point(174, 311);
+            this.labelConfigFileValue.Name = "labelConfigFileValue";
+            this.labelConfigFileValue.Size = new System.Drawing.Size(65, 19);
+            this.labelConfigFileValue.TabIndex = 18;
+            this.labelConfigFileValue.Text = "_______";
             // 
             // CloudView
             // 
@@ -293,7 +219,7 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.groupBoxCreation);
             this.Name = "CloudView";
-            this.Size = new System.Drawing.Size(719, 336);
+            this.Size = new System.Drawing.Size(719, 364);
             this.groupBoxCreation.ResumeLayout(false);
             this.groupBoxCreation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRepo)).EndInit();
@@ -306,16 +232,7 @@
         private System.Windows.Forms.GroupBox groupBoxCreation;
         private System.Windows.Forms.ComboBox comboBoxConnectionAddedRepo;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button buttonBrowseNewRepo;
         private System.Windows.Forms.TextBox textBoxRepoToAssociate;
-        private System.Windows.Forms.Label label;
-        private System.Windows.Forms.Button buttonUpdate;
-        private System.Windows.Forms.TextBox textBoxConfigPath;
-        private System.Windows.Forms.ComboBox comboBoxConnectionType;
-        private System.Windows.Forms.Button buttonBrowseConfigPath;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button buttonBrowseOriginPath;
-        private System.Windows.Forms.TextBox textBoxOriginPath;
         private System.Windows.Forms.DataGridView dataGridViewRepo;
         private System.Windows.Forms.DataGridViewImageColumn ColumnIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnId;
@@ -323,5 +240,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTypeName;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnEnabled;
         private System.Windows.Forms.Button buttonAddRepo;
+        private System.Windows.Forms.Label labelDaemonStatus;
+        private System.Windows.Forms.Label labelDaemonStatusValue;
+        private System.Windows.Forms.Label labelConfigFileValue;
+        private System.Windows.Forms.Label labelConfigFolderPath;
     }
 }

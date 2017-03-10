@@ -118,12 +118,13 @@
     </Compile>
     <Compile Include="Modules\Docker\Controler\Interface_docker.cs" />
     <Compile Include="Modules\Jira\JiraAdapter.cs" />
-    <Compile Include="Modules\Syncany\View\ViewSyncany.cs">
+    <Compile Include="Modules\Syncany\View\CloudCreate.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Modules\Syncany\View\ViewSyncany.Designer.cs">
-      <DependentUpon>ViewSyncany.cs</DependentUpon>
+    <Compile Include="Modules\Syncany\View\CloudCreate.Designer.cs">
+      <DependentUpon>CloudCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Syncany\View\ViewSyncany.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -149,9 +150,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ConsoleLauncher.cs" />
-    <Compile Include="Modules\Syncany\Controler\Interface_syncany.cs" />
-    <Compile Include="Modules\Syncany\Model\Daemon.cs" />
     <Compile Include="Modules\Syncany\Controler\SyncanyAdapter.cs" />
+    <Compile Include="Modules\Syncany\Model\Daemon.cs" />
+    <Compile Include="Modules\Syncany\Controler\SyncanyCommander.cs" />
     <Compile Include="Modules\Syncany\Model\Plugin.cs" />
     <Compile Include="Modules\Syncany\Model\Watch.cs" />
     <Compile Include="Modules\Syncany\View\CloudView.cs">
@@ -211,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\GitHub\View\GitHubLogger.resx">
       <DependentUpon>GitHubLogger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Syncany\View\CloudCreate.resx">
+      <DependentUpon>CloudCreate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Syncany\View\ViewSyncany.resx">
       <DependentUpon>ViewSyncany.cs</DependentUpon>
@@ -279,6 +283,12 @@
       <Project>{aad2b1be-9b2d-455d-8dd4-64e4e84dd985}</Project>
       <Name>Tools4Libraries</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lexBg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShieldTileBgWhite.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

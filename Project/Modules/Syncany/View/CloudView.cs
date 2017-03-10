@@ -3,22 +3,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Tools4Libraries;
 
 namespace Droid_Infra
 { 
-    public partial class CloudView : UserControl
+    public partial class CloudView : UserControlCustom
     {
         #region Attribute
-        private Interface_syncany _intSyn;
+        private SyncanyAdapter _syncany;
+        private string _workingDirectory;
         #endregion
 
         #region Properties
-        public Interface_syncany InterficeSyncany
+        public string WorkingDirectory
         {
-            get { return _intSyn; }
+            get { return _workingDirectory; }
+            set { _workingDirectory = value; }
+        }
+        public SyncanyAdapter SyncanyAdapter
+        {
+            get { return _syncany; }
             set
             {
-                _intSyn = value;
+                _syncany = value;
                 RefreshData();
             }
         }
@@ -27,12 +34,16 @@ namespace Droid_Infra
         #region Constructor
         public CloudView()
         {
+            _workingDirectory = null;
+            _syncany = null;
+
             InitializeComponent();
             Init();
         }
-        public CloudView(Interface_syncany intSyn)
+        public CloudView(SyncanyAdapter syncany, string workingDirectory)
         {
-            _intSyn = intSyn;
+            _workingDirectory = workingDirectory;
+            _syncany = syncany;
 
             InitializeComponent();
             Init();
@@ -40,50 +51,39 @@ namespace Droid_Infra
         #endregion
 
         #region Methods public
-        public void RefreshData()
+        public override void RefreshData()
         {
-            textBoxConfigPath.Text = _intSyn.CloudConfigPath;
-            textBoxOriginPath.Text = _intSyn.DirectoryOriginal;
-            textBoxRepoToAssociate.Text = _intSyn.DirectoryToAssociate;
-            comboBoxConnectionAddedRepo.Text = _intSyn.CloudConnectionType;
-            comboBoxConnectionType.Text = _intSyn.CloudConnectionType;
+            textBoxRepoToAssociate.Text = _syncany.DirectoryToAssociate;
+            comboBoxConnectionAddedRepo.Text = string.IsNullOrEmpty(_syncany.CloudConnectionType) ? "local" : _syncany.CloudConnectionType;
+            
             RefreshDataDirectories();
+        }
+        public override void ChangeLanguage()
+        {
+
         }
         #endregion
 
         #region Methods private
         private void Init()
         {
-            Tools4Libraries.Log.ApplicationAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Servodroid\Droid-Deployer";
-            _intSyn = new Interface_syncany();
+            Tools4Libraries.Log.ApplicationAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Servodroid\Droid-Infra";
+            if (_syncany == null) { _syncany = new SyncanyAdapter(); }
 
-            comboBoxConnectionType.Items.Clear();
             comboBoxConnectionAddedRepo.Items.Clear();
-            foreach (Plugin plugin in SyncanyAdapter.AvalailablePlugins)
+            foreach (Plugin plugin in SyncanyCommander.AvalailablePlugins)
             {
-                comboBoxConnectionType.Items.Add(plugin.Id);
                 comboBoxConnectionAddedRepo.Items.Add(plugin.Id);
             }
-        }
-        private void CreateCloud()
-        {
-            _intSyn.CloudConnectionType = comboBoxConnectionType.SelectedItem.ToString().Trim();
-            if (!string.IsNullOrEmpty(textBoxConfigPath.Text) && !string.IsNullOrEmpty(textBoxOriginPath.Text) && !string.IsNullOrEmpty(_intSyn.CloudConnectionType))
-            {
-                _intSyn.CloudConfigPath = textBoxConfigPath.Text;
-                _intSyn.DirectoryOriginal = textBoxOriginPath.Text;
-
-                _intSyn.GlobalAction("createcloud");
-                RefreshDataDirectories();
-            }
+            comboBoxConnectionAddedRepo.SelectedItem = "local";
         }
         private void AddRepo()
         {
-            _intSyn.CloudConnectionType = comboBoxConnectionAddedRepo.SelectedItem.ToString().Trim();
-            if (!string.IsNullOrEmpty(textBoxRepoToAssociate.Text) && !string.IsNullOrEmpty(_intSyn.CloudConnectionType))
+            _syncany.CloudConnectionType = comboBoxConnectionAddedRepo.SelectedItem.ToString().Trim();
+            if (!string.IsNullOrEmpty(textBoxRepoToAssociate.Text) && !string.IsNullOrEmpty(_syncany.CloudConnectionType))
             {
-                _intSyn.DirectoryToAssociate = textBoxRepoToAssociate.Text;
-                _intSyn.GlobalAction("associatedirectory");
+                _syncany.DirectoryToAssociate = textBoxRepoToAssociate.Text;
+                _syncany.AssociateDirectory();
                 RefreshDataDirectories();
             }
         }
@@ -94,7 +94,7 @@ namespace Droid_Infra
             List<Watch> watchList = Daemon.WatchList;
 
             dataGridViewRepo.Rows.Clear();
-            foreach (KeyValuePair<string, string> repo in _intSyn.CloudRepositories)
+            foreach (KeyValuePair<string, string> repo in _syncany.CloudRepositories)
             {
                 List<Watch> watchListTmp = watchList.Where(w => w.Path.Equals(repo.Key)).ToList();
                 if (watchListTmp.Count > 0)
@@ -156,26 +156,6 @@ namespace Droid_Infra
         #endregion
 
         #region Event
-        private void buttonBrowseConfigPath_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            if (fbd.ShowDialog() == DialogResult.OK)
-            {
-                textBoxConfigPath.Text = fbd.SelectedPath;
-            }
-        }
-        private void buttonBrowseOriginPath_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            if (fbd.ShowDialog() == DialogResult.OK)
-            {
-                textBoxOriginPath.Text = fbd.SelectedPath;
-            }
-        }
-        private void buttonCreateCloud_Click(object sender, EventArgs e)
-        {
-            CreateCloud();
-        }
         private void buttonBrowseAddRepository_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
@@ -187,6 +167,7 @@ namespace Droid_Infra
         private void buttonAddRepo_Click(object sender, EventArgs e)
         {
             AddRepo();
+            _syncany.SaveCloud(_workingDirectory);
         }
         #endregion
     }

@@ -103,9 +103,29 @@ namespace Droid_Infra.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap lexBg {
+            get {
+                object obj = ResourceManager.GetObject("lexBg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ShieldTileBg {
             get {
                 object obj = ResourceManager.GetObject("ShieldTileBg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShieldTileBgWhite {
+            get {
+                object obj = ResourceManager.GetObject("ShieldTileBgWhite", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

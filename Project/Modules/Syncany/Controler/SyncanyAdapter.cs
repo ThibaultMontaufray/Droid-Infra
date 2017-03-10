@@ -1,127 +1,163 @@
-﻿// Log 00 01
-
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 using Tools4Libraries;
 
 namespace Droid_Infra
 {
-    public static class SyncanyAdapter
+    public class SyncanyAdapter
     {
         #region Attribute
+        private string _cloudConfigPath;
+        private List<KeyValuePair<string, string>> _cloudRepositories; // path, type of connection
+        private string _directoryOriginal;
+        private string _directoryToAssociate;
+
+        private string _login;
+        private string _password;
+        private string _cloudConnectionType;
         #endregion
 
-        #region PropertiesH
-        public static List<Plugin> AvalailablePlugins
+        // TODO : control daemon and the watch list
+
+        #region Properties
+        public string CloudConnectionType
         {
-            get
-            {
-                string[] tab = GetListPlugins();
-                return Plugin.Parse(new List<string>(tab));
-            }
+            get { return _cloudConnectionType; }
+            set { _cloudConnectionType = value; }
         }
-        public static string Status
+        public List<KeyValuePair<string, string>> CloudRepositories
         {
-            get { return "";  }
+            get { return _cloudRepositories; }
+            set { _cloudRepositories = value; }
+        }
+        public string CloudConfigPath
+        {
+            get { return _cloudConfigPath; }
+            set { _cloudConfigPath = value; }
+        }
+        public string DirectoryToAssociate
+        {
+            get { return _directoryToAssociate; }
+            set { _directoryToAssociate = value; }
+        }
+        public string DirectoryOriginal
+        {
+            get { return _directoryOriginal; }
+            set { _directoryOriginal = value; }
+        }
+        public string Login
+        {
+            get { return _login; }
+            set { _login = value; }
+        }
+        public string Password
+        {
+            get { return _password; }
+            set { _password = value; }
         }
         #endregion
 
         #region Constructor
-        static SyncanyAdapter()
+        public SyncanyAdapter()
         {
-            Log.ApplicationAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Servodroid\Droid-Deployer";
+            _login = "demoLog";
+            _password = "demoPwd";
+            _cloudRepositories = new List<KeyValuePair<string, string>>();
         }
         #endregion
 
         #region Methods public
-        /// <summary>
-        /// Creates a new repository using any plugin and generates a syncany://link
-        /// </summary>
-		public static void Init(string cloudConfigFilesPath, string cloudOriginalFilesPath, string user, string passwword, string cloudType)
+        public void CloudCreation()
         {
-            string root = Path.GetPathRoot(cloudOriginalFilesPath);
+            if (!string.IsNullOrEmpty(_cloudConfigPath) && !string.IsNullOrEmpty(_directoryOriginal) && !string.IsNullOrEmpty(_cloudConnectionType))
+            {
+                SyncanyCommander.PluginInstall("sftp");
+                SyncanyCommander.Init(_cloudConfigPath, _directoryOriginal, _login, _password, _cloudConnectionType);
+                _cloudRepositories.Add(new KeyValuePair<string, string>(_directoryOriginal, _cloudConnectionType));
+                Daemon.AddWatch(_directoryOriginal);
+            }
+        }
+        public void AssociateDirectory()
+        {
+            if (!string.IsNullOrEmpty(_directoryToAssociate) && !string.IsNullOrEmpty(_cloudConfigPath) && !string.IsNullOrEmpty(_cloudConnectionType) && !_cloudRepositories.Contains(new KeyValuePair<string, string>(_directoryToAssociate, _cloudConnectionType)))
+            {
+                SyncanyCommander.Connect(_cloudConfigPath, _directoryToAssociate, _cloudConnectionType);
+                _cloudRepositories.Add(new KeyValuePair<string, string>(_directoryToAssociate, _cloudConnectionType));
+                Daemon.AddWatch(_directoryToAssociate);
+            }
+        }
+        public void SaveCloud(string workingDirectory)
+        {
+            string serializedObject = string.Empty;
 
-            string[] commands = new string[3];
-            commands[0] = root.Replace("\\" , string.Empty);
-            commands[1] = "cd " + cloudOriginalFilesPath;
-            commands[2] = string.Format("sy -d init --plugin={0} --plugin-option=path=\"{1}\" -o username='{2}' -o password='{3}' --no-encryption --no-compression --add-daemon", cloudType, cloudConfigFilesPath, user, passwword);
-            ConsoleLauncher.ExecuteCommand(commands);
-        }
-        /// <summary>
-        /// connects to an existing repository using a syncany://-link
-        /// </summary>
-		public static void Connect(string cloudConfigPath, string repoToAssociate, string typeConnection)
-        {
-            string root = Path.GetPathRoot(repoToAssociate);
+            XmlSerializer xsSubmit = new XmlSerializer(typeof(SyncanyAdapter));
+            using (var sww = new StringWriter())
+            {
+                using (XmlWriter writer = XmlWriter.Create(sww))
+                {
+                    xsSubmit.Serialize(writer, this);
+                    serializedObject = sww.ToString();
+                }
+            }
 
-            string[] commands = new string[3];
-            commands[0] = root.Replace("\\", string.Empty);
-            commands[1] = "cd " + repoToAssociate;
-            commands[2] = string.Format("sy connect --plugin={0} --plugin-option=path={1} --add-daemon", typeConnection, cloudConfigPath);
-            ConsoleLauncher.ExecuteCommand(commands);
+            using (StreamWriter sw = new StreamWriter(Path.Combine(workingDirectory, "syncany.xml"), false))
+            {
+                sw.Write(serializedObject);
+            }
         }
-        /// <summary>
-        /// detects local changes and uploads them to the repository
-        /// </summary>
-        public static void Up(string workingDirectory)
+        public void LoadCloud(string workingDirectory)
         {
-            string root = Path.GetPathRoot(workingDirectory);
+            SyncanyAdapter interfaceTmp;
+            string fileData = string.Empty;
 
-            string[] commands = new string[3];
-            commands[0] = root.Replace("\\", string.Empty);
-            commands[1] = "cd " + workingDirectory;
-            commands[2] = "sy up";
-            ConsoleLauncher.ExecuteCommand(commands);
-        }
-        /// <summary>
-        /// downloads changes by other people and apply them to your local machine
-        /// </summary>
-        public static void Down(string workingDirectory)
-        {
-            string root = Path.GetPathRoot(workingDirectory);
+            interfaceTmp = new SyncanyAdapter();
 
-            string[] commands = new string[3];
-            commands[0] = root.Replace("\\", string.Empty);
-            commands[1] = "cd " + workingDirectory;
-            commands[2] = "sy down";
-            ConsoleLauncher.ExecuteCommand(commands);
-        }
-        /// <summary>
-        /// starts background daemon to automatically sync your files
-        /// </summary>
-        public static void Starts()
-        {
-            ConsoleLauncher.ExecuteCommand("sy daemon start");
-        }
-        /// <summary>
-        /// restores an old version of a file to the local folder
-        /// </summary>
-        public static void Restores(string revision)
-        {
-            ConsoleLauncher.ExecuteCommand("sy resetore --revision=2 5shr616");
-
-        }
-        /// <summary>
-        /// downloads and install the plugin
-        /// </summary>
-        /// <param name="packcageName">Name of the plugin to install</param>
-        public static void PluginInstall(string packcageName)
-        {
-            ConsoleLauncher.ExecuteCommand("sy plugin install " + packcageName);
+            if (File.Exists(Path.Combine(workingDirectory, "syncany.xml")))
+            {
+                using (StreamReader sr = new StreamReader(Path.Combine(workingDirectory, "syncany.xml")))
+                {
+                    fileData = sr.ReadToEnd();
+                }
+                XmlSerializer xsSubmit = new XmlSerializer(typeof(SyncanyAdapter));
+                using (var sww = new StringReader(fileData))
+                {
+                    using (XmlReader reader = XmlReader.Create(sww))
+                    {
+                        try
+                        {
+                            interfaceTmp = (SyncanyAdapter)xsSubmit.Deserialize(reader);
+                        }
+                        catch (Exception exp)
+                        {
+                            Log.Write("[ ERR 0800 ] Cannot load syncany xml file : " + exp.Message);
+                            interfaceTmp = new SyncanyAdapter();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                interfaceTmp = new SyncanyAdapter();
+            }
+            Import(interfaceTmp, this);
         }
         #endregion
 
         #region Methods private
-        private static string[] GetListPlugins()
+        private void Import(SyncanyAdapter src, SyncanyAdapter target)
         {
-            string ret = ConsoleLauncher.ExecuteCommand("sy plugin list");
-            return ret.Split('\n');
+            target._cloudConfigPath = src._cloudConfigPath;
+            target._cloudRepositories = src.CloudRepositories;
+            target._directoryOriginal = src.DirectoryOriginal;
+            target._directoryToAssociate = src.DirectoryToAssociate;
+            target._login = src.Login;
+            target._password = src.Password;
+            target._cloudConnectionType = src.CloudConnectionType;
         }
-        #endregion
-
-        #region Event
         #endregion
     }
 }

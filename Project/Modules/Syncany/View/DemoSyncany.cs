@@ -14,10 +14,16 @@ namespace Droid_Infra
     public partial class DemoSyncany : Form
     {
         #region Attribute
-        private Interface_syncany _intSyn;
+        private SyncanyAdapter _intSyn;
+        private string _workingDirectory;
         #endregion
 
         #region Properties
+        public string WorkingDirectory
+        {
+            get { return _workingDirectory; }
+            set { _workingDirectory = value; }
+        }
         #endregion
 
         #region Constuctor
@@ -25,8 +31,9 @@ namespace Droid_Infra
         {
             InitializeComponent();
 
-            _intSyn = new Interface_syncany();
-            cloudView1.InterficeSyncany = _intSyn;
+            _workingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Servodroid\Droid-Infra\";
+            _intSyn = new SyncanyAdapter();
+            cloudView1.SyncanyAdapter = _intSyn;
         }
         #endregion
 
