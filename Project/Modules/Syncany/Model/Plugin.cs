@@ -103,7 +103,7 @@ namespace Droid_Infra
                         }
                         catch (Exception exp)
                         {
-
+                            Tools4Libraries.Log.Write("[ ERR 0000 ] Generic : " + exp.Message);
                         }
                     }
                 }

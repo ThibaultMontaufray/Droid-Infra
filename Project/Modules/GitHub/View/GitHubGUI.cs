@@ -40,17 +40,8 @@ namespace Droid_Infra
         #region Event
         private void _gitHubAdapt_StatusChanged()
         {
-            if (_gitHubAdapt.IsLoggedIn)
-            {
-                _gitHubUserDetail.GitHubAdapter = _gitHubAdapt;
-                _gitHubUserDetail.Visible = true;
-                _gitHubLogger.Visible = false;
-            }
-            else
-            {
-                _gitHubUserDetail.Visible = false;
-                _gitHubLogger.Visible = true;
-            }
+            _gitHubUserDetail.Visible = true;
+            _gitHubLogger.Visible = false;
         }
         #endregion
     }

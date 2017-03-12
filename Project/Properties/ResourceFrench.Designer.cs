@@ -61,6 +61,33 @@ namespace Droid_Infra.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Chemin du dossier de configuration.
+        /// </summary>
+        internal static string configFolderPath {
+            get {
+                return ResourceManager.GetString("configFolderPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Daemon PID.
+        /// </summary>
+        internal static string daemonPid {
+            get {
+                return ResourceManager.GetString("daemonPid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Status du daemon.
+        /// </summary>
+        internal static string daemonstatus {
+            get {
+                return ResourceManager.GetString("daemonstatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Quitter.
         /// </summary>
         internal static string Exit {
@@ -79,11 +106,74 @@ namespace Droid_Infra.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Identifiant.
+        /// </summary>
+        internal static string login {
+            get {
+                return ResourceManager.GetString("login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pas de dossier de configuration enregistré.
+        /// </summary>
+        internal static string Noconfigpathsaved {
+            get {
+                return ResourceManager.GetString("Noconfigpathsaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Ouvrir.
         /// </summary>
         internal static string Open {
             get {
                 return ResourceManager.GetString("Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Mot de passe.
+        /// </summary>
+        internal static string password {
+            get {
+                return ResourceManager.GetString("password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Démarré.
+        /// </summary>
+        internal static string Started {
+            get {
+                return ResourceManager.GetString("Started", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Arrêté.
+        /// </summary>
+        internal static string Stopped {
+            get {
+                return ResourceManager.GetString("Stopped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Dernière synchronisation.
+        /// </summary>
+        internal static string synchroDate {
+            get {
+                return ResourceManager.GetString("synchroDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Inconnu.
+        /// </summary>
+        internal static string Unknow {
+            get {
+                return ResourceManager.GetString("Unknow", resourceCulture);
             }
         }
     }

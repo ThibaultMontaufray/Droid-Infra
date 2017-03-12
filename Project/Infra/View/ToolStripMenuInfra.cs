@@ -35,7 +35,7 @@ namespace Droid_Infra
         private RibbonButton _syncanyManage;
         private RibbonButton _syncanyCreate;
         private RibbonButton _syncanyAssociateRepository;
-        private RibbonLabel _syncanyStatus;
+        private RibbonButton _syncanySynchro;
 
         private RibbonPanel _panelGitHub;
         private RibbonButton _githubManage;
@@ -72,7 +72,6 @@ namespace Droid_Infra
         public ToolStripMenuInfra()
         {
             InfraModules = new List<INFRA_MODULE>();
-
             Init();
         }
         #endregion
@@ -81,6 +80,11 @@ namespace Droid_Infra
         public void ChangeLanguage()
         {
             //_rbWelcome.Text = GetText.Text("Menu");
+        }
+        public void RefreshData(Interface_infra intInf)
+        {
+            _syncanySynchro.Image = intInf.InfraSyncany.SynchronisationRunning ? Tools4Libraries.Resources.ResourceIconSet32Default.control_pause : Tools4Libraries.Resources.ResourceIconSet32Default.control_play;
+            _syncanySynchro.SmallImage = intInf.InfraSyncany.SynchronisationRunning ? Tools4Libraries.Resources.ResourceIconSet16Default.control_pause : Tools4Libraries.Resources.ResourceIconSet16Default.control_play;
         }
         #endregion
 
@@ -155,15 +159,17 @@ namespace Droid_Infra
             _syncanyAssociateRepository.MaxSizeMode = RibbonElementSizeMode.Medium;
             _syncanyAssociateRepository.Click += _SyncanyClick;
 
-            _syncanyStatus = new RibbonLabel();
-            _syncanyStatus.Text = "Status unknow";
-            _syncanyStatus.MaxSizeMode = RibbonElementSizeMode.Medium;
-
+            _syncanySynchro = new RibbonButton("Synchro");
+            _syncanySynchro.Image = Tools4Libraries.Resources.ResourceIconSet32Default.control_pause;
+            _syncanySynchro.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.control_pause;
+            _syncanySynchro.MaxSizeMode = RibbonElementSizeMode.Medium;
+            _syncanySynchro.Click += _SyncanyClick;
+            
             _panelSyncany = new RibbonPanel("Cloud");
             _panelSyncany.Items.Add(_syncanyManage);
             _panelSyncany.Items.Add(_syncanyCreate);
             _panelSyncany.Items.Add(_syncanyAssociateRepository);
-            _panelSyncany.Items.Add(_syncanyStatus);
+            _panelSyncany.Items.Add(_syncanySynchro);
             this.Panels.Add(_panelSyncany);
         }
         private void BuildPanelGitHub()

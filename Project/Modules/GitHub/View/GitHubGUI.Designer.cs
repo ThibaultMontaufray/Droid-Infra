@@ -48,7 +48,6 @@
             // _gitHubUserDetail
             // 
             this._gitHubUserDetail.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this._gitHubUserDetail.GitHubAdapter = null;
             this._gitHubUserDetail.Location = new System.Drawing.Point(12, 12);
             this._gitHubUserDetail.Name = "_gitHubUserDetail";
             this._gitHubUserDetail.Size = new System.Drawing.Size(579, 64);

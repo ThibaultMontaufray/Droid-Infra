@@ -2,25 +2,17 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Net;
+using Tools4Libraries;
 
 namespace Droid_Infra
 {
-    public partial class GitHubUserDetail : UserControl
+    public partial class GitHubUserDetail : UserControlCustom
     {
         #region Attribute
-        private GitHubAdapter _gha;
+        private Interface_infra _intInf;
         #endregion
 
         #region Properties
-        public GitHubAdapter GitHubAdapter
-        {
-            get { return _gha; }
-            set
-            {
-                _gha = value;
-                LoadData();
-            }
-        }
         #endregion
 
         #region Constructor
@@ -28,21 +20,27 @@ namespace Droid_Infra
         {
             InitializeComponent();
         }
+        public GitHubUserDetail(Interface_infra intInf)
+        {
+            _intInf = intInf;
+            InitializeComponent();
+            Init();
+        }
         #endregion
 
-        #region Methods private
-        private void LoadData()
+        #region Methods public
+        public override void RefreshData()
         {
-            if (_gha != null)
-            { 
-                labelUserName.Text = _gha.CurrentUser.Name;
-                labelInfoRepository.Text = string.Format("Repositories [{0}]", _gha.CurrentUser.PublicRepos);
-                labelInfoFollower.Text = string.Format("Followers [{0}]", _gha.CurrentUser.Followers);
-                labelInfoFollowing.Text = string.Format("Following [{0}]", _gha.CurrentUser.Following);
-                labelUserLocation.Text = "From : " + _gha.CurrentUser.Location;
-                labelUserArrival.Text = "Insciption : " + _gha.CurrentUser.CreatedAt.ToString("dd/MM/yyyy hh:mm:ss");
+            if (_intInf.GitHubAdapter != null && _intInf.GitHubAdapter.CurrentUser != null)
+            {
+                labelUserName.Text = _intInf.GitHubAdapter.CurrentUser.Name;
+                labelInfoRepository.Text = string.Format("Repositories [{0}]", _intInf.GitHubAdapter.CurrentUser.PublicRepos);
+                labelInfoFollower.Text = string.Format("Followers [{0}]", _intInf.GitHubAdapter.CurrentUser.Followers);
+                labelInfoFollowing.Text = string.Format("Following [{0}]", _intInf.GitHubAdapter.CurrentUser.Following);
+                labelUserLocation.Text = "From : " + _intInf.GitHubAdapter.CurrentUser.Location;
+                labelUserArrival.Text = "Insciption : " + _intInf.GitHubAdapter.CurrentUser.CreatedAt.ToString("dd/MM/yyyy hh:mm:ss");
 
-                var request = WebRequest.Create(_gha.CurrentUser.AvatarUrl);
+                var request = WebRequest.Create(_intInf.GitHubAdapter.CurrentUser.AvatarUrl);
                 using (var response = request.GetResponse())
                 using (var stream = response.GetResponseStream())
                 {
@@ -50,12 +48,23 @@ namespace Droid_Infra
                 }
             }
         }
+        public override void ChangeLanguage()
+        {
+
+        }
+        #endregion
+
+        #region Methods private
+        private void Init()
+        {
+
+        }
         #endregion
 
         #region Event
         private void buttonLogOff_Click(object sender, EventArgs e)
         {
-            _gha.LogOff();
+            _intInf.GitHubAdapter.LogOff();
         }
         #endregion
     }

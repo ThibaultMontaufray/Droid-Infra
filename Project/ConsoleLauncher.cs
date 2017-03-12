@@ -58,7 +58,7 @@ namespace Droid_Infra
             process.ErrorDataReceived += process_ErrorDataReceived;
             process.Start();
 
-            process.WaitForExit(300000); // max 5 min to execute
+            process.WaitForExit();
 
             string result = string.Empty;
             using (StreamReader reader = process.StandardOutput)

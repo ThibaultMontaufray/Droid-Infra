@@ -78,6 +78,18 @@
     <Compile Include="Infra\View\ToolStripMenuInfra.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Modules\GitHub\View\GithubManage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\GitHub\View\GithubManage.Designer.cs">
+      <DependentUpon>GithubManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Syncany\View\CloudManage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Syncany\View\CloudManage.Designer.cs">
+      <DependentUpon>CloudManage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Syncany\View\CloudStatus.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -155,11 +167,11 @@
     <Compile Include="Modules\Syncany\Controler\SyncanyCommander.cs" />
     <Compile Include="Modules\Syncany\Model\Plugin.cs" />
     <Compile Include="Modules\Syncany\Model\Watch.cs" />
-    <Compile Include="Modules\Syncany\View\CloudView.cs">
+    <Compile Include="Modules\Syncany\View\CloudRepositories.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Modules\Syncany\View\CloudView.Designer.cs">
-      <DependentUpon>CloudView.cs</DependentUpon>
+    <Compile Include="Modules\Syncany\View\CloudRepositories.Designer.cs">
+      <DependentUpon>CloudRepositories.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Syncany\View\DemoSyncany.cs">
       <SubType>Form</SubType>
@@ -198,6 +210,12 @@
     <EmbeddedResource Include="Infra\View\Demo.resx">
       <DependentUpon>Demo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\GitHub\View\GithubManage.resx">
+      <DependentUpon>GithubManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Syncany\View\CloudManage.resx">
+      <DependentUpon>CloudManage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Syncany\View\CloudStatus.resx">
       <DependentUpon>CloudStatus.cs</DependentUpon>
     </EmbeddedResource>
@@ -230,8 +248,8 @@
     <EmbeddedResource Include="Modules\Docker\View\DockerManagerView.resx">
       <DependentUpon>DockerManagerView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Syncany\View\CloudView.resx">
-      <DependentUpon>CloudView.cs</DependentUpon>
+    <EmbeddedResource Include="Modules\Syncany\View\CloudRepositories.resx">
+      <DependentUpon>CloudRepositories.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Syncany\View\DemoSyncany.resx">
       <DependentUpon>DemoSyncany.cs</DependentUpon>

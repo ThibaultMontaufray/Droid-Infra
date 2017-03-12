@@ -14,24 +14,29 @@ namespace Droid_Infra
         #region Attribute
         public event GitHubAdapterEventHandler StatusChanged;
         public event GitHubAdapterEventHandler ConnectionFailled;
-
-        private bool _isLoggedIn;
+        
         private Octokit.User _currentUser;
         private GitHubClient _client;
-        private string _user;
         private string _repoUser;
+        private string _user;
         private string _password;
         #endregion
 
         #region Properties
+        public string User
+        {
+            get { return _user; }
+            set { _user = value; }
+        }
+        public string Password
+        {
+            get { return _password; }
+            set { _password = value; }
+        }
         public string RepoUser
         {
             get { return _repoUser; }
             set { _repoUser = value; }
-        }
-        public bool IsLoggedIn
-        {
-            get { return _isLoggedIn; }
         }
         public Octokit.User CurrentUser
         {
@@ -42,20 +47,12 @@ namespace Droid_Infra
         #region Constructor
         public GitHubAdapter()
         {
-            _isLoggedIn = false;
         }
         public GitHubAdapter(string user, string pwd, string url = "https://github.com")
         {
             try
             {
-                _user = user;
-                _password = pwd;
-                var ghe = new Uri(url);
-                _client = new GitHubClient(new ProductHeaderValue("Droid-Infra"), ghe);
-                var basicAuth = new Credentials(user, pwd);
-                _client.Credentials = basicAuth;
-
-                _isLoggedIn = true;
+                LogUser(user, pwd, url);
                 if (StatusChanged != null) { StatusChanged(); }
             }
             catch (Exception exp)
@@ -70,7 +67,11 @@ namespace Droid_Infra
         #endregion
 
         #region Methods public
-        public async void LogUser(string user, string pwd, string url = "https://github.com")
+        public void LogUser()
+        {
+            LogUser(_user, _password);
+        }
+        public void LogUser(string user, string pwd, string url = "https://github.com")
         {
             try
             {
@@ -78,6 +79,9 @@ namespace Droid_Infra
                 _password = pwd;
                 var ghe = new Uri(url);
                 _client = new GitHubClient(new ProductHeaderValue("Droid-Infra"), ghe);
+                Task<Octokit.User> taskUser = _client.User.Get(_user);
+                _currentUser = taskUser.Result;
+
                 var basicAuth = new Credentials(user, pwd);
                 _client.Credentials = basicAuth;
 
@@ -103,7 +107,7 @@ namespace Droid_Infra
                 {
                     repoName = "Server";
                 }
-                if (_client != null && _isLoggedIn)
+                if (_client != null)
                 {
                     Repository repo = GetRepo(repoName);
                     if (repo != null)
@@ -125,11 +129,12 @@ namespace Droid_Infra
         {
             _client = null;
         }
+
         public IReadOnlyList<Repository> GetUserRepo()
         {
             try
             {
-                if (_client != null && _isLoggedIn)
+                if (_client != null)
                 {
                     string repoUser = string.IsNullOrEmpty(_repoUser) ? _user : _repoUser;
                     Task<IReadOnlyList<Octokit.Repository>> getRepoList = null;
@@ -144,6 +149,24 @@ namespace Droid_Infra
             }
             return null;
         }
+        public IReadOnlyList<Issue> GetUserIssues()
+        {
+            try
+            {
+                if (_client != null)
+                {
+                    Task<IReadOnlyList<Issue>> issues = _client.Issue.GetAllForCurrent();
+                    issues.Wait();
+                    return issues.Result;
+                }
+            }
+            catch (Exception exp)
+            {
+                Tools4Libraries.Log.Write("[ ERR 0000 ] Error getting user repository : " + exp.Message);
+            }
+            return null;
+        }
+
         public List<Repository> GetRepos(string filter)
         {
             List<Repository> repos = new List<Repository>();

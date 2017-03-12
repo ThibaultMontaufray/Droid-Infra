@@ -117,13 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="configFolderPath" xml:space="preserve">
+    <value>Chemin du dossier de configuration</value>
+  </data>
+  <data name="daemonstatus" xml:space="preserve">
+    <value>Status du daemon</value>
+  </data>
   <data name="Exit" xml:space="preserve">
     <value>Quitter</value>
   </data>
   <data name="File" xml:space="preserve">
     <value>Fichier</value>
   </data>
+  <data name="Noconfigpathsaved" xml:space="preserve">
+    <value>Pas de dossier de configuration enregistré</value>
+  </data>
   <data name="Open" xml:space="preserve">
     <value>Ouvrir</value>
+  </data>
+  <data name="Started" xml:space="preserve">
+    <value>Démarré</value>
+  </data>
+  <data name="Stopped" xml:space="preserve">
+    <value>Arrêté</value>
+  </data>
+  <data name="daemonPid" xml:space="preserve">
+    <value>Daemon PID</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>Identifiant</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="Unknow" xml:space="preserve">
+    <value>Inconnu</value>
+  </data>
+  <data name="synchroDate" xml:space="preserve">
+    <value>Dernière synchronisation</value>
   </data>
 </root>

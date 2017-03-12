@@ -30,7 +30,7 @@
         {
             Droid_Infra.SyncanyAdapter interface_syncany1 = new Droid_Infra.SyncanyAdapter();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DemoSyncany));
-            this.cloudView1 = new Droid_Infra.CloudView(_intSyn, _workingDirectory);
+            this.cloudView1 = new Droid_Infra.CloudRepositories(_intSyn, _workingDirectory);
             this.SuspendLayout();
             // 
             // cloudView1
@@ -38,7 +38,7 @@
             this.cloudView1.BackColor = System.Drawing.Color.Transparent;
             interface_syncany1.CloudConfigPath = null;
             interface_syncany1.CloudConnectionType = null;
-            interface_syncany1.CloudRepositories = ((System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string, string>>)(resources.GetObject("interface_syncany1.CloudRepositories")));
+            interface_syncany1.CloudRepositories = ((System.Collections.Generic.List<string>)(resources.GetObject("interface_syncany1.CloudRepositories")));
             interface_syncany1.DirectoryOriginal = null;
             interface_syncany1.DirectoryToAssociate = null;
             interface_syncany1.Login = null;
@@ -65,6 +65,6 @@
 
         #endregion
 
-        private CloudView cloudView1;
+        private CloudRepositories cloudView1;
     }
 }

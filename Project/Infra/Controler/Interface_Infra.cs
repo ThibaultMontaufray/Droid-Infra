@@ -21,14 +21,26 @@ namespace Droid_Infra
         private string _workingDirectory;
         
         private ViewDocker _viewDocker;
-        private PanelCustom _viewSyncanyManage;
+
+        private PanelCustom _viewSyncanyRepositories;
         private PanelCustom _viewSyncanyCreate;
-        private GitHubIssue _viewGithubIssue;
+        private PanelCustom _viewSyncanyManage;
+
+        private GitHubAdapter _githubAdapter;
+        private PanelCustom _viewGithubIssue;
+        private PanelCustom _viewGithubUserDetail;
+        private PanelCustom _viewGithubManage;
 
         private SyncanyAdapter _infraSyncany;
+        private Timer _timer;
         #endregion
 
         #region Properties
+        public GitHubAdapter GitHubAdapter
+        {
+            get { return _githubAdapter; }
+            set { _githubAdapter = value; }
+        }
         public SyncanyAdapter InfraSyncany
         {
             get { return _infraSyncany; }
@@ -72,6 +84,10 @@ namespace Droid_Infra
             string action = tbea.EventText;
             GoAction(action);
         }
+        public override void Refresh()
+        {
+            _tsm.RefreshData(this);
+        }
         public override void Resize()
         {
             foreach (Control ctrl in _sheet.Controls)
@@ -111,6 +127,7 @@ namespace Droid_Infra
         {
             switch (action)
             {
+                // SYNCANY
                 case "Syncany_Manage":
                     LaunchSyncanyManage();
                     break;
@@ -118,6 +135,7 @@ namespace Droid_Infra
                     LaunchSyncanyCreate();
                     break;
                 case "Syncany_Folder":
+                    LaunchSyncanyRepositories();
                     break;
                 case "Syncany_Load":
                     LaunchSyncanyLoad();
@@ -125,17 +143,19 @@ namespace Droid_Infra
                 case "Syncany_Save":
                     LaunchSyncanySave();
                     break;
+                case "Syncany_Synchro":
+                    LaunchSyncanySynchro();
+                    break;
+                // DOCKER
                 case "Docker_Manage":
-                    LaunchDockerManage();
                     break;
                 case "Docker_Init":
                     LaunchDockerInit();
-                    //LaunchDockerStatus();
                     break;
                 case "Docker_Start":
                     LaunchDockerStart();
-                    //LaunchDockerStop();
                     break;
+                // GITHUB
                 case "Github_Manage":
                     LaunchGithubManage();
                     break;
@@ -143,16 +163,21 @@ namespace Droid_Infra
                     LaunchGithubIssue();
                     break;
                 case "Github_User detail":
+                    LaunchGitHubUserDetail();
                     break;
+                // JENKINS
                 case "Jenkins_Manage":
                     LaunchJenkinsManage();
                     break;
+                // SONAR
                 case "Sonar_Manage":
                     LaunchSonarManage();
                     break;
+                // JIRA
                 case "Jira_Manage":
                     LaunchJiraManage();
                     break;
+                // TEAMCITY
                 case "TeamCity_Manage":
                     LaunchTeamCityManage();
                     break;
@@ -169,22 +194,56 @@ namespace Droid_Infra
             _sheet.Dock = DockStyle.Fill;
             _sheet.Resize += _sheet_Resize;
 
-            _docker = new Boot2Docker();
-            _viewDocker = new ViewDocker();
-            _viewDocker.Name = "CurrentView";
-            
+            InitSyncany();
+            InitGithub();
+            InitDocker();
+
+            BuildToolBar();
+
+            _timer = new Timer();
+            _timer.Interval = 20000;
+            _timer.Tick += _timer_Tick;
+            _timer.Start();
+        }
+        private void InitSyncany()
+        {
             _infraSyncany = new SyncanyAdapter();
-            _viewSyncanyManage = new PanelCustom(new CloudView(_infraSyncany, _workingDirectory));
-            _viewSyncanyManage.Name = "CurrentView";
+
+            _viewSyncanyRepositories = new PanelCustom(new CloudRepositories(_infraSyncany, _workingDirectory));
+            _viewSyncanyRepositories.Name = "CurrentView";
+            
             _viewSyncanyCreate = new PanelCustom(new CloudCreate(_infraSyncany, _workingDirectory));
             _viewSyncanyCreate.Name = "CurrentView";
 
-            _viewGithubIssue = new GitHubIssue();
-            _viewGithubIssue.User = Properties.Settings.Default.User;
-            _viewGithubIssue.Password = Properties.Settings.Default.Password;
-            _viewGithubIssue.Repositories = new List<string>() { "Booking", "Financial", "People", "Infra" };
+            _viewSyncanyManage = new PanelCustom(new CloudManage(_infraSyncany, _workingDirectory));
+            _viewSyncanyManage.Name = "CurrentView";
+        }
+        private void InitGithub()
+        {
+            _githubAdapter = new GitHubAdapter();
+            _githubAdapter.RepoUser = "ThibaultMontaufray";
+            _githubAdapter.User = Properties.Settings.Default.User;
+            _githubAdapter.Password = Properties.Settings.Default.Password;
+            _githubAdapter.LogUser();
 
-            BuildToolBar();
+            GitHubIssue gitHubIssue = new GitHubIssue(this);
+            gitHubIssue.Repositories = new List<string>() { "Booking", "Financial", "People", "Infra" };
+            _viewGithubIssue = new PanelCustom(gitHubIssue);
+            _viewGithubIssue.Name = "CurrentView";
+
+            GitHubUserDetail githubUserDetail = new GitHubUserDetail(this);
+            _viewGithubUserDetail = new PanelCustom(githubUserDetail);
+            _viewGithubUserDetail.Name = "CurrentView";
+
+            GithubManage githubManage = new GithubManage(this);
+            _viewGithubManage = new PanelCustom(githubManage);
+            _viewGithubManage.Name = "CurrentView";
+        }
+        private void InitDocker()
+        {
+            _docker = new Boot2Docker();
+            _viewDocker = new ViewDocker();
+            _viewDocker.Name = "CurrentView";
         }
 
         private void LaunchDockerInit()
@@ -213,12 +272,11 @@ namespace Droid_Infra
             _sheet.Controls.Add(_viewDocker);
             if (SheetDisplayRequested != null) SheetDisplayRequested();
         }
-
         private void LaunchSyncanyManage()
         {
             _sheet.Controls.Clear();
 
-            if (_viewSyncanyManage == null) _viewSyncanyManage = new PanelCustom(new CloudView(_infraSyncany, _workingDirectory));
+            if (_viewSyncanyManage == null) { InitSyncany(); }
 
             _viewSyncanyManage.Top = TOP_OFFSET;
             _viewSyncanyManage.RefreshData();
@@ -231,13 +289,26 @@ namespace Droid_Infra
         {
             _sheet.Controls.Clear();
 
-            if (_viewSyncanyCreate == null) _viewSyncanyCreate = new PanelCustom(new CloudCreate(_infraSyncany, _workingDirectory));
+            if (_viewSyncanyCreate == null) { InitSyncany(); }
 
             _viewSyncanyCreate.Top = TOP_OFFSET;
             _viewSyncanyCreate.RefreshData();
             _viewSyncanyCreate.Left = (_sheet.Width / 2) - (_viewSyncanyCreate.Width / 2);
             _viewSyncanyCreate.ChangeLanguage();
             _sheet.Controls.Add(_viewSyncanyCreate);
+            if (SheetDisplayRequested != null) SheetDisplayRequested();
+        }
+        private void LaunchSyncanyRepositories()
+        {
+            _sheet.Controls.Clear();
+
+            if (_viewSyncanyRepositories == null) _viewSyncanyRepositories = new PanelCustom(new CloudRepositories(_infraSyncany, _workingDirectory));
+
+            _viewSyncanyRepositories.Top = TOP_OFFSET;
+            _viewSyncanyRepositories.RefreshData();
+            _viewSyncanyRepositories.Left = (_sheet.Width / 2) - (_viewSyncanyRepositories.Width / 2);
+            _viewSyncanyRepositories.ChangeLanguage();
+            _sheet.Controls.Add(_viewSyncanyRepositories);
             if (SheetDisplayRequested != null) SheetDisplayRequested();
         }
         private void LaunchSyncanyLoad()
@@ -248,27 +319,56 @@ namespace Droid_Infra
         {
             _infraSyncany.SaveCloud(_workingDirectory);
         }
+        private void LaunchSyncanySynchro()
+        {
+            if (_infraSyncany.SynchronisationRunning)
+            {
+                _infraSyncany.SuspendSynchro();
+            }
+            else
+            {
+                _infraSyncany.ResumeSynchro();
+            }
+            _timer.Stop();
+            _tsm.RefreshData(this);
+            _timer.Start();
+        }
         private void LaunchGithubManage()
         {
             _sheet.Controls.Clear();
+
+            if (_viewGithubManage == null) { InitGithub(); }
+
+            _viewGithubManage.Top = TOP_OFFSET;
+            _viewGithubManage.RefreshData();
+            _viewGithubManage.Left = (_sheet.Width / 2) - (_viewGithubManage.Width / 2);
+            _viewGithubManage.ChangeLanguage();
+            _sheet.Controls.Add(_viewGithubManage);
             if (SheetDisplayRequested != null) SheetDisplayRequested();
         }
+        private void LaunchGitHubUserDetail()
+        {
+            _sheet.Controls.Clear();
+            
+            if (_viewGithubUserDetail == null) { InitGithub(); }
 
+            _viewGithubUserDetail.Top = TOP_OFFSET;
+            _viewGithubUserDetail.RefreshData();
+            _viewGithubUserDetail.Left = (_sheet.Width / 2) - (_viewGithubUserDetail.Width / 2);
+            _viewGithubUserDetail.ChangeLanguage();
+            _sheet.Controls.Add(_viewGithubUserDetail);
+            if (SheetDisplayRequested != null) SheetDisplayRequested();
+        }
         private void LaunchGithubIssue()
         {
             _sheet.Controls.Clear();
 
-            if (_viewGithubIssue == null)
-            {
-                _viewGithubIssue = new GitHubIssue();
-                _viewGithubIssue.User = Properties.Settings.Default.User;
-                _viewGithubIssue.Password = Properties.Settings.Default.Password;
-                _viewGithubIssue.Repositories = new List<string>() { "Booking", "Financial", "People", "Infra" };
-            }
+            if (_viewGithubIssue == null) { InitGithub(); }
 
             _viewGithubIssue.Top = TOP_OFFSET;
+            _viewGithubIssue.RefreshData();
             _viewGithubIssue.Left = (_sheet.Width / 2) - (_viewGithubIssue.Width / 2);
-            //_viewGithubIssue.ChangeLanguage();
+            _viewGithubIssue.ChangeLanguage();
             _sheet.Controls.Add(_viewGithubIssue);
             if (SheetDisplayRequested != null) SheetDisplayRequested();
         }
@@ -299,6 +399,12 @@ namespace Droid_Infra
         #endregion
 
         #region Event
+        private void _timer_Tick(object sender, EventArgs e)
+        {
+            _timer.Stop();
+            _tsm.RefreshData(this);
+            _timer.Start();
+        }
         private void _sheet_Resize(object sender, EventArgs e)
         {
             Resize();

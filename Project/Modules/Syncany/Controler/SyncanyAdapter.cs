@@ -1,38 +1,50 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using Tools4Libraries;
 
 namespace Droid_Infra
 {
+    [Serializable]
+    [XmlType("parameters")]
     public class SyncanyAdapter
     {
         #region Attribute
         private string _cloudConfigPath;
-        private List<KeyValuePair<string, string>> _cloudRepositories; // path, type of connection
+        private List<string> _cloudRepositories; // path, type of connection
         private string _directoryOriginal;
         private string _directoryToAssociate;
 
         private string _login;
         private string _password;
         private string _cloudConnectionType;
+        private Timer _timer;
+        private DateTime _lastSynchronisation;
         #endregion
 
         // TODO : control daemon and the watch list
 
         #region Properties
+        //[XmlArray("CloudRepositories")]
+        //[XmlArrayItem("key", typeof(string))]
+        //[XmlArrayItem("value", typeof(string))]
+        //[Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        public List<string> CloudRepositories
+        {
+            get { return _cloudRepositories; }
+            set { _cloudRepositories = value; }
+        }
         public string CloudConnectionType
         {
             get { return _cloudConnectionType; }
             set { _cloudConnectionType = value; }
-        }
-        public List<KeyValuePair<string, string>> CloudRepositories
-        {
-            get { return _cloudRepositories; }
-            set { _cloudRepositories = value; }
         }
         public string CloudConfigPath
         {
@@ -59,6 +71,14 @@ namespace Droid_Infra
             get { return _password; }
             set { _password = value; }
         }
+        public DateTime LastSynchronisation
+        {
+            get { return _lastSynchronisation; }
+        }
+        public bool SynchronisationRunning
+        {
+            get { return _timer.Enabled; }
+        }
         #endregion
 
         #region Constructor
@@ -66,27 +86,48 @@ namespace Droid_Infra
         {
             _login = "demoLog";
             _password = "demoPwd";
-            _cloudRepositories = new List<KeyValuePair<string, string>>();
+            _cloudRepositories = new List<string>();
+
+            _lastSynchronisation = DateTime.MinValue;
+
+            _timer = new Timer();
+            _timer.Interval = 60000 * 7; // every 7 minutes
+            _timer.Tick += _timer_Tick; ;
+            _timer.Start();
         }
         #endregion
 
         #region Methods public
+        public void Synchronize()
+        {
+            ProcessSynchronisation();
+        }
+        public void SuspendSynchro()
+        {
+            _timer.Stop();
+        }
+        public void ResumeSynchro()
+        {
+            _timer.Start();
+        }
         public void CloudCreation()
         {
             if (!string.IsNullOrEmpty(_cloudConfigPath) && !string.IsNullOrEmpty(_directoryOriginal) && !string.IsNullOrEmpty(_cloudConnectionType))
             {
                 SyncanyCommander.PluginInstall("sftp");
                 SyncanyCommander.Init(_cloudConfigPath, _directoryOriginal, _login, _password, _cloudConnectionType);
-                _cloudRepositories.Add(new KeyValuePair<string, string>(_directoryOriginal, _cloudConnectionType));
+                string newRepo = string.Format("{0}|local", _directoryOriginal);
+                if (!_cloudRepositories.Contains(newRepo)) { _cloudRepositories.Add(newRepo); }
                 Daemon.AddWatch(_directoryOriginal);
             }
         }
         public void AssociateDirectory()
         {
-            if (!string.IsNullOrEmpty(_directoryToAssociate) && !string.IsNullOrEmpty(_cloudConfigPath) && !string.IsNullOrEmpty(_cloudConnectionType) && !_cloudRepositories.Contains(new KeyValuePair<string, string>(_directoryToAssociate, _cloudConnectionType)))
+            if (!string.IsNullOrEmpty(_directoryToAssociate) && !string.IsNullOrEmpty(_cloudConfigPath) && !string.IsNullOrEmpty(_cloudConnectionType) && !_cloudRepositories.Contains(_directoryToAssociate))
             {
                 SyncanyCommander.Connect(_cloudConfigPath, _directoryToAssociate, _cloudConnectionType);
-                _cloudRepositories.Add(new KeyValuePair<string, string>(_directoryToAssociate, _cloudConnectionType));
+                string newRepo = string.Format("{0}|{1}", _directoryToAssociate, _cloudConnectionType);
+                if (!_cloudRepositories.Contains(newRepo)) { _cloudRepositories.Add(newRepo); }
                 Daemon.AddWatch(_directoryToAssociate);
             }
         }
@@ -157,6 +198,46 @@ namespace Droid_Infra
             target._login = src.Login;
             target._password = src.Password;
             target._cloudConnectionType = src.CloudConnectionType;
+        }
+        private async void ProcessSynchronisation()
+        {
+            Task<bool> taskSync = TaskSynchro();
+            bool result = await taskSync;
+        }
+        private async Task<bool> TaskSynchro()
+        {
+            Task<bool> res1 = PushAll();
+            bool r1 = await res1;
+            
+            Task<bool> res2 = PullAll();
+            bool r2 = await res2;
+
+            _lastSynchronisation = _lastSynchronisation < DateTime.Now ? DateTime.Now : _lastSynchronisation;
+
+            return true;
+        }
+        private async Task<bool> PushAll()
+        {
+            foreach (var repo in _cloudRepositories)
+            {
+                SyncanyCommander.Up(repo.Split('|')[0]);
+            }
+            return true;
+        }
+        private async Task<bool> PullAll()
+        {
+            foreach (var repo in _cloudRepositories)
+            {
+                SyncanyCommander.Down(repo.Split('|')[0]);
+            }
+            return true;
+        }
+        #endregion
+
+        #region Event
+        private void _timer_Tick(object sender, EventArgs e)
+        {
+            ProcessSynchronisation();
         }
         #endregion
     }
