@@ -14,6 +14,7 @@ namespace Droid_Infra
     public partial class GithubManage : UserControlCustom
     {
         #region Attribute
+        public override event UserControlCustomEventHandler HeightChanged;
         #endregion
 
         #region Properties

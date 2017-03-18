@@ -11,6 +11,8 @@ namespace Droid_Infra
     public class GitHubIssue : UserControlCustom
     {
         #region Attribute
+        public override event UserControlCustomEventHandler HeightChanged;
+
         private System.ComponentModel.IContainer components = null;
         private const string OFFLINE_ISSUES_FILE = "IssueToPost.xml";
 

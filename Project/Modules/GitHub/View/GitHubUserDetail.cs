@@ -9,6 +9,8 @@ namespace Droid_Infra
     public partial class GitHubUserDetail : UserControlCustom
     {
         #region Attribute
+        public override event UserControlCustomEventHandler HeightChanged;
+
         private Interface_infra _intInf;
         #endregion
 

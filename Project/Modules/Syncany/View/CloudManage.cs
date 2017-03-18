@@ -12,6 +12,8 @@ namespace Droid_Infra
     public partial class CloudManage : UserControlCustom
     {
         #region Attribute
+        public override event UserControlCustomEventHandler HeightChanged;
+
         private SyncanyAdapter _syncany;
         private string _workingDirectory;
         private Timer _timer;
