@@ -53,9 +53,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Forms.Ribbon, Version=3.5.8.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\officeribbon.3.5.8.4\lib\net20\System.Windows.Forms.Ribbon.dll</HintPath>
@@ -78,12 +80,19 @@
     <Compile Include="Infra\View\ToolStripMenuInfra.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Infra\View\ViewWelcome.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Infra\View\ViewWelcome.Designer.cs">
+      <DependentUpon>ViewWelcome.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\GitHub\View\GithubManage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\GitHub\View\GithubManage.Designer.cs">
       <DependentUpon>GithubManage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Service\ServiceAdapter.cs" />
     <Compile Include="Modules\Syncany\View\CloudManage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -137,6 +146,7 @@
       <DependentUpon>CloudCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Syncany\View\ViewSyncany.cs" />
+    <Compile Include="Modules\System\SystemAdapter.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -209,6 +219,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Infra\View\Demo.resx">
       <DependentUpon>Demo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Infra\View\ViewWelcome.resx">
+      <DependentUpon>ViewWelcome.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\GitHub\View\GithubManage.resx">
       <DependentUpon>GithubManage.cs</DependentUpon>

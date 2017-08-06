@@ -156,7 +156,7 @@ namespace Droid_Infra
                 if (_client != null)
                 {
                     Task<IReadOnlyList<Issue>> issues = _client.Issue.GetAllForCurrent();
-                    issues.Wait();
+                    issues.Wait(10000);
                     return issues.Result;
                 }
             }

@@ -17,9 +17,9 @@ namespace Droid_Infra
 
         private Boot2Docker _docker;
         private ToolStripMenuInfra _tsm;
-        private Panel _sheet;
         private string _workingDirectory;
-        
+
+        private ViewWelcome _viewWelcome;
         private ViewDocker _viewDocker;
 
         private PanelCustom _viewSyncanyRepositories;
@@ -189,10 +189,20 @@ namespace Droid_Infra
         private void Init()
         {
             _sheet = new Panel();
+            _sheet.Name = "SheetInfra";
             _sheet.BackgroundImage = Properties.Resources.ShieldTileBg;
             _sheet.BackgroundImageLayout = ImageLayout.Tile;
             _sheet.Dock = DockStyle.Fill;
             _sheet.Resize += _sheet_Resize;
+
+            _viewWelcome = new ViewWelcome();
+            _viewWelcome.Name = "CurrentView";
+            _viewWelcome.Top = TOP_OFFSET;
+            _viewWelcome.RefreshData();
+            _viewWelcome.Left = (_sheet.Width / 2) - (_viewWelcome.Width / 2);
+            _viewWelcome.ChangeLanguage();
+            _sheet.Controls.Add(_viewWelcome);
+            if (SheetDisplayRequested != null) SheetDisplayRequested();
 
             InitSyncany();
             InitGithub();
