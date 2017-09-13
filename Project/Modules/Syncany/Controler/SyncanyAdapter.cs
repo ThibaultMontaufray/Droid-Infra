@@ -14,7 +14,7 @@ namespace Droid_Infra
 {
     [Serializable]
     [XmlType("parameters")]
-    public class SyncanyAdapter
+    public class SyncanyAdapter : InfraAdapteur
     {
         #region Attribute
         private string _cloudConfigPath;

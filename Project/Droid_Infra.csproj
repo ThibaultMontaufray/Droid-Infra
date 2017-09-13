@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6827572C-022E-4C94-8E6C-4F4FC7AEAB18}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Droid_Infra</RootNamespace>
     <AssemblyName>Droid_Infra</AssemblyName>
@@ -40,6 +40,9 @@
       <HintPath>packages\Atlassian.SDK.5.10.0\lib\Atlassian.Jira.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\Droid-Manager\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -48,14 +51,23 @@
       <HintPath>packages\Octokit.0.24.0\lib\net45\Octokit.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="RestSharp, Version=105.2.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\RestSharp.105.2.2\lib\net451\RestSharp.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Droid-Manager\packages\RestSharp.105.2.3\lib\net451\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpBucket, Version=0.6.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Droid-Manager\packages\SharpBucket.0.6.5\lib\net40\SharpBucket.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Rest, Version=1.1.0.5340, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <HintPath>..\..\Droid-Manager\packages\Spring.Rest.1.1.0\lib\net40\Spring.Rest.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Social.Core, Version=1.0.0.5340, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <HintPath>..\..\Droid-Manager\packages\Spring.Social.Core.1.0.0\lib\net40\Spring.Social.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms" />
@@ -70,7 +82,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infra\Controler\GetText.cs" />
+    <Compile Include="Infra\Controler\InfraAdapteur.cs" />
+    <Compile Include="Infra\Model\InfraFarm.cs" />
     <Compile Include="Infra\Controler\Interface_Infra.cs" />
+    <Compile Include="Infra\Model\Infra.cs" />
     <Compile Include="Infra\View\Demo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,11 +95,56 @@
     <Compile Include="Infra\View\ToolStripMenuInfra.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Infra\View\ViewInfraAdd.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Infra\View\ViewInfraAdd.Designer.cs">
+      <DependentUpon>ViewInfraAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Infra\View\ViewWelcome.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Infra\View\ViewWelcome.Designer.cs">
       <DependentUpon>ViewWelcome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\Controler\BitbucketAdapter.cs" />
+    <Compile Include="Modules\Bitbucket\Model\BitbucketRepository.cs" />
+    <Compile Include="Modules\Bitbucket\View\ViewBitbucket.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\View\ViewBitbucket.Designer.cs">
+      <DependentUpon>ViewBitbucket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\View\ViewBitBucketRepository.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\View\ViewBitBucketRepository.Designer.cs">
+      <DependentUpon>ViewBitBucketRepository.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\View\ViewBitBucketIssue.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\View\ViewBitBucketIssue.Designer.cs">
+      <DependentUpon>ViewBitBucketIssue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\View\ViewBitBucketUser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\View\ViewBitBucketUser.Designer.cs">
+      <DependentUpon>ViewBitBucketUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\View\ViewBitBucketLogin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\View\ViewBitBucketLogin.Designer.cs">
+      <DependentUpon>ViewBitBucketLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Computer\Controler\ComputerAdapter.cs" />
+    <Compile Include="Modules\Computer\View\ViewComputer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Computer\View\ViewComputer.Designer.cs">
+      <DependentUpon>ViewComputer.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\GitHub\View\GithubManage.cs">
       <SubType>UserControl</SubType>
@@ -92,7 +152,9 @@
     <Compile Include="Modules\GitHub\View\GithubManage.Designer.cs">
       <DependentUpon>GithubManage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Jenkins\Controler\JenkinsAdapter.cs" />
     <Compile Include="Modules\Service\ServiceAdapter.cs" />
+    <Compile Include="Modules\Sonar\Controler\SonarAdapter.cs" />
     <Compile Include="Modules\Syncany\View\CloudManage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -137,7 +199,7 @@
     <Compile Include="Modules\GitHub\View\GitHubLogger.Designer.cs">
       <DependentUpon>GitHubLogger.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Docker\Controler\Interface_docker.cs" />
+    <Compile Include="Modules\Docker\Controler\DockerAdapter.cs" />
     <Compile Include="Modules\Jira\JiraAdapter.cs" />
     <Compile Include="Modules\Syncany\View\CloudCreate.cs">
       <SubType>UserControl</SubType>
@@ -147,6 +209,7 @@
     </Compile>
     <Compile Include="Modules\Syncany\View\ViewSyncany.cs" />
     <Compile Include="Modules\System\SystemAdapter.cs" />
+    <Compile Include="Modules\TeamCity\Controler\TeamCityAdapter.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -220,8 +283,29 @@
     <EmbeddedResource Include="Infra\View\Demo.resx">
       <DependentUpon>Demo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Infra\View\ViewInfraAdd.resx">
+      <DependentUpon>ViewInfraAdd.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infra\View\ViewWelcome.resx">
       <DependentUpon>ViewWelcome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Bitbucket\View\ViewBitbucket.resx">
+      <DependentUpon>ViewBitbucket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Bitbucket\View\ViewBitBucketRepository.resx">
+      <DependentUpon>ViewBitBucketRepository.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Bitbucket\View\ViewBitBucketIssue.resx">
+      <DependentUpon>ViewBitBucketIssue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Bitbucket\View\ViewBitBucketUser.resx">
+      <DependentUpon>ViewBitBucketUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Bitbucket\View\ViewBitBucketLogin.resx">
+      <DependentUpon>ViewBitBucketLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Computer\View\ViewComputer.resx">
+      <DependentUpon>ViewComputer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\GitHub\View\GithubManage.resx">
       <DependentUpon>GithubManage.cs</DependentUpon>
@@ -279,12 +363,7 @@
       <LastGenOutput>ResourceFrench.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infra\Model\" />
-    <Folder Include="Modules\Jenkins\" />
-    <Folder Include="Modules\Sonar\" />
-    <Folder Include="Modules\TeamCity\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\docker.png" />
   </ItemGroup>
@@ -304,22 +383,30 @@
     <None Include="Resources\syncany.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\teamcity.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\ShieldTileBg.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Tools4Libraries\Tools4Libraries.csproj">
-      <Project>{aad2b1be-9b2d-455d-8dd4-64e4e84dd985}</Project>
-      <Name>Tools4Libraries</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\lexBg.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ShieldTileBgWhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bitbucket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Readme\Spring.Rest.txt" />
+    <Content Include="App_Readme\Spring.Social.Core.txt" />
+    <None Include="Resources\unknown.png" />
+    <None Include="Resources\TeamCity.png" />
+    <None Include="Resources\SQL.png" />
+    <None Include="Resources\Serveur.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Tools4Libraries\Tools4Libraries.csproj">
+      <Project>{aad2b1be-9b2d-455d-8dd4-64e4e84dd985}</Project>
+      <Name>Tools4Libraries</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

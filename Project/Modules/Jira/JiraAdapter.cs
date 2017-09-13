@@ -6,7 +6,7 @@
     using System.Collections.Generic;
     using System.Text;
 
-    public class JiraAdapter
+    public class JiraAdapter : InfraAdapteur
     {
         #region Attribute
         private Jira _jira;
@@ -36,6 +36,9 @@
         #endregion
 
         #region Constructor
+        public JiraAdapter()
+        {
+        }
         public JiraAdapter(string login, string password, string url)
         {
             _url = url;

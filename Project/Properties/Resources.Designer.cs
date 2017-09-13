@@ -19,7 +19,7 @@ namespace Droid_Infra.Properties {
     // à l'aide d'un outil, tel que ResGen ou Visual Studio.
     // Pour ajouter ou supprimer un membre, modifiez votre fichier .ResX, puis réexécutez ResGen
     // avec l'option /str ou régénérez votre projet VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -57,6 +57,16 @@ namespace Droid_Infra.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bitbucket {
+            get {
+                object obj = ResourceManager.GetObject("bitbucket", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -113,6 +123,16 @@ namespace Droid_Infra.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Serveur {
+            get {
+                object obj = ResourceManager.GetObject("Serveur", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ShieldTileBg {
             get {
                 object obj = ResourceManager.GetObject("ShieldTileBg", resourceCulture);
@@ -143,6 +163,16 @@ namespace Droid_Infra.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap SQL {
+            get {
+                object obj = ResourceManager.GetObject("SQL", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap syncany {
             get {
                 object obj = ResourceManager.GetObject("syncany", resourceCulture);
@@ -156,6 +186,16 @@ namespace Droid_Infra.Properties {
         internal static System.Drawing.Bitmap teamcity {
             get {
                 object obj = ResourceManager.GetObject("teamcity", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap unknown {
+            get {
+                object obj = ResourceManager.GetObject("unknown", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -16,7 +16,8 @@ namespace Droid_Infra
             JENKINS,
             JIRA,
             SONAR,
-            TEAMCITY
+            TEAMCITY,
+            BITBUCKET
         }
         #endregion
 
@@ -24,6 +25,14 @@ namespace Droid_Infra
         public event EventHandlerAction ActionAppened;
 
         private List<INFRA_MODULE> _infraModules;
+
+        private RibbonPanel _panelInfra;
+        private RibbonButton _infraOpen;
+        private RibbonButton _infraSave;
+        private RibbonButton _infraAdd;
+
+        private RibbonPanel _panelComputer;
+        private RibbonButton _computerManage;
 
         private RibbonPanel _panelDocker;
         private RibbonButton _dockerManage;
@@ -36,6 +45,9 @@ namespace Droid_Infra
         private RibbonButton _syncanyCreate;
         private RibbonButton _syncanyAssociateRepository;
         private RibbonButton _syncanySynchro;
+
+        private RibbonPanel _panelBitbucket;
+        private RibbonButton _bitbucketManage;
 
         private RibbonPanel _panelGitHub;
         private RibbonButton _githubManage;
@@ -91,25 +103,76 @@ namespace Droid_Infra
         #region Methods private
         private void Init()
         {
+            BuildPanelInfra();
+            BuildPanelComputer();
             BuildPanelDocker();
             BuildPanelSyncany();
             BuildPanelGitHub();
+            BuildPanelBitbucket();
             BuildPanelJenkins();
             BuildPanelJira();
             BuildPanelSonar();
             BuildPanelTeamCity();
+
+            this.Text = GetText.Text("Infra");
         }
         private void LoadModules()
         {
             if (_panelSyncany != null) _panelSyncany.Visible = _infraModules.Contains(INFRA_MODULE.CLOUD);
             if (_panelDocker != null) _panelDocker.Visible = _infraModules.Contains(INFRA_MODULE.DOCKER);
             if (_panelGitHub != null) _panelGitHub.Visible = _infraModules.Contains(INFRA_MODULE.GITHUB);
+            if (_panelBitbucket != null) _panelBitbucket.Visible = _infraModules.Contains(INFRA_MODULE.BITBUCKET);
             if (_panelJenkins != null) _panelJenkins.Visible = _infraModules.Contains(INFRA_MODULE.JENKINS);
             if (_panelJira != null) _panelJira.Visible = _infraModules.Contains(INFRA_MODULE.JIRA);
             if (_panelSonar != null) _panelSonar.Visible = _infraModules.Contains(INFRA_MODULE.SONAR);
             if (_panelTeamCity != null) _panelTeamCity.Visible = _infraModules.Contains(INFRA_MODULE.TEAMCITY);
         }
 
+        private void BuildPanelInfra()
+        {
+            _infraOpen = new RibbonButton();
+            _infraOpen.Name = "Open";
+            _infraOpen.Text = GetText.Text(_infraOpen.Name);
+            _infraOpen.Image = Tools4Libraries.Resources.ResourceIconSet32Default.layer_open;
+            _infraOpen.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.layer_open;
+            _infraOpen.MaxSizeMode = RibbonElementSizeMode.Large;
+            _infraOpen.Click += _infra_Click;
+
+            _infraSave = new RibbonButton();
+            _infraSave.Name = "Save";
+            _infraSave.Text = GetText.Text(_infraSave.Name);
+            _infraSave.Image = Tools4Libraries.Resources.ResourceIconSet32Default.layer_save;
+            _infraSave.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.layer_save;
+            _infraSave.MaxSizeMode = RibbonElementSizeMode.Large;
+            _infraSave.Click += _infra_Click;
+
+            _infraAdd = new RibbonButton();
+            _infraAdd.Name = "Add";
+            _infraAdd.Text = GetText.Text(_infraAdd.Name);
+            _infraAdd.Image = Tools4Libraries.Resources.ResourceIconSet32Default.layer_add;
+            _infraAdd.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.layer_add;
+            _infraAdd.MaxSizeMode = RibbonElementSizeMode.Large;
+            _infraAdd.Click += _infra_Click;
+
+            _panelInfra = new RibbonPanel(GetText.Text("Infra"));
+            _panelInfra.Items.Add(_infraOpen);
+            _panelInfra.Items.Add(_infraSave);
+            _panelInfra.Items.Add(_infraAdd);
+            this.Panels.Add(_panelInfra);
+
+        }
+        private void BuildPanelComputer()
+        {
+            _computerManage = new RibbonButton("Manage");
+            _computerManage.Image = Tools4Libraries.Resources.ResourceIconSet32Default.computer;
+            _computerManage.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.computer;
+            _computerManage.MaxSizeMode = RibbonElementSizeMode.Large;
+            _computerManage.Click += _computerManage_Click;
+
+            _panelComputer = new RibbonPanel("Computer");
+            _panelComputer.Items.Add(_computerManage);
+            this.Panels.Add(_panelComputer);
+        }
         private void BuildPanelDocker()
         {
             _dockerManage = new RibbonButton("Manage");
@@ -202,6 +265,17 @@ namespace Droid_Infra
             _panelGitHub.Items.Add(_githubDetail);
             this.Panels.Add(_panelGitHub);
         }
+        private void BuildPanelBitbucket()
+        {
+            _bitbucketManage = new RibbonButton("Manage");
+            _bitbucketManage.Image = Properties.Resources.bitbucket;
+            _bitbucketManage.SmallImage = Properties.Resources.bitbucket;
+            _bitbucketManage.Click += _BitbucketClick;
+
+            _panelBitbucket = new RibbonPanel("Bitbucket");
+            _panelBitbucket.Items.Add(_bitbucketManage);
+            this.Panels.Add(_panelBitbucket);
+        }
         private void BuildPanelJenkins()
         {
             _jenkinsManage = new RibbonButton("Manage");
@@ -249,6 +323,20 @@ namespace Droid_Infra
         #endregion
 
         #region Event
+        private void _infra_Click(object sender, EventArgs e)
+        {
+            if (sender is RibbonButton)
+            {
+                if (ActionAppened != null) ActionAppened(this, new ToolBarEventArgs("Infra_" + ((RibbonButton)sender).Text));
+            }
+        }
+        private void _computerManage_Click(object sender, EventArgs e)
+        {
+            if (sender is RibbonButton)
+            {
+                if (ActionAppened != null) ActionAppened(this, new ToolBarEventArgs("Computer_" + ((RibbonButton)sender).Text));
+            }
+        }
         private void _SyncanyClick(object sender, EventArgs e)
         {
             if (sender is RibbonButton)
@@ -268,6 +356,13 @@ namespace Droid_Infra
             if (sender is RibbonButton)
             {
                 if (ActionAppened != null) ActionAppened(this, new ToolBarEventArgs("Github_" + ((RibbonButton)sender).Text));
+            }
+        }
+        private void _BitbucketClick(object sender, EventArgs e)
+        {
+            if (sender is RibbonButton)
+            {
+                if (ActionAppened != null) ActionAppened(this, new ToolBarEventArgs("Bitbucket_" + ((RibbonButton)sender).Text));
             }
         }
         private void _JenkinsClick(object sender, EventArgs e)

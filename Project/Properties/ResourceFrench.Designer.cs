@@ -19,7 +19,7 @@ namespace Droid_Infra.Properties {
     // à l'aide d'un outil, tel que ResGen ou Visual Studio.
     // Pour ajouter ou supprimer un membre, modifiez votre fichier .ResX, puis réexécutez ResGen
     // avec l'option /str ou régénérez votre projet VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class ResourceFrench {
@@ -57,6 +57,15 @@ namespace Droid_Infra.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Ajouter.
+        /// </summary>
+        internal static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
             }
         }
         
@@ -106,6 +115,15 @@ namespace Droid_Infra.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Infra.
+        /// </summary>
+        internal static string Infra {
+            get {
+                return ResourceManager.GetString("Infra", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Identifiant.
         /// </summary>
         internal static string login {
@@ -138,6 +156,15 @@ namespace Droid_Infra.Properties {
         internal static string password {
             get {
                 return ResourceManager.GetString("password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enregistrer.
+        /// </summary>
+        internal static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
         

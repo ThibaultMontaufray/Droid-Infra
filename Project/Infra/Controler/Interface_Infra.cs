@@ -9,16 +9,23 @@ using Tools4Libraries;
 namespace Droid_Infra
 {
     public delegate void InterfaceEventHandler();
+
+    [Serializable]
+    [XmlRoot("infra")]
     public class Interface_infra : GPInterface
     {
         #region Attribute
         public readonly int TOP_OFFSET = 175;
+        public const string CONFIGFILE = "infra.config";
         public event InterfaceEventHandler SheetDisplayRequested;
 
         private Boot2Docker _docker;
         private ToolStripMenuInfra _tsm;
         private string _workingDirectory;
 
+        private ViewInfraAdd _viewInfraAdd;
+
+        private ViewComputer _viewComputer;
         private ViewWelcome _viewWelcome;
         private ViewDocker _viewDocker;
 
@@ -31,11 +38,26 @@ namespace Droid_Infra
         private PanelCustom _viewGithubUserDetail;
         private PanelCustom _viewGithubManage;
 
+        private BitbucketAdapter _bitbucketAdapter;
+        private PanelCustom _viewBitbucket;
+
         private SyncanyAdapter _infraSyncany;
         private Timer _timer;
+        private InfraAdapteur _currentInfraComponent;
+        private InfraFarm _infraFarm;
         #endregion
 
         #region Properties
+        public InfraFarm InfraFarm
+        {
+            get { return _infraFarm; }
+            set { _infraFarm = value; }
+        }
+        public InfraAdapteur CurrentInfraComponent
+        {
+            get { return _currentInfraComponent; }
+            set { _currentInfraComponent = value; }
+        }
         public GitHubAdapter GitHubAdapter
         {
             get { return _githubAdapter; }
@@ -56,7 +78,7 @@ namespace Droid_Infra
             get { return _docker; }
             set { _docker = value; }
         }
-        public Panel Sheet
+        public new Panel Sheet
         {
             get { return _sheet; }
             set { _sheet = value; }
@@ -69,9 +91,14 @@ namespace Droid_Infra
         #endregion
 
         #region Constructor
+        public Interface_infra()
+        {
+            _workingDirectory = Tools4Libraries.Params.ConfigFile = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Servodroid\";
+            Init();
+        }
         public Interface_infra(string workingDirectory)
         {
-            _workingDirectory = workingDirectory;
+            _workingDirectory = string.IsNullOrEmpty(workingDirectory) ? Tools4Libraries.Params.ConfigFile = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Servodroid\" : workingDirectory;
             Init();
         }
         #endregion
@@ -127,6 +154,20 @@ namespace Droid_Infra
         {
             switch (action)
             {
+                // INFRA
+                case "Infra_Open":
+                    LaunchInfraOpen();
+                    break;
+                case "Infra_Save":
+                    LaunchInfraSave();
+                    break;
+                case "Infra_Add":
+                    LaunchInfraAdd();
+                    break;
+                // COMPUTER
+                case "Computer_Manage":
+                    LaunchComputerManage();
+                    break;
                 // SYNCANY
                 case "Syncany_Manage":
                     LaunchSyncanyManage();
@@ -154,6 +195,10 @@ namespace Droid_Infra
                     break;
                 case "Docker_Start":
                     LaunchDockerStart();
+                    break;
+                // BITBUCKET
+                case "Bitbucket_Manage":
+                    LaunchBitbucketManage();
                     break;
                 // GITHUB
                 case "Github_Manage":
@@ -188,6 +233,8 @@ namespace Droid_Infra
         #region Methods private
         private void Init()
         {
+            _infraFarm = new InfraFarm();
+
             _sheet = new Panel();
             _sheet.Name = "SheetInfra";
             _sheet.BackgroundImage = Properties.Resources.ShieldTileBg;
@@ -203,7 +250,7 @@ namespace Droid_Infra
             _viewWelcome.ChangeLanguage();
             _sheet.Controls.Add(_viewWelcome);
             if (SheetDisplayRequested != null) SheetDisplayRequested();
-
+            
             InitSyncany();
             InitGithub();
             InitDocker();
@@ -249,6 +296,14 @@ namespace Droid_Infra
             _viewGithubManage = new PanelCustom(githubManage);
             _viewGithubManage.Name = "CurrentView";
         }
+        private void InitBitbucket()
+        {
+            _bitbucketAdapter = new BitbucketAdapter();
+
+            ViewBitbucket viewBitbucket = new ViewBitbucket(_bitbucketAdapter);
+            _viewBitbucket = new PanelCustom(viewBitbucket);
+            _viewBitbucket.Name = "CurrentView";
+        }
         private void InitDocker()
         {
             _docker = new Boot2Docker();
@@ -256,6 +311,59 @@ namespace Droid_Infra
             _viewDocker.Name = "CurrentView";
         }
 
+        private void LaunchInfraOpen()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.InitialDirectory = _workingDirectory;
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                LoadConfig(ofd.FileName);
+            }
+        }
+        private void LaunchInfraSave()
+        {
+            //XmlSerializer ser = new XmlSerializer(typeof(List<InfraAdapteur>));
+            //using (FileStream fs = new FileStream(Path.Combine(_workingDirectory, CONFIGFILE), FileMode.Create))
+            //{
+            //    ser.Serialize(fs, _infraComponents);
+            //}
+
+            //FileStream fs = new FileStream(Path.Combine(_workingDirectory, CONFIGFILE), FileMode.OpenOrCreate);
+            //System.Xml.Serialization.XmlSerializer s = new System.Xml.Serialization.XmlSerializer(typeof(Interface_infra));
+            //s.Serialize(fs, this);
+
+            using (FileStream fs = new FileStream(Path.Combine(_workingDirectory, CONFIGFILE), FileMode.OpenOrCreate))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(InfraFarm));
+                serializer.Serialize(fs, _infraFarm);
+            }
+        }
+        private void LaunchInfraAdd()
+        {
+            _sheet.Controls.Clear();
+
+            if (_viewInfraAdd == null) { _viewInfraAdd = new ViewInfraAdd(this); }
+
+            _viewInfraAdd.Top = TOP_OFFSET;
+            _viewInfraAdd.RefreshData();
+            _viewInfraAdd.Left = (_sheet.Width / 2) - (_viewInfraAdd.Width / 2);
+            _viewInfraAdd.ChangeLanguage();
+            _sheet.Controls.Add(_viewInfraAdd);
+            if (SheetDisplayRequested != null) SheetDisplayRequested();
+        }
+        private void LaunchComputerManage()
+        {
+            _sheet.Controls.Clear();
+
+            if (_viewComputer == null) _viewComputer = new ViewComputer();
+
+            _viewComputer.Top = TOP_OFFSET;
+            _viewComputer.RefreshData();
+            _viewComputer.Left = (_sheet.Width / 2) - (_viewComputer.Width / 2);
+            _viewComputer.ChangeLanguage();
+            _sheet.Controls.Add(_viewComputer);
+            if (SheetDisplayRequested != null) SheetDisplayRequested();
+        }
         private void LaunchDockerInit()
         {
             _docker.Init();
@@ -343,6 +451,19 @@ namespace Droid_Infra
             _tsm.RefreshData(this);
             _timer.Start();
         }
+        private void LaunchBitbucketManage()
+        {
+            _sheet.Controls.Clear();
+
+            if (_viewBitbucket == null) { InitBitbucket(); }
+
+            _viewBitbucket.Top = TOP_OFFSET;
+            _viewBitbucket.RefreshData();
+            _viewBitbucket.Left = (_sheet.Width / 2) - (_viewBitbucket.Width / 2);
+            _viewBitbucket.ChangeLanguage();
+            _sheet.Controls.Add(_viewBitbucket);
+            if (SheetDisplayRequested != null) SheetDisplayRequested();
+        }
         private void LaunchGithubManage()
         {
             _sheet.Controls.Clear();
@@ -382,29 +503,36 @@ namespace Droid_Infra
             _sheet.Controls.Add(_viewGithubIssue);
             if (SheetDisplayRequested != null) SheetDisplayRequested();
         }
-
         private void LaunchJiraManage()
         {
             _sheet.Controls.Clear();
             if (SheetDisplayRequested != null) SheetDisplayRequested();
         }
-
         private void LaunchTeamCityManage()
         {
             _sheet.Controls.Clear();
             if (SheetDisplayRequested != null) SheetDisplayRequested();
         }
-
         private void LaunchSonarManage()
         {
             _sheet.Controls.Clear();
             if (SheetDisplayRequested != null) SheetDisplayRequested();
         }
-
         private void LaunchJenkinsManage()
         {
             _sheet.Controls.Clear();
             if (SheetDisplayRequested != null) SheetDisplayRequested();
+        }
+
+        private void LoadConfig(string filePath)
+        {
+            _infraFarm.Clear();
+
+            XmlSerializer ser = new XmlSerializer(typeof(InfraFarm));
+            using (FileStream fs = new FileStream(Path.Combine(_workingDirectory, CONFIGFILE), FileMode.Open))
+            {
+                _infraFarm = ser.Deserialize(fs) as InfraFarm;
+            }
         }
         #endregion
 

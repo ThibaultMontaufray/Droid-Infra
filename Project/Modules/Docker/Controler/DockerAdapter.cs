@@ -1,6 +1,6 @@
 ﻿namespace Droid_Infra
 {
-    public class Interface_docker
+    public class DockerAdapter : InfraAdapteur
     {
         #region Attribute
         private Boot2Docker _docker;
@@ -15,7 +15,7 @@
         #endregion
 
         #region Constructor
-        public Interface_docker()
+        public DockerAdapter()
         {
             _docker = new Boot2Docker();
         }

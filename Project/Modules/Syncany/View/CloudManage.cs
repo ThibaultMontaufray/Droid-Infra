@@ -40,8 +40,7 @@ namespace Droid_Infra
             _timer = new Timer();
             _timer.Interval = 37000;
             _timer.Tick += _timer_Tick;
-            _timer.Start();
-
+            
             InitializeComponent();
         }
         #endregion
@@ -71,6 +70,14 @@ namespace Droid_Infra
             labelPassword.Text = GetText.Text("password");
             labelSynchroDate.Text = GetText.Text("synchroDate");
             buttonSynchroStartStop.Text = _syncany.SynchronisationRunning ? GetText.Text("Started") : GetText.Text("Stopped");
+        }
+        public void LaunchSynchro()
+        {
+            _timer.Start();
+        }
+        public void StopSynchro()
+        {
+            _timer.Stop();
         }
         #endregion
 

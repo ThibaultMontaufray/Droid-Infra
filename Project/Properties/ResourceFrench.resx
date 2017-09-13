@@ -156,4 +156,13 @@
   <data name="synchroDate" xml:space="preserve">
     <value>Dernière synchronisation</value>
   </data>
+  <data name="Infra" xml:space="preserve">
+    <value>Infra</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
 </root>

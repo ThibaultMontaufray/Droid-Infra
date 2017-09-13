@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Droid_Infra
 {
     public delegate void GitHubAdapterEventHandler();
-    public class GitHubAdapter
+    public class GitHubAdapter : InfraAdapteur
     {
         #region Attribute
         public event GitHubAdapterEventHandler StatusChanged;
