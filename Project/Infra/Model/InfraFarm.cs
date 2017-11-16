@@ -21,6 +21,8 @@ namespace Droid_Infra
         [XmlElement(typeof(SonarAdapter))]
         [XmlElement(typeof(SyncanyAdapter))]
         [XmlElement(typeof(TeamCityAdapter))]
+        [XmlElement(typeof(SqlAdapter))]
+        [XmlElement(typeof(VPNAdapter))]
         public List<InfraAdapteur> InfraComponents { get; set; }
 
         public InfraFarm()

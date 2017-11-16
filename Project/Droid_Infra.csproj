@@ -43,6 +43,12 @@
     <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\..\Droid-Manager\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
     </Reference>
+    <Reference Include="EasyHttp, Version=1.6.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Droid-Manager\packages\EasyHttp.1.6.6.0\lib\net40\EasyHttp.dll</HintPath>
+    </Reference>
+    <Reference Include="JsonFx, Version=2.0.1209.2802, Culture=neutral, PublicKeyToken=315052dd637f8a52, processorArchitecture=MSIL">
+      <HintPath>..\..\Droid-Manager\packages\JsonFx.2.0.1209.2802\lib\net40\JsonFx.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -79,6 +85,9 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TeamCitySharp, Version=0.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Droid-Manager\packages\TeamCitySharp.0.3.5\lib\net40\TeamCitySharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infra\Controler\GetText.cs" />
@@ -91,6 +100,12 @@
     </Compile>
     <Compile Include="Infra\View\Demo.Designer.cs">
       <DependentUpon>Demo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Infra\View\Component.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Infra\View\Component.Designer.cs">
+      <DependentUpon>Component.cs</DependentUpon>
     </Compile>
     <Compile Include="Infra\View\ToolStripMenuInfra.cs">
       <SubType>Component</SubType>
@@ -107,8 +122,16 @@
     <Compile Include="Infra\View\ViewWelcome.Designer.cs">
       <DependentUpon>ViewWelcome.cs</DependentUpon>
     </Compile>
+    <Compile Include="lang\strings.de.Designer.cs" />
+    <Compile Include="lang\strings.Designer.cs" />
     <Compile Include="Modules\Bitbucket\Controler\BitbucketAdapter.cs" />
     <Compile Include="Modules\Bitbucket\Model\BitbucketRepository.cs" />
+    <Compile Include="Modules\Bitbucket\View\ComponentBitbucket.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\View\ComponentBitbucket.Designer.cs">
+      <DependentUpon>ComponentBitbucket.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Bitbucket\View\ViewBitbucket.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -140,11 +163,29 @@
       <DependentUpon>ViewBitBucketLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Computer\Controler\ComputerAdapter.cs" />
+    <Compile Include="Modules\Computer\View\ComponentComputer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Computer\View\ComponentComputer.Designer.cs">
+      <DependentUpon>ComponentComputer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Computer\View\ViewComputer.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\Computer\View\ViewComputer.Designer.cs">
       <DependentUpon>ViewComputer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\View\ComponentDocekr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\View\ComponentDocekr.Designer.cs">
+      <DependentUpon>ComponentDocekr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\GitHub\View\ComponentGithub.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\GitHub\View\ComponentGithub.Designer.cs">
+      <DependentUpon>ComponentGithub.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\GitHub\View\GithubManage.cs">
       <SubType>UserControl</SubType>
@@ -153,8 +194,33 @@
       <DependentUpon>GithubManage.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Jenkins\Controler\JenkinsAdapter.cs" />
+    <Compile Include="Modules\Jenkins\View\ComponentJenkins.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Jenkins\View\ComponentJenkins.Designer.cs">
+      <DependentUpon>ComponentJenkins.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Jira\View\ComponentJira.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Jira\View\ComponentJira.Designer.cs">
+      <DependentUpon>ComponentJira.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Service\ServiceAdapter.cs" />
     <Compile Include="Modules\Sonar\Controler\SonarAdapter.cs" />
+    <Compile Include="Modules\Sonar\View\ComponentSonar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sonar\View\ComponentSonar.Designer.cs">
+      <DependentUpon>ComponentSonar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SQL\Controler\SqlAdapter.cs" />
+    <Compile Include="Modules\SQL\View\ComponentSql.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\SQL\View\ComponentSql.Designer.cs">
+      <DependentUpon>ComponentSql.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Syncany\View\CloudManage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -200,16 +266,122 @@
       <DependentUpon>GitHubLogger.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Docker\Controler\DockerAdapter.cs" />
-    <Compile Include="Modules\Jira\JiraAdapter.cs" />
+    <Compile Include="Modules\Jira\Controler\JiraAdapter.cs" />
     <Compile Include="Modules\Syncany\View\CloudCreate.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\Syncany\View\CloudCreate.Designer.cs">
       <DependentUpon>CloudCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Syncany\View\ComponentSyncany.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Syncany\View\ComponentSyncany.Designer.cs">
+      <DependentUpon>ComponentSyncany.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Syncany\View\ViewSyncany.cs" />
     <Compile Include="Modules\System\SystemAdapter.cs" />
     <Compile Include="Modules\TeamCity\Controler\TeamCityAdapter.cs" />
+    <Compile Include="Modules\TeamCity\View\ComponentTeamCity.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\TeamCity\View\ComponentTeamCity.Designer.cs">
+      <DependentUpon>ComponentTeamCity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VPN\Controler\helper.cs" />
+    <Compile Include="Modules\VPN\Controler\VPNAdapter.cs" />
+    <Compile Include="Modules\VPN\View\FrmAbout.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\View\FrmAbout.Designer.cs">
+      <DependentUpon>FrmAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VPN\View\FrmGlobalStatus.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\View\FrmGlobalStatus.Designer.cs">
+      <DependentUpon>FrmGlobalStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VPN\View\FrmLoginAndPasswd.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\View\FrmLoginAndPasswd.Designer.cs">
+      <DependentUpon>FrmLoginAndPasswd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VPN\View\FrmPasswd.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\View\FrmPasswd.Designer.cs">
+      <DependentUpon>FrmPasswd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VPN\View\FrmSelectPKCS11Key.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\View\FrmSelectPKCS11Key.Designer.cs">
+      <DependentUpon>FrmSelectPKCS11Key.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VPN\View\FrmSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\View\FrmSettings.Designer.cs">
+      <DependentUpon>FrmSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VPN\View\FrmStatus.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\View\FrmStatus.Designer.cs">
+      <DependentUpon>FrmStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VPN\View\IPLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\Controler\OpenVPN\AsyncEventDetail.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\Communicator.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\ConfigParser.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\Connection.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\DebugEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\GotLineEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\LogEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\LogManager.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\ManagementLogic.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\ManagementParser.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\NeedCardIDEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\NeedLoginAndPasswordEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\NeedPasswordEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNCommunicator.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNConfigParser.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNConnection.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNLogEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNLogManager.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNManagementLogic.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNManagementParser.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNNeedCardIDEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNNeedLoginAndPasswordEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNNeedPasswordEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNService.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNServiceConnection.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNUserConnection.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\PKCS11Detail.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\ServiceConnection.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\States\State.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\States\StateChangedEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\States\StateSnapshot.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\States\VPNConnectionState.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\UserSpaceConnection.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\UserSpaceService.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\UtilsHelper.cs" />
+    <Compile Include="Modules\VPN\Controler\ProfileSettings.cs" />
+    <Compile Include="Modules\VPN\Controler\ProgramVPN.cs" />
+    <Compile Include="Modules\VPN\Controler\RTLMessageBox.cs" />
+    <Compile Include="Modules\VPN\Controler\SimpleComm.cs" />
+    <Compile Include="Modules\VPN\Controler\Update.cs" />
+    <Compile Include="Modules\VPN\Controler\VPNConfig.cs" />
+    <Compile Include="Modules\VPN\View\VPNInfoBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\View\VPNInfoBox.Designer.cs">
+      <DependentUpon>VPNInfoBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -283,11 +455,19 @@
     <EmbeddedResource Include="Infra\View\Demo.resx">
       <DependentUpon>Demo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Infra\View\Component.resx">
+      <DependentUpon>Component.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infra\View\ViewInfraAdd.resx">
       <DependentUpon>ViewInfraAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Infra\View\ViewWelcome.resx">
       <DependentUpon>ViewWelcome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="lang\strings.de.resx" />
+    <EmbeddedResource Include="lang\strings.resx" />
+    <EmbeddedResource Include="Modules\Bitbucket\View\ComponentBitbucket.resx">
+      <DependentUpon>ComponentBitbucket.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Bitbucket\View\ViewBitbucket.resx">
       <DependentUpon>ViewBitbucket.cs</DependentUpon>
@@ -304,11 +484,32 @@
     <EmbeddedResource Include="Modules\Bitbucket\View\ViewBitBucketLogin.resx">
       <DependentUpon>ViewBitBucketLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Computer\View\ComponentComputer.resx">
+      <DependentUpon>ComponentComputer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Computer\View\ViewComputer.resx">
       <DependentUpon>ViewComputer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\View\ComponentDocekr.resx">
+      <DependentUpon>ComponentDocekr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\GitHub\View\ComponentGithub.resx">
+      <DependentUpon>ComponentGithub.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\GitHub\View\GithubManage.resx">
       <DependentUpon>GithubManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Jenkins\View\ComponentJenkins.resx">
+      <DependentUpon>ComponentJenkins.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Jira\View\ComponentJira.resx">
+      <DependentUpon>ComponentJira.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Sonar\View\ComponentSonar.resx">
+      <DependentUpon>ComponentSonar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\SQL\View\ComponentSql.resx">
+      <DependentUpon>ComponentSql.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Syncany\View\CloudManage.resx">
       <DependentUpon>CloudManage.cs</DependentUpon>
@@ -331,8 +532,62 @@
     <EmbeddedResource Include="Modules\Syncany\View\CloudCreate.resx">
       <DependentUpon>CloudCreate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Syncany\View\ComponentSyncany.resx">
+      <DependentUpon>ComponentSyncany.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Syncany\View\ViewSyncany.resx">
       <DependentUpon>ViewSyncany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\TeamCity\View\ComponentTeamCity.resx">
+      <DependentUpon>ComponentTeamCity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\View\FrmAbout.de.resx">
+      <DependentUpon>FrmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\View\FrmAbout.resx">
+      <DependentUpon>FrmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\View\FrmGlobalStatus.de.resx">
+      <DependentUpon>FrmGlobalStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\View\FrmGlobalStatus.resx">
+      <DependentUpon>FrmGlobalStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\View\FrmLoginAndPasswd.de.resx">
+      <DependentUpon>FrmLoginAndPasswd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\View\FrmLoginAndPasswd.resx">
+      <DependentUpon>FrmLoginAndPasswd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\View\FrmPasswd.de.resx">
+      <DependentUpon>FrmPasswd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\View\FrmPasswd.resx">
+      <DependentUpon>FrmPasswd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\View\FrmSelectPKCS11Key.de.resx">
+      <DependentUpon>FrmSelectPKCS11Key.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\View\FrmSelectPKCS11Key.resx">
+      <DependentUpon>FrmSelectPKCS11Key.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\View\FrmSettings.de.resx">
+      <DependentUpon>FrmSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\View\FrmSettings.resx">
+      <DependentUpon>FrmSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\View\FrmStatus.de.resx">
+      <DependentUpon>FrmStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\View\FrmStatus.resx">
+      <DependentUpon>FrmStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\View\VPNInfoBox.de.resx">
+      <DependentUpon>VPNInfoBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\View\VPNInfoBox.resx">
+      <DependentUpon>VPNInfoBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -392,17 +647,49 @@
     <None Include="Resources\ShieldTileBgWhite.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\bitbucket.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="App_Readme\Spring.Rest.txt" />
     <Content Include="App_Readme\Spring.Social.Core.txt" />
+    <None Include="Resources\VPN.png" />
+    <None Include="Resources\redled1.png" />
+    <None Include="Resources\connect1.png" />
+    <None Include="Resources\cancel1.png" />
+    <None Include="Resources\arrow_refresh1.png" />
+    <None Include="Resources\accept1.png" />
+    <None Include="Resources\yellowled.png" />
+    <None Include="Resources\wrench.png" />
+    <None Include="Resources\waiting321.ico" />
+    <None Include="Resources\waiting32.ico" />
+    <None Include="Resources\update.png" />
+    <None Include="Resources\tooloptions.png" />
+    <None Include="Resources\script_edit.png" />
+    <None Include="Resources\redled.png" />
+    <None Include="Resources\magnifier.png" />
+    <None Include="Resources\information.png" />
+    <None Include="Resources\icon.ico" />
+    <None Include="Resources\greenled.png" />
+    <None Include="Resources\fail32.ico" />
+    <None Include="Resources\exit.png" />
+    <None Include="Resources\disconnect.png" />
+    <None Include="Resources\connect.png" />
+    <None Include="Resources\cancel.png" />
+    <None Include="Resources\blueled.png" />
+    <None Include="Resources\arrow_refresh.png" />
+    <None Include="Resources\ack32.ico" />
+    <None Include="Resources\accept.png" />
+    <None Include="Resources\Sonarqube.png" />
+    <None Include="Resources\BitBucket.png" />
+    <None Include="Resources\componentOffline.png" />
+    <None Include="Resources\component.png" />
     <None Include="Resources\unknown.png" />
     <None Include="Resources\TeamCity.png" />
     <None Include="Resources\SQL.png" />
     <None Include="Resources\Serveur.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Droid-Maths\Droid-Maths\Droid-Maths.csproj">
+      <Project>{971bc5f1-f428-45be-9dd7-c85d5504ea7f}</Project>
+      <Name>Droid-Maths</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Tools4Libraries\Tools4Libraries.csproj">
       <Project>{aad2b1be-9b2d-455d-8dd4-64e4e84dd985}</Project>
       <Name>Tools4Libraries</Name>

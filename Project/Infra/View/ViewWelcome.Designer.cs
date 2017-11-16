@@ -28,23 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(219, 100);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(295, 153);
-            this.panel1.TabIndex = 0;
             // 
             // ViewWelcome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.panel1);
             this.Name = "ViewWelcome";
             this.Size = new System.Drawing.Size(904, 446);
             this.ResumeLayout(false);
@@ -52,7 +42,5 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel1;
     }
 }

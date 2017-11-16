@@ -5,7 +5,7 @@ using Tools4Libraries;
 
 namespace Droid_Infra
 {
-    public class ToolStripMenuInfra : RibbonTab
+    public class ToolStripMenuInfra : TSM
     {
         #region Enum
         public enum INFRA_MODULE
@@ -17,7 +17,8 @@ namespace Droid_Infra
             JIRA,
             SONAR,
             TEAMCITY,
-            BITBUCKET
+            BITBUCKET,
+            VPN
         }
         #endregion
 
@@ -27,6 +28,7 @@ namespace Droid_Infra
         private List<INFRA_MODULE> _infraModules;
 
         private RibbonPanel _panelInfra;
+        private RibbonButton _infraHome;
         private RibbonButton _infraOpen;
         private RibbonButton _infraSave;
         private RibbonButton _infraAdd;
@@ -45,6 +47,14 @@ namespace Droid_Infra
         private RibbonButton _syncanyCreate;
         private RibbonButton _syncanyAssociateRepository;
         private RibbonButton _syncanySynchro;
+
+        private RibbonPanel _panelVPN;
+        private RibbonButton _vpnGlobalStatus;
+        private RibbonButton _vpnAuthentication;
+        private RibbonButton _vpnPassword;
+        private RibbonButton _vpnSelectPKCS11Key;
+        private RibbonButton _vpnSettings;
+        private RibbonButton _vpnStatus;
 
         private RibbonPanel _panelBitbucket;
         private RibbonButton _bitbucketManage;
@@ -89,7 +99,7 @@ namespace Droid_Infra
         #endregion
 
         #region Methods public
-        public void ChangeLanguage()
+        public new void ChangeLanguage()
         {
             //_rbWelcome.Text = GetText.Text("Menu");
         }
@@ -113,6 +123,7 @@ namespace Droid_Infra
             BuildPanelJira();
             BuildPanelSonar();
             BuildPanelTeamCity();
+            BuildPanelVPN();
 
             this.Text = GetText.Text("Infra");
         }
@@ -126,10 +137,19 @@ namespace Droid_Infra
             if (_panelJira != null) _panelJira.Visible = _infraModules.Contains(INFRA_MODULE.JIRA);
             if (_panelSonar != null) _panelSonar.Visible = _infraModules.Contains(INFRA_MODULE.SONAR);
             if (_panelTeamCity != null) _panelTeamCity.Visible = _infraModules.Contains(INFRA_MODULE.TEAMCITY);
+            if (_panelVPN != null) _panelVPN.Visible = _infraModules.Contains(INFRA_MODULE.VPN);
         }
 
         private void BuildPanelInfra()
         {
+            _infraHome = new RibbonButton();
+            _infraHome.Name = "Home";
+            _infraHome.Text = GetText.Text(_infraHome.Name);
+            _infraHome.Image = Tools4Libraries.Resources.ResourceIconSet32Default.large_tiles;
+            _infraHome.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.large_tiles;
+            _infraHome.MaxSizeMode = RibbonElementSizeMode.Large;
+            _infraHome.Click += _infra_Click;
+
             _infraOpen = new RibbonButton();
             _infraOpen.Name = "Open";
             _infraOpen.Text = GetText.Text(_infraOpen.Name);
@@ -155,6 +175,7 @@ namespace Droid_Infra
             _infraAdd.Click += _infra_Click;
 
             _panelInfra = new RibbonPanel(GetText.Text("Infra"));
+            _panelInfra.Items.Add(_infraHome);
             _panelInfra.Items.Add(_infraOpen);
             _panelInfra.Items.Add(_infraSave);
             _panelInfra.Items.Add(_infraAdd);
@@ -320,6 +341,52 @@ namespace Droid_Infra
             _panelTeamCity.Items.Add(_teamcityManage);
             this.Panels.Add(_panelTeamCity);
         }
+        private void BuildPanelVPN()
+        {
+            _vpnGlobalStatus = new RibbonButton("Global status");
+            _vpnGlobalStatus.Image = Properties.Resources.VPN;
+            _vpnGlobalStatus.SmallImage = Properties.Resources.VPN;
+            _vpnGlobalStatus.Click += _vpnClick;
+
+            _vpnAuthentication = new RibbonButton("Authentication");
+            _vpnAuthentication.Image = Tools4Libraries.Resources.ResourceIconSet32Default.action_log;
+            _vpnAuthentication.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.action_log;
+            _vpnAuthentication.Click += _vpnClick;
+            _vpnAuthentication.MaxSizeMode = RibbonElementSizeMode.Medium;
+
+            _vpnPassword = new RibbonButton("Password");
+            _vpnPassword.Image = Tools4Libraries.Resources.ResourceIconSet32Default.change_password;
+            _vpnPassword.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.change_password;
+            _vpnPassword.Click += _vpnClick;
+            _vpnPassword.MaxSizeMode = RibbonElementSizeMode.Medium;
+
+            _vpnSelectPKCS11Key = new RibbonButton("Select key");
+            _vpnSelectPKCS11Key.Image = Tools4Libraries.Resources.ResourceIconSet32Default.key;
+            _vpnSelectPKCS11Key.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.key;
+            _vpnSelectPKCS11Key.Click += _vpnClick;
+            _vpnSelectPKCS11Key.MaxSizeMode = RibbonElementSizeMode.Medium;
+
+            _vpnSettings = new RibbonButton("Settings");
+            _vpnSettings.Image = Tools4Libraries.Resources.ResourceIconSet32Default.setting_tools;
+            _vpnSettings.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.setting_tools;
+            _vpnSettings.Click += _vpnClick;
+            _vpnSettings.MaxSizeMode = RibbonElementSizeMode.Medium;
+
+            _vpnStatus = new RibbonButton("Status");
+            _vpnStatus.Image = Tools4Libraries.Resources.ResourceIconSet32Default.connect;
+            _vpnStatus.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.connect;
+            _vpnStatus.Click += _vpnClick;
+            _vpnStatus.MaxSizeMode = RibbonElementSizeMode.Medium;
+
+            _panelVPN = new RibbonPanel("VPN");
+            _panelVPN.Items.Add(_vpnGlobalStatus);
+            _panelVPN.Items.Add(_vpnAuthentication);
+            //_panelVPN.Items.Add(_vpnPassword);
+            _panelVPN.Items.Add(_vpnSelectPKCS11Key);
+            _panelVPN.Items.Add(_vpnSettings);
+            //_panelVPN.Items.Add(_vpnStatus);
+            this.Panels.Add(_panelVPN);
+        }
         #endregion
 
         #region Event
@@ -391,6 +458,13 @@ namespace Droid_Infra
             if (sender is RibbonButton)
             {
                 if (ActionAppened != null) ActionAppened(this, new ToolBarEventArgs("TeamCity_" + ((RibbonButton)sender).Text));
+            }
+        }
+        private void _vpnClick(object sender, EventArgs e)
+        {
+            if (sender is RibbonButton)
+            {
+                if (ActionAppened != null) ActionAppened(this, new ToolBarEventArgs("VPN_" + ((RibbonButton)sender).Text));
             }
         }
         #endregion

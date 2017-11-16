@@ -56,7 +56,10 @@ namespace Droid_Infra
                     ia = new SonarAdapter();
                     break;
                 case "sql":
-                    ia = new ComputerAdapter();
+                    ia = new SqlAdapter();
+                    break;
+                case "vpn":
+                    ia = new VPNAdapter();
                     break;
                 case "team city":
                     ia = new TeamCityAdapter();

@@ -12,14 +12,6 @@
         private Jira _jira;
         private string _login;
         private string _password;
-        private string _url;
-
-        public string Url
-        {
-            get { return _url; }
-            set { _url = value; }
-        }
-
         #endregion
 
         #region Properties

@@ -115,6 +115,15 @@ namespace Droid_Infra.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Home.
+        /// </summary>
+        internal static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Infra.
         /// </summary>
         internal static string Infra {

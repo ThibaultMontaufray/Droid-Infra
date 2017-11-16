@@ -4,6 +4,7 @@ using SharpBucket.V1.Pocos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using Tools4Libraries;
@@ -74,12 +75,7 @@ namespace Droid_Infra
             _sharpbucket = new SharpBucketV1();
             _login = Params.BitbucketLogin;
             _password = Params.BitbucketPassword;
-
-
-
-
-
-
+            
             //// your main entry to the Bitbucket API, this one is for V1
             //var sharpBucket = new SharpBucketV1();
             //// authenticate with OAuth keys

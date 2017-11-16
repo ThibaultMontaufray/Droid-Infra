@@ -165,4 +165,7 @@
   <data name="Save" xml:space="preserve">
     <value>Enregistrer</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Accueil</value>
+  </data>
 </root>

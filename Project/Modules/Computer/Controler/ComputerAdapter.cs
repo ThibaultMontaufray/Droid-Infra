@@ -11,7 +11,6 @@ namespace Droid_Infra
     public class ComputerAdapter : InfraAdapteur
     {
         #region Attributes
-        private string _name;
         private string _ip;
         private string _os;
         private string _login;
@@ -50,11 +49,6 @@ namespace Droid_Infra
         {
             get { return _ip; }
             set { _ip = value; }
-        }
-        public new string Name
-        {
-            get { return _name; }
-            set { _name = value; }
         }
         #endregion
 

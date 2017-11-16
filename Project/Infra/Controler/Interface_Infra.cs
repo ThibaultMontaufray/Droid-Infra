@@ -8,16 +8,15 @@ using Tools4Libraries;
 
 namespace Droid_Infra
 {
-    public delegate void InterfaceEventHandler();
-
     [Serializable]
     [XmlRoot("infra")]
     public class Interface_infra : GPInterface
     {
         #region Attribute
-        public readonly int TOP_OFFSET = 175;
-        public const string CONFIGFILE = "infra.config";
         public event InterfaceEventHandler SheetDisplayRequested;
+
+        public readonly int TOP_OFFSET = 150;
+        public const string CONFIGFILE = "infra.config";
 
         private Boot2Docker _docker;
         private ToolStripMenuInfra _tsm;
@@ -45,6 +44,14 @@ namespace Droid_Infra
         private Timer _timer;
         private InfraAdapteur _currentInfraComponent;
         private InfraFarm _infraFarm;
+
+        private VPNAdapter _vpnAdapter;
+        private ViewVPNGlobalStatus _viewVPNGlobalStatus;
+        private ViewVPNAuthentication _viewVPNAuthentication;
+        private ViewVPNPasswd _viewVPNPassword;
+        private ViewVPNSelectPKCS11Key _viewVPNSelectKey;
+        private ViewVPNSettings _viewVPNSettings;
+        private ViewVPNStatus _viewVPNStatus;
         #endregion
 
         #region Properties
@@ -62,6 +69,11 @@ namespace Droid_Infra
         {
             get { return _githubAdapter; }
             set { _githubAdapter = value; }
+        }
+        public BitbucketAdapter BitbucketAdapter
+        {
+            get { return _bitbucketAdapter; }
+            set { _bitbucketAdapter = value; }
         }
         public SyncanyAdapter InfraSyncany
         {
@@ -104,29 +116,6 @@ namespace Droid_Infra
         #endregion
 
         #region Methods public
-        #region Methods Public override
-        public override void GlobalAction(object sender, EventArgs e)
-        {
-            ToolBarEventArgs tbea = e as ToolBarEventArgs;
-            string action = tbea.EventText;
-            GoAction(action);
-        }
-        public override void Refresh()
-        {
-            _tsm.RefreshData(this);
-        }
-        public override void Resize()
-        {
-            foreach (Control ctrl in _sheet.Controls)
-            {
-                if (ctrl.Name.Equals("CurrentView"))
-                {
-                    ctrl.Left = (_sheet.Width / 2) - (ctrl.Width / 2);
-                }
-            }
-        }
-        #endregion
-
         public System.Windows.Forms.RibbonTab BuildToolBar()
         {
             _tsm = new ToolStripMenuInfra();
@@ -140,7 +129,7 @@ namespace Droid_Infra
             _tsm.ActionAppened += GlobalAction;
             return _tsm;
         }
-        
+
         #region ACTIONS
         public static void ACTION_lancer_docker_130()
         {
@@ -149,12 +138,14 @@ namespace Droid_Infra
             //ddp.ShowDialog();
         }
         #endregion
-
-        public void GoAction(string action)
+        public override void GoAction(string action)
         {
             switch (action)
             {
                 // INFRA
+                case "Infra_Home":
+                    LaunchInfraHome();
+                    break;
                 case "Infra_Open":
                     LaunchInfraOpen();
                     break;
@@ -226,6 +217,25 @@ namespace Droid_Infra
                 case "TeamCity_Manage":
                     LaunchTeamCityManage();
                     break;
+                // VPN
+                case "VPN_Global status":
+                    LaunchVPNGlobalStatus();
+                    break;
+                case "VPN_Authentication":
+                    LaunchVPNAuthentication();
+                    break;
+                case "VPN_Password":
+                    LaunchVPNPassword();
+                    break;
+                case "VPN_Select key":
+                    LaunchVPNSelectKey();
+                    break;
+                case "VPN_Settings":
+                    LaunchVPNSettings();
+                    break;
+                case "VPN_Status":
+                    LaunchVPNStatus();
+                    break;
             }
         }
         #endregion
@@ -234,6 +244,7 @@ namespace Droid_Infra
         private void Init()
         {
             _infraFarm = new InfraFarm();
+            LoadConfig(null);
 
             _sheet = new Panel();
             _sheet.Name = "SheetInfra";
@@ -242,25 +253,27 @@ namespace Droid_Infra
             _sheet.Dock = DockStyle.Fill;
             _sheet.Resize += _sheet_Resize;
 
-            _viewWelcome = new ViewWelcome();
+            _viewWelcome = new ViewWelcome(this);
             _viewWelcome.Name = "CurrentView";
             _viewWelcome.Top = TOP_OFFSET;
             _viewWelcome.RefreshData();
             _viewWelcome.Left = (_sheet.Width / 2) - (_viewWelcome.Width / 2);
             _viewWelcome.ChangeLanguage();
             _sheet.Controls.Add(_viewWelcome);
-            if (SheetDisplayRequested != null) SheetDisplayRequested();
+            if (SheetDisplayRequested != null) SheetDisplayRequested(null);
             
-            InitSyncany();
-            InitGithub();
-            InitDocker();
+            //InitSyncany();
+            //InitGithub();
+            //InitDocker();
 
             BuildToolBar();
 
             _timer = new Timer();
             _timer.Interval = 20000;
             _timer.Tick += _timer_Tick;
-            _timer.Start();
+            //_timer.Start();
+
+            LaunchWelcomeView();
         }
         private void InitSyncany()
         {
@@ -300,8 +313,7 @@ namespace Droid_Infra
         {
             _bitbucketAdapter = new BitbucketAdapter();
 
-            ViewBitbucket viewBitbucket = new ViewBitbucket(_bitbucketAdapter);
-            _viewBitbucket = new PanelCustom(viewBitbucket);
+            _viewBitbucket = new PanelCustom(new ViewBitbucket(_bitbucketAdapter));
             _viewBitbucket.Name = "CurrentView";
         }
         private void InitDocker()
@@ -310,7 +322,36 @@ namespace Droid_Infra
             _viewDocker = new ViewDocker();
             _viewDocker.Name = "CurrentView";
         }
+        private void InitVPN()
+        {
+            _vpnAdapter = new VPNAdapter();
 
+            _viewVPNGlobalStatus = new ViewVPNGlobalStatus(new string[0]);
+            _viewVPNAuthentication = new ViewVPNAuthentication();
+            _viewVPNPassword = new ViewVPNPasswd();
+            _viewVPNSelectKey = new ViewVPNSelectPKCS11Key();
+            _viewVPNSettings = new ViewVPNSettings();
+            _viewVPNStatus = new ViewVPNStatus(null);
+        }
+
+        private void LaunchWelcomeView()
+        {
+            _sheet.Controls.Clear();
+
+            if (_viewWelcome == null) { _viewWelcome = new ViewWelcome(this); }
+
+            _viewWelcome.Top = TOP_OFFSET;
+            _viewWelcome.RefreshData();
+            _viewWelcome.Left = (_sheet.Width / 2) - (_viewWelcome.Width / 2);
+            _viewWelcome.ChangeLanguage();
+            _viewWelcome.Name = "CurrentView";
+            _sheet.Controls.Add(_viewWelcome);
+            if (SheetDisplayRequested != null) SheetDisplayRequested(null);
+        }
+        private void LaunchInfraHome()
+        {
+            LaunchWelcomeView();
+        }
         private void LaunchInfraOpen()
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -319,6 +360,7 @@ namespace Droid_Infra
             {
                 LoadConfig(ofd.FileName);
             }
+            LaunchWelcomeView();
         }
         private void LaunchInfraSave()
         {
@@ -348,8 +390,9 @@ namespace Droid_Infra
             _viewInfraAdd.RefreshData();
             _viewInfraAdd.Left = (_sheet.Width / 2) - (_viewInfraAdd.Width / 2);
             _viewInfraAdd.ChangeLanguage();
+            _viewInfraAdd.Name = "CurrentView";
             _sheet.Controls.Add(_viewInfraAdd);
-            if (SheetDisplayRequested != null) SheetDisplayRequested();
+            SheetDisplayRequested?.Invoke(null);
         }
         private void LaunchComputerManage()
         {
@@ -361,8 +404,9 @@ namespace Droid_Infra
             _viewComputer.RefreshData();
             _viewComputer.Left = (_sheet.Width / 2) - (_viewComputer.Width / 2);
             _viewComputer.ChangeLanguage();
+            _viewComputer.Name = "CurrentView";
             _sheet.Controls.Add(_viewComputer);
-            if (SheetDisplayRequested != null) SheetDisplayRequested();
+            SheetDisplayRequested?.Invoke(null);
         }
         private void LaunchDockerInit()
         {
@@ -387,8 +431,9 @@ namespace Droid_Infra
             if (_viewDocker == null) _viewDocker = new ViewDocker();
 
             _viewDocker.Dock = DockStyle.Fill;
+            _viewDocker.Name = "CurrentView";
             _sheet.Controls.Add(_viewDocker);
-            if (SheetDisplayRequested != null) SheetDisplayRequested();
+            SheetDisplayRequested?.Invoke(null);
         }
         private void LaunchSyncanyManage()
         {
@@ -400,8 +445,9 @@ namespace Droid_Infra
             _viewSyncanyManage.RefreshData();
             _viewSyncanyManage.Left = (_sheet.Width / 2) - (_viewSyncanyManage.Width / 2);
             _viewSyncanyManage.ChangeLanguage();
+            _viewSyncanyManage.Name = "CurrentView";
             _sheet.Controls.Add(_viewSyncanyManage);
-            if (SheetDisplayRequested != null) SheetDisplayRequested();
+            SheetDisplayRequested?.Invoke(null);
         }
         private void LaunchSyncanyCreate()
         {
@@ -413,8 +459,9 @@ namespace Droid_Infra
             _viewSyncanyCreate.RefreshData();
             _viewSyncanyCreate.Left = (_sheet.Width / 2) - (_viewSyncanyCreate.Width / 2);
             _viewSyncanyCreate.ChangeLanguage();
+            _viewSyncanyCreate.Name = "CurrentView";
             _sheet.Controls.Add(_viewSyncanyCreate);
-            if (SheetDisplayRequested != null) SheetDisplayRequested();
+            SheetDisplayRequested?.Invoke(null);
         }
         private void LaunchSyncanyRepositories()
         {
@@ -426,8 +473,9 @@ namespace Droid_Infra
             _viewSyncanyRepositories.RefreshData();
             _viewSyncanyRepositories.Left = (_sheet.Width / 2) - (_viewSyncanyRepositories.Width / 2);
             _viewSyncanyRepositories.ChangeLanguage();
+            _viewSyncanyRepositories.Name = "CurrentView";
             _sheet.Controls.Add(_viewSyncanyRepositories);
-            if (SheetDisplayRequested != null) SheetDisplayRequested();
+            SheetDisplayRequested?.Invoke(null);
         }
         private void LaunchSyncanyLoad()
         {
@@ -461,8 +509,9 @@ namespace Droid_Infra
             _viewBitbucket.RefreshData();
             _viewBitbucket.Left = (_sheet.Width / 2) - (_viewBitbucket.Width / 2);
             _viewBitbucket.ChangeLanguage();
+            _viewBitbucket.Name = "CurrentView";
             _sheet.Controls.Add(_viewBitbucket);
-            if (SheetDisplayRequested != null) SheetDisplayRequested();
+            SheetDisplayRequested?.Invoke(null);
         }
         private void LaunchGithubManage()
         {
@@ -474,8 +523,9 @@ namespace Droid_Infra
             _viewGithubManage.RefreshData();
             _viewGithubManage.Left = (_sheet.Width / 2) - (_viewGithubManage.Width / 2);
             _viewGithubManage.ChangeLanguage();
+            _viewGithubManage.Name = "CurrentView";
             _sheet.Controls.Add(_viewGithubManage);
-            if (SheetDisplayRequested != null) SheetDisplayRequested();
+            SheetDisplayRequested?.Invoke(null);
         }
         private void LaunchGitHubUserDetail()
         {
@@ -487,8 +537,9 @@ namespace Droid_Infra
             _viewGithubUserDetail.RefreshData();
             _viewGithubUserDetail.Left = (_sheet.Width / 2) - (_viewGithubUserDetail.Width / 2);
             _viewGithubUserDetail.ChangeLanguage();
+            _viewGithubUserDetail.Name = "CurrentView";
             _sheet.Controls.Add(_viewGithubUserDetail);
-            if (SheetDisplayRequested != null) SheetDisplayRequested();
+            SheetDisplayRequested?.Invoke(null);
         }
         private void LaunchGithubIssue()
         {
@@ -500,37 +551,124 @@ namespace Droid_Infra
             _viewGithubIssue.RefreshData();
             _viewGithubIssue.Left = (_sheet.Width / 2) - (_viewGithubIssue.Width / 2);
             _viewGithubIssue.ChangeLanguage();
+            _viewGithubIssue.Name = "CurrentView";
             _sheet.Controls.Add(_viewGithubIssue);
-            if (SheetDisplayRequested != null) SheetDisplayRequested();
+            SheetDisplayRequested?.Invoke(null);
         }
         private void LaunchJiraManage()
         {
             _sheet.Controls.Clear();
-            if (SheetDisplayRequested != null) SheetDisplayRequested();
+            SheetDisplayRequested?.Invoke(null);
         }
         private void LaunchTeamCityManage()
         {
             _sheet.Controls.Clear();
-            if (SheetDisplayRequested != null) SheetDisplayRequested();
+            SheetDisplayRequested?.Invoke(null);
         }
         private void LaunchSonarManage()
         {
             _sheet.Controls.Clear();
-            if (SheetDisplayRequested != null) SheetDisplayRequested();
+            SheetDisplayRequested?.Invoke(null);
         }
         private void LaunchJenkinsManage()
         {
             _sheet.Controls.Clear();
-            if (SheetDisplayRequested != null) SheetDisplayRequested();
+            SheetDisplayRequested?.Invoke(null);
+        }
+        private void LaunchVPNGlobalStatus()
+        {
+            _sheet.Controls.Clear();
+
+            if (_viewVPNGlobalStatus == null) { InitVPN(); }
+
+            _viewVPNGlobalStatus.Top = TOP_OFFSET;
+            _viewVPNGlobalStatus.RefreshData();
+            _viewVPNGlobalStatus.Left = (_sheet.Width / 2) - (_viewVPNGlobalStatus.Width / 2);
+            _viewVPNGlobalStatus.ChangeLanguage();
+            _viewVPNGlobalStatus.Name = "CurrentView";
+            _sheet.Controls.Add(_viewVPNGlobalStatus);
+            SheetDisplayRequested?.Invoke(null);
+        }
+        private void LaunchVPNAuthentication()
+        {
+            _sheet.Controls.Clear();
+
+            if (_viewVPNAuthentication== null) { InitVPN(); }
+
+            _viewVPNAuthentication.Top = TOP_OFFSET;
+            _viewVPNAuthentication.RefreshData();
+            _viewVPNAuthentication.Left = (_sheet.Width / 2) - (_viewVPNAuthentication.Width / 2);
+            _viewVPNAuthentication.ChangeLanguage();
+            _viewVPNAuthentication.Name = "CurrentView";
+            _sheet.Controls.Add(_viewVPNAuthentication);
+            SheetDisplayRequested?.Invoke(null);
+        }
+        private void LaunchVPNPassword()
+        {
+            _sheet.Controls.Clear();
+
+            if (_viewVPNPassword == null) { InitVPN(); }
+
+            _viewVPNPassword.Top = TOP_OFFSET;
+            _viewVPNPassword.RefreshData();
+            _viewVPNPassword.Left = (_sheet.Width / 2) - (_viewVPNPassword.Width / 2);
+            _viewVPNPassword.ChangeLanguage();
+            _viewVPNPassword.Name = "CurrentView";
+            _sheet.Controls.Add(_viewVPNPassword);
+            SheetDisplayRequested?.Invoke(null);
+        }
+        private void LaunchVPNSelectKey()
+        {
+            _sheet.Controls.Clear();
+
+            if (_viewVPNSelectKey == null) { InitVPN(); }
+
+            _viewVPNSelectKey.Top = TOP_OFFSET;
+            _viewVPNSelectKey.RefreshData();
+            _viewVPNSelectKey.Left = (_sheet.Width / 2) - (_viewVPNSelectKey.Width / 2);
+            _viewVPNSelectKey.ChangeLanguage();
+            _viewVPNSelectKey.Name = "CurrentView";
+            _sheet.Controls.Add(_viewVPNSelectKey);
+            SheetDisplayRequested?.Invoke(null);
+        }
+        private void LaunchVPNSettings()
+        {
+            _sheet.Controls.Clear();
+
+            if (_viewVPNSettings == null) { InitVPN(); }
+
+            _viewVPNSettings.Top = TOP_OFFSET;
+            _viewVPNSettings.RefreshData();
+            _viewVPNSettings.Left = (_sheet.Width / 2) - (_viewVPNSettings.Width / 2);
+            _viewVPNSettings.ChangeLanguage();
+            _viewVPNSettings.Name = "CurrentView";
+            _sheet.Controls.Add(_viewVPNSettings);
+            SheetDisplayRequested?.Invoke(null);
+        }
+        private void LaunchVPNStatus()
+        {
+            _sheet.Controls.Clear();
+
+            if (_viewVPNStatus == null) { InitVPN(); }
+
+            _viewVPNStatus.Top = TOP_OFFSET;
+            _viewVPNStatus.RefreshData();
+            _viewVPNStatus.Left = (_sheet.Width / 2) - (_viewVPNStatus.Width / 2);
+            _viewVPNStatus.ChangeLanguage();
+            _viewVPNStatus.Name = "CurrentView";
+            _sheet.Controls.Add(_viewVPNStatus);
+            SheetDisplayRequested?.Invoke(null);
         }
 
         private void LoadConfig(string filePath)
         {
+            if (string.IsNullOrEmpty(filePath)) { filePath = Path.Combine(_workingDirectory, CONFIGFILE); }
             _infraFarm.Clear();
 
             XmlSerializer ser = new XmlSerializer(typeof(InfraFarm));
-            using (FileStream fs = new FileStream(Path.Combine(_workingDirectory, CONFIGFILE), FileMode.Open))
+            using (FileStream fs = new FileStream(filePath, FileMode.Open))
             {
+                _infraFarm.Clear();
                 _infraFarm = ser.Deserialize(fs) as InfraFarm;
             }
         }
