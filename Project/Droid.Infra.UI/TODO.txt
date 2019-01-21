@@ -1,0 +1,15 @@
+﻿<docker>
+	- docker search microsoft/windowsservercore
+
+	- docker logs containerID
+	- docker system df
+	- docker volume ls
+	- docker system df --format "{{.Type}}: {{.TotalCount}} [{{.Size}}]""
+	- $ docker run -dit --restart unless-stopped redis
+ 	- certificats : $cert = New-SelfSignedCertificate -certstorelocation cert:\localmachine\my -dnsname *.onfly.io -FriendlyName "*.onfly.io"
+no	Do not automatically restart the container. (the default)
+on-failure	Restart the container if it exits due to an error, which manifests as a non-zero exit code.
+unless-stopped	Restart the container unless it is explicitly stopped or Docker itself is stopped or restarted.
+always	Always restart the container if it stops.
+
+</docker>

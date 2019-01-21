@@ -1,0 +1,87 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Authors>Thibault MONTAUFRAY</Authors>
+    <Version>1.0.14</Version>
+    <Company>Servodroid</Company>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/ThibaultMontaufray/Tools4Libraries/master/License</PackageLicenseUrl>
+    <Copyright>Copyright 2016</Copyright>
+    <PackageProjectUrl>https://github.com/ThibaultMontaufray/Droid-infra</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ThibaultMontaufray/Droid-infra</RepositoryUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/ThibaultMontaufray/Tools4Libraries/master/ManagersDevComponents/servodroidIconColor.png</PackageIconUrl>
+    <RepositoryType>github</RepositoryType>
+    <PackageTags>Servodroid mqrabbit infra docker github jenkins jira syncany cloud</PackageTags>
+    <Description>Interface for soft integration (docker, github, jenkins, jira, syncany...). Allow you to create your own private cloud with syncany</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Infra\Model\InfraMonitoring.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Infra\Model\InfraMonitoring.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Atlassian.Stash.Api" Version="3.1.20" />
+    <PackageReference Include="Bitbucket.Net" Version="2.1.5" />
+    <PackageReference Include="BitBucketServerCSharp" Version="1.0.0" />
+    <PackageReference Include="Core.System.Configuration.Install" Version="1.0.0" />
+    <PackageReference Include="Dapplo.Config.Registry" Version="1.0.10" />
+    <PackageReference Include="Dapplo.Registry" Version="0.6.2" />
+    <PackageReference Include="Docker.DotNet" Version="3.125.2" />
+    <PackageReference Include="Droid.Web" Version="1.0.5" />
+    <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
+    <PackageReference Include="Npgsql" Version="4.0.4" />
+    <PackageReference Include="Octokit" Version="0.32.0" />
+    <PackageReference Include="Ofl.Atlassian.Jira" Version="3.0.6" />
+    <PackageReference Include="RabbitMQ.Client" Version="5.1.0" />
+    <PackageReference Include="RabbitMQHare" Version="4.4.0" />
+    <PackageReference Include="SharpBucket" Version="0.8.0" />
+    <PackageReference Include="System.DirectoryServices" Version="4.5.0" />
+    <PackageReference Include="System.IO" Version="4.3.0" />
+    <PackageReference Include="System.Management" Version="4.5.0" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="4.5.0" />
+    <PackageReference Include="System.Threading.AccessControl" Version="4.5.0" />
+    <PackageReference Include="TeamCitySharp" Version="0.3.5" />
+    <PackageReference Include="Tools.Utilities" Version="1.0.23" />
+    <PackageReference Include="YouTrackSharp" Version="3.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CodeBucket.Client">
+      <HintPath>..\Droid.Infra.UI\Modules\Bitbucket\Lib\CodeBucket.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.NetFwTypeLib">
+      <HintPath>..\Droid.Infra.UI\obj\Debug\Interop.NetFwTypeLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Administration">
+      <HintPath>C:\Program Files\Microsoft SDKs\Azure\.NET SDK\v2.9\bin\plugins\Diagnostics\Microsoft.Web.Administration.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>System</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Settings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>

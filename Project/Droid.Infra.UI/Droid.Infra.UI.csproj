@@ -1,0 +1,1270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <ProjectGuid>{6827572C-022E-4C94-8E6C-4F4FC7AEAB18}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Droid.Infra.UI</RootNamespace>
+    <AssemblyName>Droid.Infra.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>lib\4.5.1\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>TobiAppliKey.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TobiProject|x64'">
+    <OutputPath>bin\TobiProject\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ServoIconInfrastructures.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Droid|x64'">
+    <OutputPath>bin\Droid\</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TobiProject|AnyCPU'">
+    <OutputPath>bin\TobiProject\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Droid|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>lib\4.6.1\</OutputPath>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TobiProject|x86'">
+    <OutputPath>bin\x86\TobiProject\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Droid|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>lib\4.6.1\</OutputPath>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="Atlassian.Jira, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Atlassian.SDK.5.10.0\lib\Atlassian.Jira.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Atlassian.Stash, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Atlassian.Stash.Api.3.1.0\lib\net45\Atlassian.Stash.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CodeBucket.Client">
+      <HintPath>Modules\Bitbucket\Lib\CodeBucket.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Dapplo.Utils, Version=1.1.0.0, Culture=neutral, PublicKeyToken=5be96fed5d651fee, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Utils.1.1.9\lib\net461\Dapplo.Utils.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Docker.DotNet, Version=3.125.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Docker.DotNet.3.125.2\lib\net46\Docker.DotNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Droid_scheduler">
+      <HintPath>..\..\Droid-Scheduler\Project\obj\Debug\Droid_scheduler.dll</HintPath>
+    </Reference>
+    <Reference Include="Droid_Tobi">
+      <HintPath>..\..\Droid-Tobi\obj\Debug\Droid_Tobi.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyHttp, Version=1.6.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EasyHttp.1.6.6.0\lib\net40\EasyHttp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Flurl, Version=2.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.2.6.0\lib\net45\Flurl.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Flurl.Http, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.Http.2.1.1\lib\net45\Flurl.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HgRpcSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\hgrpcsharp.1.12.1\lib\net461\HgRpcSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JsonFx, Version=2.0.1209.2802, Culture=neutral, PublicKeyToken=315052dd637f8a52, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\JsonFx.2.0.1209.2802\lib\net40\JsonFx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\..\ServOdroid\ServOdroid\bin\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\Tobi.Desktop\Project\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net46\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Web.Administration.7.0.0.0\lib\net20\Microsoft.Web.Administration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\Tobi.Desktop\Project\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Npgsql, Version=3.2.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.3.2.7\lib\net451\Npgsql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Octokit, Version=0.24.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Octokit.0.24.0\lib\net45\Octokit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\..\Tobi.Desktop\Project\packages\RabbitMQ.Client.5.1.0\lib\net451\RabbitMQ.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RabbitMQHare, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Tobi.Desktop\Project\packages\RabbitMQHare.4.4.0\lib\net40\RabbitMQHare.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpBucket, Version=0.6.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpBucket.0.6.5\lib\net40\SharpBucket.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spring.Rest, Version=1.1.0.5340, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Spring.Rest.1.1.0\lib\net40\Spring.Rest.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spring.Social.Core, Version=1.0.0.5340, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Spring.Social.Core.1.0.0\lib\net40\Spring.Social.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Statsify.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\statsify.client.1.0.0\lib\net40\Statsify.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.3.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Diagnostics.DiagnosticSource.4.3.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.IO.FileSystem.4.3.0\lib\net46\System.IO.FileSystem.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.0\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.Ribbon, Version=3.5.8.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tools.Utilities.UI.1.0.23\lib\4.6.1\System.Windows.Forms.Ribbon.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Xml.ReaderWriter.4.3.0\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TeamCitySharp, Version=0.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\TeamCitySharp.0.3.5\lib\net40\TeamCitySharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Tools.Utilities.UI, Version=1.0.11.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\Tools.Utilities.UI.1.0.23\lib\4.6.1\Tools.Utilities.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="YouTrackSharp, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YouTrackSharp.3.4.1\lib\netstandard1.3\YouTrackSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Infra\InterfaceInfra.cs" />
+    <Compile Include="Infra\View\FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Infra\View\FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Infra\View\Component.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Infra\View\Component.Designer.cs">
+      <DependentUpon>Component.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Infra\View\ToolStripMenuInfra.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Infra\View\ViewInfraNew.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Infra\View\ViewInfraNew.Designer.cs">
+      <DependentUpon>ViewInfraNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Infra\View\ViewInfraOverview.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Infra\View\ViewInfraOverview.Designer.cs">
+      <DependentUpon>ViewInfraOverview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Infra\View\ViewInfraComponent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Infra\View\ViewInfraComponent.Designer.cs">
+      <DependentUpon>ViewInfraComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Infra\View\ViewInfraMonitoring.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Infra\View\ViewInfraMonitoring.Designer.cs">
+      <DependentUpon>ViewInfraMonitoring.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Infra\View\ViewWelcome.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Infra\View\ViewWelcome.Designer.cs">
+      <DependentUpon>ViewWelcome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="lang\strings.de.Designer.cs" />
+    <Compile Include="lang\strings.Designer.cs" />
+    <Compile Include="Modules\Bitbucket\BitbucketAdapterUI.cs" />
+    <Compile Include="Modules\Bitbucket\ComponentBitbucket.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\ComponentBitbucket.Designer.cs">
+      <DependentUpon>ComponentBitbucket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\RepoPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\RepoPanel.Designer.cs">
+      <DependentUpon>RepoPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\ViewBitBucketCreateBranch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\ViewBitBucketCreateBranch.Designer.cs">
+      <DependentUpon>ViewBitBucketCreateBranch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\ViewBitbucketManage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\ViewBitbucketManage.Designer.cs">
+      <DependentUpon>ViewBitbucketManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\ViewBitBucketRepository.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\ViewBitBucketRepository.Designer.cs">
+      <DependentUpon>ViewBitBucketRepository.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\ViewBitBucketIssue.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\ViewBitBucketIssue.Designer.cs">
+      <DependentUpon>ViewBitBucketIssue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\ViewBitBucketRepositoryAdd.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\ViewBitBucketRepositoryAdd.Designer.cs">
+      <DependentUpon>ViewBitBucketRepositoryAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\ViewBitBucketSetting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\ViewBitBucketSetting.Designer.cs">
+      <DependentUpon>ViewBitBucketSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\ViewBitBucketLogin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Bitbucket\ViewBitBucketLogin.Designer.cs">
+      <DependentUpon>ViewBitBucketLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Computer\ComponentComputer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Computer\ComponentComputer.Designer.cs">
+      <DependentUpon>ComponentComputer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Computer\ConsoleControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Computer\ConsoleControl.Designer.cs">
+      <DependentUpon>ConsoleControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Computer\FormConsoleControlSample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Computer\FormConsoleControlSample.Designer.cs">
+      <DependentUpon>FormConsoleControlSample.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Computer\FormNewProcess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Computer\FormNewProcess.Designer.cs">
+      <DependentUpon>FormNewProcess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Computer\SendKeysEx.cs" />
+    <Compile Include="Modules\Computer\ViewComputer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Computer\ViewComputer.Designer.cs">
+      <DependentUpon>ViewComputer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\ComponentDocker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\ComponentDocker.Designer.cs">
+      <DependentUpon>ComponentDocker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\ComponentDockerContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\ComponentDockerContainer.Designer.cs">
+      <DependentUpon>ComponentDockerContainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\ComponentDockerImage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\ComponentDockerImage.Designer.cs">
+      <DependentUpon>ComponentDockerImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\ComponentDockerMachine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\ComponentDockerMachine.Designer.cs">
+      <DependentUpon>ComponentDockerMachine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\DockerAdapter.cs" />
+    <Compile Include="Modules\Docker\SuperGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewContainer.Designer.cs">
+      <DependentUpon>ViewContainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewContainerDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewContainerDetail.Designer.cs">
+      <DependentUpon>ViewContainerDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewDockerCompose.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewDockerCompose.Designer.cs">
+      <DependentUpon>ViewDockerCompose.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewDockerMachine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewDockerMachine.Designer.cs">
+      <DependentUpon>ViewDockerMachine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewDockerMonitor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewDockerMonitor.Designer.cs">
+      <DependentUpon>ViewDockerMonitor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewNetworkDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewNetworkDetail.Designer.cs">
+      <DependentUpon>ViewNetworkDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewImageDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewImageDetail.Designer.cs">
+      <DependentUpon>ViewImageDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewNetwork.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewNetwork.Designer.cs">
+      <DependentUpon>ViewNetwork.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewImages.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewImages.Designer.cs">
+      <DependentUpon>ViewImages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewDockerManage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewDockerManage.Designer.cs">
+      <DependentUpon>ViewDockerManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\GitHub\ComponentGithub.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\GitHub\ComponentGithub.Designer.cs">
+      <DependentUpon>ComponentGithub.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\GitHub\GithubManage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\GitHub\GithubManage.Designer.cs">
+      <DependentUpon>GithubManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Jenkins\ComponentJenkins.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Jenkins\ComponentJenkins.Designer.cs">
+      <DependentUpon>ComponentJenkins.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Jira\ComponentJira.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Jira\ComponentJira.Designer.cs">
+      <DependentUpon>ComponentJira.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\MySql\ComponentMySql.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\MySql\ComponentMySql.Designer.cs">
+      <DependentUpon>ComponentMySql.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\MySql\ViewMySql.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\MySql\ViewMySql.Designer.cs">
+      <DependentUpon>ViewMySql.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PostGre\ComponentPostGre.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\PostGre\ComponentPostGre.Designer.cs">
+      <DependentUpon>ComponentPostGre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PostGre\ViewPostGreSql.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\PostGre\ViewPostGreSql.Designer.cs">
+      <DependentUpon>ViewPostGreSql.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Sonar\ComponentSonar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sonar\ComponentSonar.Designer.cs">
+      <DependentUpon>ComponentSonar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SQL\ComponentSql.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\SQL\ComponentSql.Designer.cs">
+      <DependentUpon>ComponentSql.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Syncany\CloudManage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Syncany\CloudManage.Designer.cs">
+      <DependentUpon>CloudManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Syncany\CloudStatus.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Syncany\CloudStatus.Designer.cs">
+      <DependentUpon>CloudStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\GitHub\GitHubIssue.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\GitHub\GitHubGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\GitHub\GitHubGUI.Designer.cs">
+      <DependentUpon>GitHubGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\GitHub\GitHubUserDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\GitHub\GitHubUserDetail.Designer.cs">
+      <DependentUpon>GitHubUserDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\GitHub\GitHubLogger.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\GitHub\GitHubLogger.Designer.cs">
+      <DependentUpon>GitHubLogger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Syncany\CloudCreate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Syncany\CloudCreate.Designer.cs">
+      <DependentUpon>CloudCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Syncany\ComponentSyncany.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Syncany\ComponentSyncany.Designer.cs">
+      <DependentUpon>ComponentSyncany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Syncany\ViewSyncany.cs" />
+    <Compile Include="Modules\TeamCity\ComponentTeamCity.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\TeamCity\ComponentTeamCity.Designer.cs">
+      <DependentUpon>ComponentTeamCity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VPN\ComponentVPN.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\ComponentVPN.Designer.cs">
+      <DependentUpon>ComponentVPN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VPN\Controler\helper.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVpnAdapter.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\AsyncEventDetail.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\Communicator.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\ConfigParser.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\Connection.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\DebugEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\GotLineEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\LogEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\LogManager.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\ManagementLogic.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\ManagementParser.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\NeedCardIDEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\NeedLoginAndPasswordEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\NeedPasswordEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNCommunicator.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNConfigParser.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNConnection.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNLogEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNLogManager.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNManagementLogic.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNManagementParser.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNNeedCardIDEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNNeedLoginAndPasswordEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNNeedPasswordEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNService.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNServiceConnection.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\OVPNUserConnection.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\PKCS11Detail.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\ServiceConnection.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\States\State.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\States\StateChangedEventArgs.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\States\StateSnapshot.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\States\VPNConnectionState.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\UserSpaceConnection.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\UserSpaceService.cs" />
+    <Compile Include="Modules\VPN\Controler\OpenVPN\UtilsHelper.cs" />
+    <Compile Include="Modules\VPN\Controler\ProfileSettings.cs" />
+    <Compile Include="Modules\VPN\Controler\ProgramVPN.cs" />
+    <Compile Include="Modules\VPN\Controler\RTLMessageBox.cs" />
+    <Compile Include="Modules\VPN\Controler\SimpleComm.cs" />
+    <Compile Include="Modules\VPN\Controler\VPNConfig.cs" />
+    <Compile Include="Modules\VPN\FrmAbout.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\FrmAbout.Designer.cs">
+      <DependentUpon>FrmAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VPN\FrmGlobalStatus.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\FrmGlobalStatus.Designer.cs">
+      <DependentUpon>FrmGlobalStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VPN\FrmLoginAndPasswd.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\FrmLoginAndPasswd.Designer.cs">
+      <DependentUpon>FrmLoginAndPasswd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VPN\FrmPasswd.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\FrmPasswd.Designer.cs">
+      <DependentUpon>FrmPasswd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VPN\FrmSelectPKCS11Key.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\FrmSelectPKCS11Key.Designer.cs">
+      <DependentUpon>FrmSelectPKCS11Key.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VPN\FrmSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\FrmSettings.Designer.cs">
+      <DependentUpon>FrmSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VPN\FrmStatus.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\FrmStatus.Designer.cs">
+      <DependentUpon>FrmStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VPN\IPLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\OpenVpnAdapter.cs" />
+    <Compile Include="Modules\VPN\Update.cs" />
+    <Compile Include="Modules\VPN\ViewVpnManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\ViewVpnManager.Designer.cs">
+      <DependentUpon>ViewVpnManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VPN\VPNInfoBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\VPN\VPNInfoBox.Designer.cs">
+      <DependentUpon>VPNInfoBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\YouTrack\ViewYoutrackConnect.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\YouTrack\ViewYoutrackConnect.Designer.cs">
+      <DependentUpon>ViewYoutrackConnect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\YouTrack\ViewYoutrackManage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\YouTrack\ViewYoutrackManage.Designer.cs">
+      <DependentUpon>ViewYoutrackManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\YouTrack\ViewYoutrackTicket.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\YouTrack\ViewYoutrackTicket.Designer.cs">
+      <DependentUpon>ViewYoutrackTicket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\YouTrack\YoutrackAdapterUI.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Modules\Docker\ViewDocker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\ViewDocker.Designer.cs">
+      <DependentUpon>ViewDocker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Docker\DockerManagerView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Docker\DockerManagerView.Designer.cs">
+      <DependentUpon>DockerManagerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ConsoleLauncher.cs" />
+    <Compile Include="Modules\Syncany\CloudRepositories.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Syncany\CloudRepositories.Designer.cs">
+      <DependentUpon>CloudRepositories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Syncany\DemoSyncany.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Syncany\DemoSyncany.Designer.cs">
+      <DependentUpon>DemoSyncany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Syncany\SyncanyAdaptaterView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Syncany\SyncanyAdaptaterView.Designer.cs">
+      <DependentUpon>SyncanyAdaptaterView.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="TobiAppliKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Infra\View\Component.resx">
+      <DependentUpon>Component.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Infra\View\FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Infra\View\ViewInfraNew.resx">
+      <DependentUpon>ViewInfraNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Infra\View\ViewInfraOverview.resx">
+      <DependentUpon>ViewInfraOverview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Infra\View\ViewInfraComponent.resx">
+      <DependentUpon>ViewInfraComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Infra\View\ViewInfraMonitoring.resx">
+      <DependentUpon>ViewInfraMonitoring.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Infra\View\ViewWelcome.resx">
+      <DependentUpon>ViewWelcome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="lang\strings.de.resx" />
+    <EmbeddedResource Include="lang\strings.resx" />
+    <EmbeddedResource Include="Modules\Bitbucket\ComponentBitbucket.resx">
+      <DependentUpon>ComponentBitbucket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Bitbucket\RepoPanel.resx">
+      <DependentUpon>RepoPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Bitbucket\ViewBitBucketCreateBranch.resx">
+      <DependentUpon>ViewBitBucketCreateBranch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Bitbucket\ViewBitbucketManage.resx">
+      <DependentUpon>ViewBitbucketManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Bitbucket\ViewBitBucketRepository.resx">
+      <DependentUpon>ViewBitBucketRepository.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Bitbucket\ViewBitBucketIssue.resx">
+      <DependentUpon>ViewBitBucketIssue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Bitbucket\ViewBitBucketRepositoryAdd.resx">
+      <DependentUpon>ViewBitBucketRepositoryAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Bitbucket\ViewBitBucketSetting.resx">
+      <DependentUpon>ViewBitBucketSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Bitbucket\ViewBitBucketLogin.resx">
+      <DependentUpon>ViewBitBucketLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Computer\ComponentComputer.resx">
+      <DependentUpon>ComponentComputer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Computer\ViewComputer.resx">
+      <DependentUpon>ViewComputer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\ComponentDocker.resx">
+      <DependentUpon>ComponentDocker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\ComponentDockerContainer.resx">
+      <DependentUpon>ComponentDockerContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\ComponentDockerImage.resx">
+      <DependentUpon>ComponentDockerImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\ComponentDockerMachine.resx">
+      <DependentUpon>ComponentDockerMachine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\ViewContainer.resx">
+      <DependentUpon>ViewContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\ViewContainerDetail.resx">
+      <DependentUpon>ViewContainerDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\ViewDockerCompose.resx">
+      <DependentUpon>ViewDockerCompose.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\ViewDockerMachine.resx">
+      <DependentUpon>ViewDockerMachine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\ViewDockerMonitor.resx">
+      <DependentUpon>ViewDockerMonitor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\ViewNetworkDetail.resx">
+      <DependentUpon>ViewNetworkDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\ViewImageDetail.resx">
+      <DependentUpon>ViewImageDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\ViewNetwork.resx">
+      <DependentUpon>ViewNetwork.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\ViewImages.resx">
+      <DependentUpon>ViewImages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\ViewDockerManage.resx">
+      <DependentUpon>ViewDockerManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\GitHub\ComponentGithub.resx">
+      <DependentUpon>ComponentGithub.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\GitHub\GithubManage.resx">
+      <DependentUpon>GithubManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Jenkins\ComponentJenkins.resx">
+      <DependentUpon>ComponentJenkins.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Jira\ComponentJira.resx">
+      <DependentUpon>ComponentJira.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\MySql\ComponentMySql.resx">
+      <DependentUpon>ComponentMySql.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\MySql\ViewMySql.resx">
+      <DependentUpon>ViewMySql.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\PostGre\ComponentPostGre.resx">
+      <DependentUpon>ComponentPostGre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\PostGre\ViewPostGreSql.resx">
+      <DependentUpon>ViewPostGreSql.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Sonar\ComponentSonar.resx">
+      <DependentUpon>ComponentSonar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\SQL\ComponentSql.resx">
+      <DependentUpon>ComponentSql.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Syncany\CloudManage.resx">
+      <DependentUpon>CloudManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Syncany\CloudStatus.resx">
+      <DependentUpon>CloudStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\GitHub\GitHubIssue.resx">
+      <DependentUpon>GitHubIssue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\GitHub\GitHubGUI.resx">
+      <DependentUpon>GitHubGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\GitHub\GitHubUserDetail.resx">
+      <DependentUpon>GitHubUserDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\GitHub\GitHubLogger.resx">
+      <DependentUpon>GitHubLogger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Syncany\CloudCreate.resx">
+      <DependentUpon>CloudCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Syncany\ComponentSyncany.resx">
+      <DependentUpon>ComponentSyncany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Syncany\ViewSyncany.resx">
+      <DependentUpon>ViewSyncany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\TeamCity\ComponentTeamCity.resx">
+      <DependentUpon>ComponentTeamCity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\ComponentVPN.resx">
+      <DependentUpon>ComponentVPN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\FrmAbout.de.resx">
+      <DependentUpon>FrmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\FrmAbout.resx">
+      <DependentUpon>FrmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\FrmGlobalStatus.de.resx">
+      <DependentUpon>FrmGlobalStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\FrmGlobalStatus.resx">
+      <DependentUpon>FrmGlobalStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\FrmLoginAndPasswd.de.resx">
+      <DependentUpon>FrmLoginAndPasswd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\FrmLoginAndPasswd.resx">
+      <DependentUpon>FrmLoginAndPasswd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\FrmPasswd.de.resx">
+      <DependentUpon>FrmPasswd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\FrmPasswd.resx">
+      <DependentUpon>FrmPasswd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\FrmSelectPKCS11Key.de.resx">
+      <DependentUpon>FrmSelectPKCS11Key.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\FrmSelectPKCS11Key.resx">
+      <DependentUpon>FrmSelectPKCS11Key.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\FrmSettings.de.resx">
+      <DependentUpon>FrmSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\FrmSettings.resx">
+      <DependentUpon>FrmSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\FrmStatus.de.resx">
+      <DependentUpon>FrmStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\FrmStatus.resx">
+      <DependentUpon>FrmStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\ViewVpnManager.resx">
+      <DependentUpon>ViewVpnManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\VPNInfoBox.de.resx">
+      <DependentUpon>VPNInfoBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\VPN\VPNInfoBox.resx">
+      <DependentUpon>VPNInfoBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\YouTrack\ViewYoutrackConnect.resx">
+      <DependentUpon>ViewYoutrackConnect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\YouTrack\ViewYoutrackManage.resx">
+      <DependentUpon>ViewYoutrackManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\YouTrack\ViewYoutrackTicket.resx">
+      <DependentUpon>ViewYoutrackTicket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\ViewDocker.resx">
+      <DependentUpon>ViewDocker.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Docker\DockerManagerView.resx">
+      <DependentUpon>DockerManagerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Syncany\CloudRepositories.resx">
+      <DependentUpon>CloudRepositories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Syncany\DemoSyncany.resx">
+      <DependentUpon>DemoSyncany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Syncany\SyncanyAdaptaterView.resx">
+      <DependentUpon>SyncanyAdaptaterView.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Droid-Communication\Project\Droid.Communication.csproj">
+      <Project>{F584B1BA-503A-483A-A17B-626AC1554A25}</Project>
+      <Name>Droid.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Droid-Image\Project\Droid.Image.csproj">
+      <Project>{9fd7aaf3-3236-474a-9017-be10bf369e7e}</Project>
+      <Name>Droid.Image</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Droid-Maths\Droid-Maths\Droid.Maths.csproj">
+      <Project>{971bc5f1-f428-45be-9dd7-c85d5504ea7f}</Project>
+      <Name>Droid.Maths</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Droid-Web\Project\Droid.Web.csproj">
+      <Project>{6f403985-3764-4023-a511-09662fe2f746}</Project>
+      <Name>Droid.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tools4Libraries\Tools4Libraries.csproj">
+      <Project>{aad2b1be-9b2d-455d-8dd4-64e4e84dd985}</Project>
+      <Name>Tools4Libraries</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\github.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jenkins.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jira.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sonar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\syncany.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShieldTileBg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lexBg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShieldTileBgWhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\docker_mise_a_mort - Copie.png" />
+    <None Include="Resources\bimandco_logo.png" />
+    <None Include="Resources\NCover.png" />
+    <None Include="Resources\winscp.png" />
+    <None Include="Resources\service.png" />
+    <None Include="Resources\elasticsearch.png" />
+    <None Include="Resources\redis.png" />
+    <None Include="Resources\kibana.png" />
+    <None Include="Resources\settings_android.png" />
+    <None Include="Resources\database.png" />
+    <None Include="Resources\mono.png" />
+    <None Include="Resources\portainer.png" />
+    <None Include="Resources\ic_launcher.png" />
+    <None Include="Resources\docker_container_face_disable.png" />
+    <None Include="Resources\docker_container_face.png" />
+    <None Include="Resources\youtrack - small.png" />
+    <None Include="Resources\elasticsearch_gray.png" />
+    <None Include="Resources\kibana_gray.png" />
+    <None Include="Resources\postgresql_gray.png" />
+    <None Include="Resources\redis_gray.png" />
+    <None Include="Resources\TeamCity_gray.png" />
+    <None Include="Resources\winscp_gray.png" />
+    <None Include="Resources\youtrack_gray - small.png" />
+    <None Include="Resources\youtrack_gray.png" />
+    <None Include="Resources\mysql2.png" />
+    <None Include="Resources\lighthouse_48.png" />
+    <None Include="Resources\BitBucket_black.png" />
+    <None Include="Resources\demo.html" />
+    <None Include="Resources\demo.css" />
+    <None Include="Resources\demo.js" />
+    <Content Include="App_Readme\Spring.Rest.txt" />
+    <Content Include="App_Readme\Spring.Social.Core.txt" />
+    <None Include="Resources\component.css" />
+    <None Include="Resources\app.js" />
+    <None Include="Resources\jsplumb.js" />
+    <None Include="Resources\app.html" />
+    <Content Include="ServoIconInfrastructures.ico" />
+    <Content Include="TODO.txt" />
+    <None Include="Resources\docker_compose_small.png" />
+    <None Include="Resources\docker_compose48.png" />
+    <None Include="Resources\docker_small.png" />
+    <None Include="Resources\docker.png" />
+    <None Include="Resources\docker_network_small.png" />
+    <None Include="Resources\docker_image_small.png" />
+    <None Include="Resources\docker_container_small.png" />
+    <None Include="Resources\docker_network.png" />
+    <None Include="Resources\docker_image.png" />
+    <None Include="Resources\docker_container.png" />
+    <None Include="Resources\Warning.bmp" />
+    <None Include="Resources\Stop.bmp" />
+    <None Include="Resources\Play.bmp" />
+    <None Include="Resources\NewWindow.bmp" />
+    <None Include="Resources\Information.bmp" />
+    <None Include="Resources\GotoShortcuts.bmp" />
+    <None Include="Resources\FontDialog.bmp" />
+    <None Include="Resources\Delete.bmp" />
+    <None Include="Resources\Control_TextBox.bmp" />
+    <None Include="Resources\ConsoleControl1.bmp" />
+    <None Include="Resources\ConsoleControl.bmp" />
+    <None Include="Resources\postgresql.png" />
+    <None Include="Resources\VPN.png" />
+    <None Include="Resources\redled1.png" />
+    <None Include="Resources\connect1.png" />
+    <None Include="Resources\cancel1.png" />
+    <None Include="Resources\arrow_refresh1.png" />
+    <None Include="Resources\accept1.png" />
+    <None Include="Resources\yellowled.png" />
+    <None Include="Resources\wrench.png" />
+    <None Include="Resources\waiting321.ico" />
+    <None Include="Resources\waiting32.ico" />
+    <None Include="Resources\update.png" />
+    <None Include="Resources\tooloptions.png" />
+    <None Include="Resources\script_edit.png" />
+    <None Include="Resources\redled.png" />
+    <None Include="Resources\magnifier.png" />
+    <None Include="Resources\information.png" />
+    <None Include="Resources\icon.ico" />
+    <None Include="Resources\greenled.png" />
+    <None Include="Resources\fail32.ico" />
+    <None Include="Resources\exit.png" />
+    <None Include="Resources\disconnect.png" />
+    <None Include="Resources\connect.png" />
+    <None Include="Resources\cancel.png" />
+    <None Include="Resources\blueled.png" />
+    <None Include="Resources\arrow_refresh.png" />
+    <None Include="Resources\ack32.ico" />
+    <None Include="Resources\accept.png" />
+    <None Include="Resources\Sonarqube.png" />
+    <None Include="Resources\BitBucket.png" />
+    <None Include="Resources\componentOffline.png" />
+    <None Include="Resources\component.png" />
+    <None Include="Resources\unknown.png" />
+    <None Include="Resources\TeamCity.png" />
+    <None Include="Resources\SQL.png" />
+    <None Include="Resources\Serveur.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\MQRabbit\" />
+    <Folder Include="Modules\System\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="NetFwTypeLib">
+      <Guid>{58FBCF7C-E7A9-467C-80B3-FC65E8FCCA08}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

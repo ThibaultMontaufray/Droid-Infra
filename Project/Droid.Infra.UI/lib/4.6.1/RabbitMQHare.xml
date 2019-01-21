@@ -1,0 +1,490 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RabbitMQHare</name>
+    </assembly>
+    <members>
+        <member name="T:RabbitMQHare.BaseConsumer">
+            <summary>
+            Underlying class for consuming messages
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.BaseConsumer.AutoAck">
+            <summary>
+            If true, threadedConsumer will ack messages right after the synchronous call of OnMessage. Else you have to ack messages.
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.BaseConsumer.ShutdownTimeout">
+            <summary>
+            Maximum waiting time of OnMessage handlers to finish before disposing. Default to Infinite.
+            </summary>
+        </member>
+        <member name="E:RabbitMQHare.BaseConsumer.OnMessage">
+            <summary>
+            Handler called when a message is received and a spot is freed. If not provided it will swallow messages as fast as it can.
+            </summary>
+        </member>
+        <member name="E:RabbitMQHare.BaseConsumer.OnStart">
+            <summary>
+            Handler called at start
+            </summary>
+        </member>
+        <member name="E:RabbitMQHare.BaseConsumer.OnStop">
+            <summary>
+            Handler called when the consumer will stop
+            </summary>
+        </member>
+        <member name="E:RabbitMQHare.BaseConsumer.OnDelete">
+            <summary>
+            Handler called when rabbit mq broker deletes the connection
+            </summary>
+        </member>
+        <member name="E:RabbitMQHare.BaseConsumer.OnError">
+            <summary>
+            Handler called for all errors other than connection. It is your responsability to ack the message that may be passed.
+            </summary>
+        </member>
+        <member name="E:RabbitMQHare.BaseConsumer.OnShutdown">
+            <summary>
+            Handler called when connection issues occurs.
+            </summary>
+        </member>
+        <member name="T:RabbitMQHare.BaseConsumer.CallbackExceptionEventHandlerWithMessage">
+            <summary>
+            Callback used to give control on the message being processed while an exception was thrown.
+            </summary>
+            <param name="sender">The threadedConsumer</param>
+            <param name="exception">The exception that was thrown. Might be an business exception (thrown by your OnMessage handler) or internal exception thrown by consumer</param>
+            <param name="e">The message so you can ack it if needed.</param>
+        </member>
+        <member name="T:RabbitMQHare.IHareSettings">
+            <summary>
+            Default interface for settings used by Consumer and Publisher
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.IHareSettings.ConnectionFactory">
+            <summary>
+            Factory used to create the connection to rabbitmq. All passwords, endpoints, ports settings go there.
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.IHareSettings.MaxConnectionRetry">
+            <summary>
+            Maximum numbers of unsuccessful connection retry.
+            -1 (System.Threading.Timeout.Infinite) is infinite
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.IHareSettings.IntervalConnectionTries">
+            <summary>
+            Interval between two retries when connecting to rabbitmq. Default is 5 seconds
+            </summary>
+        </member>
+        <member name="T:RabbitMQHare.RabbitConnectorCommon">
+            <summary>
+            The base class that implements connection handling, reconnection and topology declaration
+            </summary>
+        </member>
+        <member name="E:RabbitMQHare.RabbitConnectorCommon.TemporaryConnectionFailureHandler">
+            <summary>
+            Called when an exception is thrown when connecting to rabbit. It is called at most [MaxConnectionRetry] times before a more serious BrokerUnreachableException is thrown
+            </summary>
+        </member>
+        <member name="E:RabbitMQHare.RabbitConnectorCommon.PermanentConnectionFailureHandler">
+            <summary>
+            Called when too many exceptions ([MaxConnectionRetry]) are thrown when connecting to rabbit.
+            The object (Consumer or Publisher) will stop trying to connect and can be considered dead when this event is called
+            </summary>
+        </member>
+        <member name="E:RabbitMQHare.RabbitConnectorCommon.ACLFailureHandler">
+            <summary>
+            Called when a ACL exception is thrown.
+            </summary>
+        </member>
+        <member name="E:RabbitMQHare.RabbitConnectorCommon.EventHandlerFailureHandler">
+            <summary>
+            Called when an exception is thrown by another handler, this obviously must not throw an exception (it will crash)
+            </summary>
+        </member>
+        <member name="T:RabbitMQHare.RabbitConnectorCommon.TemporaryConnectionFailure">
+            <summary>
+            Event type used to announce a temporary connection failure (see TemporaryConnectionFailureHandler)
+            </summary>
+            <param name="e">Exception raised by the connection failure</param>
+        </member>
+        <member name="T:RabbitMQHare.RabbitConnectorCommon.PermanentConnectionFailure">
+            <summary>
+            Event type used to announce a permanent connection failure (see PermanentConnectionFailureHandler)
+            </summary>
+            <param name="e">Exception raised by the connection failure</param>
+        </member>
+        <member name="T:RabbitMQHare.RabbitConnectorCommon.ACLFailure">
+            <summary>
+            Event type used to announce an authorization failure (see ACLFailureHandler)
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:RabbitMQHare.RabbitConnectorCommon.EventHandlerFailure">
+            <summary>
+            Called when another handler throws an exception
+            </summary>
+            <param name="e">Exception raised by the auth error</param>
+        </member>
+        <member name="T:RabbitMQHare.HareConsumerSettings">
+            <summary>
+            Settings used to construct a consumer. If you don't use HareConsumerSettings.DefaultSettings you have to fill all parameters.
+            </summary>
+        </member>
+        <member name="M:RabbitMQHare.HareConsumerSettings.GetDefaultSettings">
+            <summary>
+            Default set of settings.
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.HareConsumerSettings.MaxWorkers">
+            <summary>
+            Maxmimum number of concurrents messages processed at the same time. DefaultSettings sets it to 1
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.HareConsumerSettings.AcknowledgeMessageForMe">
+            <summary>
+            If false, it is your responsability to ack each message in your MessageHandler. DefaultSettings sets it to True
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.HareConsumerSettings.ConnectionFactory">
+            <summary>
+            You can provide a way to modify the IBasicProperties of all messages. DefaultSettings sets it to  "text/plain" type and transient messages
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.HareConsumerSettings.MaxConnectionRetry">
+            <summary>
+            When connection fails, indicates the maximum number of tries before calling the permanent connection failure handler. DefaultSettings sets it to 5. -1 is infinite
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.HareConsumerSettings.IntervalConnectionTries">
+            <summary>
+            Interval between two retries when connecting to rabbitmq. Default is 5 seconds
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.HareConsumerSettings.CancelationTime">
+            <summary>
+            Time given to message handler to finish in case of cancel event. Infinite if not set
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.HareConsumerSettings.TaskScheduler">
+            <summary>
+            Task scheduler used by workers
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.HareConsumerSettings.HandleMessagesSynchronously">
+            <summary>
+            When false (the default), uses the task scheduler to process messages.
+            When true, process each message synchronously before fetching the next one.
+            </summary>
+        </member>
+        <member name="M:RabbitMQHare.RabbitConsumer.#ctor(RabbitMQHare.HareConsumerSettings,RabbitMQHare.RabbitExchange)">
+            <summary>
+            Create a rabbitconsumer which will consume message from a PUBLIC exchange. This exchange is supposed to be direct/fanout (otherwise use the raw constructor)
+            </summary>
+            <param name="settings">Settings used to construct the consumer</param>
+            <param name="exchange">the exchange you want to listen to</param>
+        </member>
+        <member name="M:RabbitMQHare.RabbitConsumer.#ctor(RabbitMQHare.HareConsumerSettings,RabbitMQHare.RabbitQueue)">
+            <summary>
+            Create a rabbitconsumer which will consume message from a PUBLIC queue without knowing who will feed it
+            </summary>
+            <param name="settings">Settings used to construct the consumer</param>
+            <param name="queue">the queue you want to listen to</param>
+        </member>
+        <member name="M:RabbitMQHare.RabbitConsumer.#ctor(RabbitMQHare.HareConsumerSettings,RabbitMQHare.RabbitQueue,System.Action{RabbitMQ.Client.IModel})">
+            <summary>
+            Raw constructor. You give the Queue and a handler to create the topology. Use at your own risk !
+            </summary>
+            <param name="settings">Settings used to construct the consumer</param>
+            <param name="queue">the queue you want to listen to. It *won't* be created, you have to create it in redeclareTopology</param>
+            <param name="redeclareTopology">Construct your complete, twisted, complex topology :) </param>
+        </member>
+        <member name="M:RabbitMQHare.RabbitConsumer.Start">
+            <summary>
+            Start consuming messages. Not thread safe ! You should call it once. This api might call it at each connection failure.
+            </summary>
+        </member>
+        <member name="M:RabbitMQHare.RabbitConsumer.Start(System.Int32)">
+            <summary>
+            Start consuming messages. This method is not thread safe.
+            </summary>
+            <param name="maxConnectionRetry">number of allowed retries before giving up</param>
+            <returns>true if connection has succeeded</returns>
+        </member>
+        <member name="F:RabbitMQHare.RabbitConsumer._uid">
+            <summary>
+            This int is used to keep track of already attributed ids.
+            </summary>
+        </member>
+        <member name="M:RabbitMQHare.RabbitConsumer.GetUniqueIdentifier(System.String)">
+            <summary>
+            Provides a unique identifier.
+            The result is unique on a given server+process for a given prefix
+            It provides garantees to avoid collisions in a reasonnable setup.
+            </summary>
+            <param name="prefix"></param>
+            <returns></returns>
+        </member>
+        <member name="E:RabbitMQHare.RabbitConsumer.MessageHandler">
+            <summary>
+            Event handler for messages. If you modify this after Start methed is called, it won't be applied
+            until next restart (=connection issue)
+             If you forgot to set this one, the consumer will swallow messages as fast as it can
+            </summary>
+        </member>
+        <member name="E:RabbitMQHare.RabbitConsumer.ErrorHandler">
+            <summary>
+            Event handler for messages handler failure. If you modify this after Start method is called, it won't be applied
+            until next restart (connection issue). If this throws an error, you are screwed, buddy. Don't tempt the devil !
+            Handler that is called when :
+            1)the messageHandler throws an exception
+            2)the consumer itself throws an exception.
+            You have to decide wether to ack the message in both case (even if AcknowledgeMessageForMe is set to true)
+            </summary>
+        </member>
+        <member name="E:RabbitMQHare.RabbitConsumer.StartHandler">
+            <summary>
+            Handler called at each start (and restart). If you modify this after Start method is called, it won't be applied
+            until next restart (connection issue). If this throws an error, you are screwed, buddy. Don't tempt the devil !
+            </summary>
+        </member>
+        <member name="E:RabbitMQHare.RabbitConsumer.StopHandler">
+            <summary>
+            Handler called at each stop. If you modify this after Start method is called, it won't be applied
+            until next restart (connection issue). If this throws an error, you are screwed, buddy. Don't tempt the devil !
+            </summary>
+        </member>
+        <member name="M:RabbitMQHare.RabbitExchange.Declare(RabbitMQ.Client.IModel)">
+            <summary>
+            Declare the exchange against a model
+            </summary>
+            <param name="model"></param>
+        </member>
+        <member name="T:RabbitMQHare.HarePublisherSettings">
+            <summary>
+            Settings used to construct a publisher. If you don't use HarePublisherSettings.DefaultSettings you have to fill all parameters.
+            </summary>
+        </member>
+        <member name="M:RabbitMQHare.HarePublisherSettings.GetDefaultSettings">
+            <summary>
+            Return a minimal set of settings to work properly.
+            It connects to localhost using default user for rabbitmq.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:RabbitMQHare.HarePublisherSettings.MaxMessageWaitingToBeSent">
+            <summary>
+            Maximum number of message waiting to be sent. Above this limit, new messages won't be added. DefaultSettings sets it to 10000
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.HarePublisherSettings.ConstructProperties">
+            <summary>
+            You can provide a way to modify the IBasicProperties of all messages. DefaultSettings sets it to  "text/plain" type and transient messages
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.HarePublisherSettings.ConnectionFactory">
+            <summary>
+            RabbitMQ object to specify how to connect to rabbitMQ. DefaultSettings sets it to localhost:5672 on virtual host "/"
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.HarePublisherSettings.MaxConnectionRetry">
+            <summary>
+            When connection fails, indicates the maximum numbers of retries before calling the permanent connection failure handler.
+            DefaultSettings sets it to 5. -1 Is infinite.
+            This setting is used only when connection has been already established once.
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.HarePublisherSettings.IntervalConnectionTries">
+            <summary>
+            Interval between two retries when connecting to rabbitmq. Default is 5 seconds
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.HarePublisherSettings.RequeueMessageAfterFailure">
+            <summary>
+            Prefer to send a message twice than loosing it
+            Order is not garanteed. If you use this with UseConfirm, then message are requeued at most once.
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.HarePublisherSettings.UseConfirms">
+            <summary>
+            Use publisher lightweight confirms
+            </summary>
+        </member>
+        <member name="T:RabbitMQHare.RabbitPublisher">
+            <summary>
+            A publisher object allow to send messages to rabbitmq.
+            </summary>
+        </member>
+        <member name="M:RabbitMQHare.RabbitPublisher.#ctor(RabbitMQHare.HarePublisherSettings,RabbitMQHare.RabbitQueue)">
+            <summary>
+            Publish to a PUBLIC queue
+            </summary>
+            <param name="mySettings">Settings used to construct a publisher</param>
+            <param name="destinationQueue">public queue you want to connect to</param>
+        </member>
+        <member name="M:RabbitMQHare.RabbitPublisher.#ctor(RabbitMQHare.HarePublisherSettings,RabbitMQHare.RabbitExchange)">
+            <summary>
+            Publish to a PUBLIC exchange
+            </summary>
+            <param name="mySettings">Settings used to construct a publisher</param>
+            <param name="exchange">public exchange you want to connect to</param>
+        </member>
+        <member name="M:RabbitMQHare.RabbitPublisher.#ctor(RabbitMQHare.HarePublisherSettings,RabbitMQHare.RabbitExchange,System.Action{RabbitMQ.Client.IModel})">
+            <summary>
+            Raw constructor, you have to do everything yourself
+            </summary>
+            <param name="mySettings"> </param>
+            <param name="exchange">Exchange you will sent message to. It *won't* be created, you have to create it in the redeclareToplogy parameter</param>
+            <param name="redeclareTopology">Lambda called everytime we need to recreate the rabbitmq oblects, it should be idempotent</param>
+        </member>
+        <member name="M:RabbitMQHare.RabbitPublisher.Start">
+            <summary>
+            Start to publish. This method is NOT thread-safe. Advice is to use it once.
+            </summary>
+        </member>
+        <member name="M:RabbitMQHare.RabbitPublisher.Start(System.Int32)">
+            <summary>
+            Start to publish messages. This method is not thread-safe.
+            </summary>
+            <param name="maxConnectionRetry"></param>
+            <returns>true if the connection has succeeded. If false, you can retry to connect.</returns>
+        </member>
+        <member name="M:RabbitMQHare.RabbitPublisher.SpecificRestart(RabbitMQ.Client.IModel)">
+            <summary>
+            Method that will be called everytime there is a network failure.
+            </summary>
+        </member>
+        <member name="M:RabbitMQHare.RabbitPublisher.DequeueSend(System.Threading.CancellationToken)">
+            <summary>
+            The main thread method : dequeue and publish
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RabbitMQHare.RabbitPublisher.Publish(System.String,System.Byte[])">
+            <summary>
+            Add message that will be sent asynchronously. This method is thread-safe
+            </summary>
+            <param name="routingKey">routing key used to route the message. If not needed just put "toto"</param>
+            <param name="message">the message you want to send</param>
+            <returns>false if the message was droppped instead of added to the queue</returns>
+        </member>
+        <member name="M:RabbitMQHare.RabbitPublisher.BlockingPublish(System.String,System.Byte[])">
+            <summary>
+            Add message that will be sent asynchronously BUT might block if queue is full. This method is thread-safe
+            </summary>
+            <param name="routingKey">routing key used to route the message. If not needed just put "toto"</param>
+            <param name="message">the message you want to send</param>
+        </member>
+        <member name="E:RabbitMQHare.RabbitPublisher.NotEnqueuedHandler">
+            <summary>
+            Called when queue is full and message are not enqueued.
+            </summary>
+        </member>
+        <member name="E:RabbitMQHare.RabbitPublisher.OnStart">
+            <summary>
+            Handler called at each start (and restart)
+            This is different from StartHandler of consumer, so you can modify this at any time
+            </summary>
+        </member>
+        <member name="E:RabbitMQHare.RabbitPublisher.OnNAcked">
+            <summary>
+            Handler called when some messages are not acknowledged after being published.
+            It can happen if rabbitmq send a nacked message, or if the connection is lost
+            before ack are received.
+            Using this handler has no sense when UseConfirms setting is false.
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.RabbitPublisher.MySettings">
+            <summary>
+            The settings of the publisher
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.RabbitPublisher.Started">
+            <summary>
+            This is true if the publisher has been sucessfully started once.
+            </summary>
+        </member>
+        <member name="T:RabbitMQHare.RabbitPublisher.NotEnqueued">
+            <summary>
+            Event type used when a message could not be enqueued (see NotEnqueuedHandler)
+            </summary>
+        </member>
+        <member name="T:RabbitMQHare.RabbitPublisher.StartHandler">
+            <summary>
+            Event type used when the object start and restart (connect and reconnect).
+            See OnStart.
+            </summary>
+            <param name="pub"></param>
+        </member>
+        <member name="T:RabbitMQHare.RabbitPublisher.NAckedHandler">
+            <summary>
+            Event type used when receiving Nack messages (see OnNAcked)
+            </summary>
+            <param name="nackedMessages"></param>
+        </member>
+        <member name="T:RabbitMQHare.Message">
+            <summary>
+            Structure representing an in-flight message.
+            This is used to account for Acked and NAcked messages.
+            </summary>
+        </member>
+        <member name="F:RabbitMQHare.Message.Failed">
+            <summary>
+            Number of times this message has been send and have failed.
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.Message.RoutingKey">
+            <summary>
+            Routing key used when sending the message
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.Message.Payload">
+            <summary>
+            Binary payload of the message
+            </summary>
+        </member>
+        <member name="M:RabbitMQHare.RabbitQueue.#ctor(System.String)">
+            <summary>
+            A non durable, non exclusive, non auto-delete queue.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:RabbitMQHare.RabbitQueue.Declare(RabbitMQ.Client.IModel)">
+            <summary>
+            Declare the queue
+            </summary>
+            <param name="model"></param>
+        </member>
+        <member name="P:RabbitMQHare.RabbitQueue.Name">
+            <summary>
+            Name used in rabbitmq
+            </summary>
+        </member>
+        <member name="T:RabbitMQHare.SyncConsumer">
+             <summary>
+             A class that dispatches messages synchronously.
+            
+             That means the OnMessage event should be connected only to things
+             that return _really_ quickly.
+             </summary>
+        </member>
+        <member name="T:RabbitMQHare.ConnectionFailureException">
+            <summary>
+            This exception class encapsulate the various reason for a connection to be reset.
+            The CausedByShutdown indicates which property to look for.
+            </summary>
+        </member>
+        <member name="T:RabbitMQHare.ThreadedConsumer">
+            <summary>
+            Underlying class for consuming messages
+            </summary>
+        </member>
+        <member name="P:RabbitMQHare.ThreadedConsumer.MaxWorker">
+            <summary>
+             Maxmimum number of concurrents messages processed at the same time.
+            </summary>
+        </member>
+    </members>
+</doc>
