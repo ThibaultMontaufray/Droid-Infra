@@ -50,7 +50,7 @@ namespace Droid.Infra.UI.Modules.Docker.View
             string address = (!string.IsNullOrEmpty(_machine.URL) && _machine.URL.Split('/').Length > 1) ? _machine.URL.Split('/')[1] : _machine.URL;
             labelMachineName.Text = _machine.Name;
             labelDetail.Text = _machine.State + (!string.IsNullOrEmpty(address) ? (Environment.NewLine + address) : string.Empty);
-            buttonStartStop.BackgroundImage = _machine.State.Equals("Running") ? Tools4Libraries.Resources.ResourceIconSet32Default.control_stop : Tools4Libraries.Resources.ResourceIconSet32Default.control_play;
+            buttonStartStop.BackgroundImage = _machine.State.Equals("Running") ? Tools.Utilities.UI.Resources.ResourceIconSet32Default.control_stop : Tools.Utilities.UI.Resources.ResourceIconSet32Default.control_play;
 
             BuildMachinePreview();
         }
@@ -60,7 +60,7 @@ namespace Droid.Infra.UI.Modules.Docker.View
         private async void StartStop()
         {
             buttonStartStop.Enabled = false;
-            buttonStartStop.BackgroundImage = Tools4Libraries.Resources.ResourceIconSet32Default.time;
+            buttonStartStop.BackgroundImage = Tools.Utilities.UI.Resources.ResourceIconSet32Default.time;
             if (_machine.State.Equals("Running")) { _machine.Stop(); }
             else { _machine.Start(); }
             await Task.Run(() => _machine.RefreshData());

@@ -128,43 +128,43 @@ namespace Droid.Infra.UI
                 switch (typeRepo)
                 {
                     case "azure":
-                        row.Cells[ColumnIcon.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.network;
+                        row.Cells[ColumnIcon.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.network;
                         break;
                     case "dropbox":
-                        row.Cells[ColumnIcon.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.network;
+                        row.Cells[ColumnIcon.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.network;
                         break;
                     case "flickr":
-                        row.Cells[ColumnIcon.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.flickr;
+                        row.Cells[ColumnIcon.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.flickr;
                         break;
                     case "ftp":
-                        row.Cells[ColumnIcon.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.ftp;
+                        row.Cells[ColumnIcon.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.ftp;
                         break;
                     case "gui":
-                        row.Cells[ColumnIcon.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.network;
+                        row.Cells[ColumnIcon.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.network;
                         break;
                     case "local":
-                        row.Cells[ColumnIcon.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.folder;
+                        row.Cells[ColumnIcon.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.folder;
                         break;
                     case "raid0":
-                        row.Cells[ColumnIcon.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.cd;
+                        row.Cells[ColumnIcon.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.cd;
                         break;
                     case "s3":
-                        row.Cells[ColumnIcon.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.network;
+                        row.Cells[ColumnIcon.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.network;
                         break;
                     case "samba":
-                        row.Cells[ColumnIcon.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.network;
+                        row.Cells[ColumnIcon.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.network;
                         break;
                     case "sftp":
-                        row.Cells[ColumnIcon.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.network;
+                        row.Cells[ColumnIcon.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.network;
                         break;
                     case "swift":
-                        row.Cells[ColumnIcon.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.network;
+                        row.Cells[ColumnIcon.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.network;
                         break;
                     case "webdav":
-                        row.Cells[ColumnIcon.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.drive_web;
+                        row.Cells[ColumnIcon.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.drive_web;
                         break;
                     default:
-                        row.Cells[ColumnIcon.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.network;
+                        row.Cells[ColumnIcon.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.network;
                         break;
                 }
             }

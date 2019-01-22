@@ -35,6 +35,7 @@
     <PackageReference Include="Docker.DotNet" Version="3.125.2" />
     <PackageReference Include="Droid.Web" Version="1.0.5" />
     <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
+    <PackageReference Include="Microsoft.Web.Administration" Version="11.1.0" />
     <PackageReference Include="Npgsql" Version="4.0.4" />
     <PackageReference Include="Octokit" Version="0.32.0" />
     <PackageReference Include="Ofl.Atlassian.Jira" Version="3.0.6" />

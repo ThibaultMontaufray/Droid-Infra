@@ -99,8 +99,8 @@ namespace Droid.Infra.UI.Modules.Docker.View
                 dataGridViewContainer.Rows[dataGridViewContainer.Rows.Count - 1].Cells[ColumnImage.Index].Value = Container.DockerImage;
                 dataGridViewContainer.Rows[dataGridViewContainer.Rows.Count - 1].Cells[ColumnPort.Index].Value = Container.Port;
                 dataGridViewContainer.Rows[dataGridViewContainer.Rows.Count - 1].Cells[ColumnStatus.Index].Value = Container.Status;
-                dataGridViewContainer.Rows[dataGridViewContainer.Rows.Count - 1].Cells[ColumnDelete.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.cross;
-                dataGridViewContainer.Rows[dataGridViewContainer.Rows.Count - 1].Cells[ColumnInspect.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.zoom;
+                dataGridViewContainer.Rows[dataGridViewContainer.Rows.Count - 1].Cells[ColumnDelete.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.cross;
+                dataGridViewContainer.Rows[dataGridViewContainer.Rows.Count - 1].Cells[ColumnInspect.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.zoom;
                 dataGridViewContainer.Rows[dataGridViewContainer.Rows.Count - 1].Height = 48;
                 dataGridViewContainer.Rows[dataGridViewContainer.Rows.Count - 1].Tag = Container;
             }

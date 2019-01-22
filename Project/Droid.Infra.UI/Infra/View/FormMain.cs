@@ -72,14 +72,14 @@ namespace Droid.Infra.UI
             _ribbon.Tabs.Add(_intInf.Tsm);
 
             _btn_open = new RibbonButton(GetText.Text("Open"));
-            _btn_open.Image = Tools4Libraries.Resources.ResourceIconSet32Default.open_folder;
-            _btn_open.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.open_folder;
+            _btn_open.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.open_folder;
+            _btn_open.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.open_folder;
             _btn_open.Click += B_open_Click;
             _ribbon.OrbDropDown.MenuItems.Add(_btn_open);
 
             _btn_exit = new RibbonButton(GetText.Text("Exit"));
-            _btn_exit.Image = Tools4Libraries.Resources.ResourceIconSet32Default.door_out;
-            _btn_exit.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.door_out;
+            _btn_exit.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.door_out;
+            _btn_exit.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.door_out;
             _btn_exit.Click += B_exit_Click;
             _ribbon.OrbDropDown.MenuItems.Add(_btn_exit);
 

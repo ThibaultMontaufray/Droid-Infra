@@ -46,8 +46,8 @@ namespace Droid.Infra.UI
                     _dataGridView.Rows[_dataGridView.Rows.Count - 1].Cells[ColumnName.Index].Value = item.Name;
                     _dataGridView.Rows[_dataGridView.Rows.Count - 1].Cells[ColumnDomain.Index].Value = item.Domain;
                     _dataGridView.Rows[_dataGridView.Rows.Count - 1].Cells[ColumnLogin.Index].Value = item.Login;
-                    _dataGridView.Rows[_dataGridView.Rows.Count - 1].Cells[ColumnDelete.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.cross;
-                    _dataGridView.Rows[_dataGridView.Rows.Count - 1].Cells[ColumnEdit.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.drive_edit;
+                    _dataGridView.Rows[_dataGridView.Rows.Count - 1].Cells[ColumnDelete.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.cross;
+                    _dataGridView.Rows[_dataGridView.Rows.Count - 1].Cells[ColumnEdit.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.drive_edit;
                     _dataGridView.Rows[_dataGridView.Rows.Count - 1].Cells[ColumnTypeIcon.Index].Value = GetImage(item);
                     _dataGridView.Rows[_dataGridView.Rows.Count - 1].Cells[ColumnAddress.Index].Value = (string.IsNullOrEmpty(item.Ip) ? string.Empty : item.Ip + ((string.IsNullOrEmpty(item.Port)) ? string.Empty : ":" + item.Port));
                     _dataGridView.Rows[_dataGridView.Rows.Count - 1].Cells[ColumnToken.Index].Value = !string.IsNullOrEmpty(item.Token);

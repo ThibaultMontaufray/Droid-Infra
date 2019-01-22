@@ -72,8 +72,8 @@ namespace Droid.Infra.UI.Modules.Docker.View
                 dataGridViewNetwork.Rows[dataGridViewNetwork.Rows.Count - 1].Cells[ColumnDriver.Index].Value = network.Driver;
                 dataGridViewNetwork.Rows[dataGridViewNetwork.Rows.Count - 1].Cells[ColumnName.Index].Value = network.Name;
                 dataGridViewNetwork.Rows[dataGridViewNetwork.Rows.Count - 1].Cells[ColumnScope.Index].Value = network.Scope;
-                dataGridViewNetwork.Rows[dataGridViewNetwork.Rows.Count - 1].Cells[ColumnDelete.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.cross;
-                dataGridViewNetwork.Rows[dataGridViewNetwork.Rows.Count - 1].Cells[ColumnInspect.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.zoom;
+                dataGridViewNetwork.Rows[dataGridViewNetwork.Rows.Count - 1].Cells[ColumnDelete.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.cross;
+                dataGridViewNetwork.Rows[dataGridViewNetwork.Rows.Count - 1].Cells[ColumnInspect.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.zoom;
                 dataGridViewNetwork.Rows[dataGridViewNetwork.Rows.Count - 1].Tag = network;
             }
             this.ResumeLayout();

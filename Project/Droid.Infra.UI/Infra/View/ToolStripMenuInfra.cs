@@ -162,8 +162,8 @@ namespace Droid.Infra.UI
                 }
             }
 
-            //_syncanySynchro.Image = intInf.InfraSyncany.SynchronisationRunning ? Tools4Libraries.Resources.ResourceIconSet32Default.control_pause : Tools4Libraries.Resources.ResourceIconSet32Default.control_play;
-            //_syncanySynchro.SmallImage = intInf.InfraSyncany.SynchronisationRunning ? Tools4Libraries.Resources.ResourceIconSet16Default.control_pause : Tools4Libraries.Resources.ResourceIconSet16Default.control_play;
+            //_syncanySynchro.Image = intInf.InfraSyncany.SynchronisationRunning ? Tools.Utilities.UI.Resources.ResourceIconSet32Default.control_pause : Tools.Utilities.UI.Resources.ResourceIconSet32Default.control_play;
+            //_syncanySynchro.SmallImage = intInf.InfraSyncany.SynchronisationRunning ? Tools.Utilities.UI.Resources.ResourceIconSet16Default.control_pause : Tools.Utilities.UI.Resources.ResourceIconSet16Default.control_play;
         }
         #endregion
 
@@ -192,48 +192,48 @@ namespace Droid.Infra.UI
             _infraHome = new RibbonButton();
             _infraHome.Name = "Home";
             _infraHome.Text = GetText.Text(_infraHome.Name);
-            _infraHome.Image = Tools4Libraries.Resources.ResourceIconSet32Default.application_view_tile;
-            _infraHome.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.application_view_tile;
+            _infraHome.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.application_view_tile;
+            _infraHome.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.application_view_tile;
             _infraHome.MaxSizeMode = RibbonElementSizeMode.Large;
             _infraHome.Click += _infra_Click;
 
             _infraOpen = new RibbonButton();
             _infraOpen.Name = "Open";
             _infraOpen.Text = GetText.Text(_infraOpen.Name);
-            _infraOpen.Image = Tools4Libraries.Resources.ResourceIconSet32Default.layer_open;
-            _infraOpen.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.layer_open;
+            _infraOpen.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.layer_open;
+            _infraOpen.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.layer_open;
             _infraOpen.MaxSizeMode = RibbonElementSizeMode.Medium;
             _infraOpen.Click += _infra_Click;
 
             _infraSave = new RibbonButton();
             _infraSave.Name = "Save";
             _infraSave.Text = GetText.Text(_infraSave.Name);
-            _infraSave.Image = Tools4Libraries.Resources.ResourceIconSet32Default.layer_save;
-            _infraSave.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.layer_save;
+            _infraSave.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.layer_save;
+            _infraSave.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.layer_save;
             _infraSave.MaxSizeMode = RibbonElementSizeMode.Medium;
             _infraSave.Click += _infra_Click;
 
             _infraNew = new RibbonButton();
             _infraNew.Name = "New";
             _infraNew.Text = GetText.Text(_infraNew.Name);
-            _infraNew.Image = Tools4Libraries.Resources.ResourceIconSet32Default.layer_create;
-            _infraNew.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.layer_create;
+            _infraNew.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.layer_create;
+            _infraNew.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.layer_create;
             _infraNew.MaxSizeMode = RibbonElementSizeMode.Medium;
             _infraNew.Click += _infra_Click;
 
             _infraSettings = new RibbonButton();
             _infraSettings.Name = "Setting";
             _infraSettings.Text = GetText.Text(_infraSettings.Name);
-            _infraSettings.Image = Tools4Libraries.Resources.ResourceIconSet32Default.layers;
-            _infraSettings.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.layers;
+            _infraSettings.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.layers;
+            _infraSettings.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.layers;
             _infraSettings.MaxSizeMode = RibbonElementSizeMode.Large;
             _infraSettings.Click += _infra_Click;
 
             _infraAdd = new RibbonButton();
             _infraAdd.Name = "Add";
             _infraAdd.Text = GetText.Text(_infraAdd.Name);
-            _infraAdd.Image = Tools4Libraries.Resources.ResourceIconSet32Default.layer_add;
-            _infraAdd.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.layer_add;
+            _infraAdd.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.layer_add;
+            _infraAdd.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.layer_add;
             _infraAdd.MaxSizeMode = RibbonElementSizeMode.Large;
             _infraAdd.Click += _infra_Click;
 
@@ -250,8 +250,8 @@ namespace Droid.Infra.UI
         private void BuildPanelComputer()
         {
             _computerManage = new RibbonButton("Manage");
-            _computerManage.Image = Tools4Libraries.Resources.ResourceIconSet32Default.computer;
-            _computerManage.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.computer;
+            _computerManage.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.computer;
+            _computerManage.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.computer;
             _computerManage.MaxSizeMode = RibbonElementSizeMode.Large;
             _computerManage.Click += _computerManage_Click;
 
@@ -268,14 +268,14 @@ namespace Droid.Infra.UI
             _dockerManage.Click += _DockerClick;
 
             //_dockerInit = new RibbonButton("Init");
-            //_dockerInit.Image = Tools4Libraries.Resources.ResourceIconSet32Default.recycle;
-            //_dockerInit.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.recycle;
+            //_dockerInit.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.recycle;
+            //_dockerInit.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.recycle;
             //_dockerInit.MaxSizeMode = RibbonElementSizeMode.Medium;
             //_dockerInit.Click += _DockerClick;
 
             //_dockerStartStop = new RibbonButton("Start");
-            //_dockerStartStop.Image = Tools4Libraries.Resources.ResourceIconSet32Default.stopwatch_start;
-            //_dockerStartStop.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.stopwatch_start;
+            //_dockerStartStop.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.stopwatch_start;
+            //_dockerStartStop.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.stopwatch_start;
             //_dockerStartStop.MaxSizeMode = RibbonElementSizeMode.Medium;
             //_dockerStartStop.Click += _DockerClick;
             //_dockerSelectMachine
@@ -333,20 +333,20 @@ namespace Droid.Infra.UI
             _syncanyManage.Click += _SyncanyClick;
 
             _syncanyCreate = new RibbonButton("Create");
-            _syncanyCreate.Image = Tools4Libraries.Resources.ResourceIconSet32Default.weather_clouds;
-            _syncanyCreate.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.weather_clouds;
+            _syncanyCreate.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.weather_clouds;
+            _syncanyCreate.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.weather_clouds;
             _syncanyCreate.MaxSizeMode = RibbonElementSizeMode.Medium;
             _syncanyCreate.Click += _SyncanyClick;
 
             _syncanyAssociateRepository = new RibbonButton("Folder");
-            _syncanyAssociateRepository.Image = Tools4Libraries.Resources.ResourceIconSet32Default.network_folder;
-            _syncanyAssociateRepository.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.network_folder;
+            _syncanyAssociateRepository.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.network_folder;
+            _syncanyAssociateRepository.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.network_folder;
             _syncanyAssociateRepository.MaxSizeMode = RibbonElementSizeMode.Medium;
             _syncanyAssociateRepository.Click += _SyncanyClick;
 
             _syncanySynchro = new RibbonButton("Synchro");
-            _syncanySynchro.Image = Tools4Libraries.Resources.ResourceIconSet32Default.control_pause;
-            _syncanySynchro.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.control_pause;
+            _syncanySynchro.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.control_pause;
+            _syncanySynchro.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.control_pause;
             _syncanySynchro.MaxSizeMode = RibbonElementSizeMode.Medium;
             _syncanySynchro.Click += _SyncanyClick;
             
@@ -365,14 +365,14 @@ namespace Droid.Infra.UI
             _githubManage.Click += _GithubClick;
 
             _githubCreateIssue = new RibbonButton("Create issue");
-            _githubCreateIssue.Image = Tools4Libraries.Resources.ResourceIconSet32Default.wishlist_add;
-            _githubCreateIssue.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.wishlist_add;
+            _githubCreateIssue.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.wishlist_add;
+            _githubCreateIssue.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.wishlist_add;
             _githubCreateIssue.MaxSizeMode = RibbonElementSizeMode.Medium;
             _githubCreateIssue.Click += _GithubClick;
 
             _githubUserDetail = new RibbonButton("User detail");
-            _githubUserDetail.Image = Tools4Libraries.Resources.ResourceIconSet32Default.report_user;
-            _githubUserDetail.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.report_user;
+            _githubUserDetail.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.report_user;
+            _githubUserDetail.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.report_user;
             _githubUserDetail.MaxSizeMode = RibbonElementSizeMode.Medium;
             _githubUserDetail.Click += _GithubClick;
 
@@ -395,22 +395,22 @@ namespace Droid.Infra.UI
             _bitbucketManage.Click += _BitbucketClick;
 
             _bitbucketConnection = new RibbonButton("Connection");
-            _bitbucketConnection.Image = Tools4Libraries.Resources.ResourceIconSet32Default.report_key;
-            _bitbucketConnection.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.report_key;
+            _bitbucketConnection.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.report_key;
+            _bitbucketConnection.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.report_key;
             _bitbucketConnection.MaxSizeMode = RibbonElementSizeMode.Medium;
             _bitbucketConnection.MinSizeMode = RibbonElementSizeMode.Medium;
             _bitbucketConnection.Click += _BitbucketClick;
 
             _bitbucketAdd = new RibbonButton("Add");
-            _bitbucketAdd.Image = Tools4Libraries.Resources.ResourceIconSet32Default.report_add;
-            _bitbucketAdd.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.report_add;
+            _bitbucketAdd.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.report_add;
+            _bitbucketAdd.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.report_add;
             _bitbucketAdd.MaxSizeMode = RibbonElementSizeMode.Medium;
             _bitbucketAdd.MinSizeMode = RibbonElementSizeMode.Medium;
             _bitbucketAdd.Click += _BitbucketClick;
 
             _bitbucketSetting = new RibbonButton("Setting");
-            _bitbucketSetting.Image = Tools4Libraries.Resources.ResourceIconSet32Default.report_magnify;
-            _bitbucketSetting.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.report_magnify;
+            _bitbucketSetting.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.report_magnify;
+            _bitbucketSetting.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.report_magnify;
             _bitbucketSetting.MaxSizeMode = RibbonElementSizeMode.Medium;
             _bitbucketSetting.Click += _BitbucketClick;
 
@@ -440,14 +440,14 @@ namespace Droid.Infra.UI
             _youtrackManage.Click += _youtrackClick;
 
             _youtrackConnection = new RibbonButton("Connection");
-            _youtrackConnection.Image = Tools4Libraries.Resources.ResourceIconSet32Default.application_key;
-            _youtrackConnection.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.application_key; ;
+            _youtrackConnection.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.application_key;
+            _youtrackConnection.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.application_key; ;
             _youtrackConnection.MaxSizeMode = RibbonElementSizeMode.Medium;
             _youtrackConnection.Click += _youtrackClick;
 
             _youtrackCreateTicket = new RibbonButton("Create ticket");
-            _youtrackCreateTicket.Image = Tools4Libraries.Resources.ResourceIconSet32Default.note_add;
-            _youtrackCreateTicket.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.note_add;
+            _youtrackCreateTicket.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.note_add;
+            _youtrackCreateTicket.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.note_add;
             _youtrackCreateTicket.MaxSizeMode = RibbonElementSizeMode.Medium;
             _youtrackCreateTicket.Click += _youtrackClick;
 
@@ -498,32 +498,32 @@ namespace Droid.Infra.UI
             _vpnGlobalStatus.Click += _vpnClick;
 
             _vpnAuthentication = new RibbonButton("Authentication");
-            _vpnAuthentication.Image = Tools4Libraries.Resources.ResourceIconSet32Default.action_log;
-            _vpnAuthentication.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.action_log;
+            _vpnAuthentication.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.action_log;
+            _vpnAuthentication.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.action_log;
             _vpnAuthentication.Click += _vpnClick;
             _vpnAuthentication.MaxSizeMode = RibbonElementSizeMode.Medium;
 
             _vpnPassword = new RibbonButton("Password");
-            _vpnPassword.Image = Tools4Libraries.Resources.ResourceIconSet32Default.change_password;
-            _vpnPassword.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.change_password;
+            _vpnPassword.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.change_password;
+            _vpnPassword.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.change_password;
             _vpnPassword.Click += _vpnClick;
             _vpnPassword.MaxSizeMode = RibbonElementSizeMode.Medium;
 
             _vpnSelectPKCS11Key = new RibbonButton("Select key");
-            _vpnSelectPKCS11Key.Image = Tools4Libraries.Resources.ResourceIconSet32Default.key;
-            _vpnSelectPKCS11Key.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.key;
+            _vpnSelectPKCS11Key.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.key;
+            _vpnSelectPKCS11Key.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.key;
             _vpnSelectPKCS11Key.Click += _vpnClick;
             _vpnSelectPKCS11Key.MaxSizeMode = RibbonElementSizeMode.Medium;
 
             _vpnSettings = new RibbonButton("Settings");
-            _vpnSettings.Image = Tools4Libraries.Resources.ResourceIconSet32Default.setting_tools;
-            _vpnSettings.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.setting_tools;
+            _vpnSettings.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.setting_tools;
+            _vpnSettings.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.setting_tools;
             _vpnSettings.Click += _vpnClick;
             _vpnSettings.MaxSizeMode = RibbonElementSizeMode.Medium;
 
             _vpnStatus = new RibbonButton("Status");
-            _vpnStatus.Image = Tools4Libraries.Resources.ResourceIconSet32Default.connect;
-            _vpnStatus.SmallImage = Tools4Libraries.Resources.ResourceIconSet16Default.connect;
+            _vpnStatus.Image = Tools.Utilities.UI.Resources.ResourceIconSet32Default.connect;
+            _vpnStatus.SmallImage = Tools.Utilities.UI.Resources.ResourceIconSet16Default.connect;
             _vpnStatus.Click += _vpnClick;
             _vpnStatus.MaxSizeMode = RibbonElementSizeMode.Medium;
 

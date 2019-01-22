@@ -63,25 +63,25 @@ namespace Droid.Infra.UI
                     dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnName.Index].Value = machine.Name;
                     dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnDriver.Index].Value = machine.DriverName;
                     dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnDocker.Index].Value = machine.ConfigVersion;
-                    dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnDelete.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.cross;
-                    dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnInspect.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.zoom;
-                    dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnResetEnv.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.table_refresh;
-                    dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnRegenerateCert.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.ssl_certificates;
-                    dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnActive.Index].Value = (_adapter.Engine.CurrentMachine != null && _adapter.Engine.CurrentMachine.Name.Equals(machine.Name)) ? Tools4Libraries.Resources.ResourceIconSet16Default.cog_go : Tools4Libraries.Resources.ResourceIconSet16Default.cog_delete;
-                    dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnStartStop.Index].Value = machine.State == "Running" ? Tools4Libraries.Resources.ResourceIconSet16Default.control_pause : Tools4Libraries.Resources.ResourceIconSet16Default.control_play;
+                    dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnDelete.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.cross;
+                    dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnInspect.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.zoom;
+                    dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnResetEnv.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.table_refresh;
+                    dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnRegenerateCert.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.ssl_certificates;
+                    dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnActive.Index].Value = (_adapter.Engine.CurrentMachine != null && _adapter.Engine.CurrentMachine.Name.Equals(machine.Name)) ? Tools.Utilities.UI.Resources.ResourceIconSet16Default.cog_go : Tools.Utilities.UI.Resources.ResourceIconSet16Default.cog_delete;
+                    dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnStartStop.Index].Value = machine.State == "Running" ? Tools.Utilities.UI.Resources.ResourceIconSet16Default.control_pause : Tools.Utilities.UI.Resources.ResourceIconSet16Default.control_play;
                     switch (machine.State)
                     {
                         case "Running":
-                            dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnState.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.bullet_green;
+                            dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnState.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.bullet_green;
                             break;
                         case "Stopped":
-                            dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnState.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.bullet_red;
+                            dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnState.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.bullet_red;
                             break;
                         case "Timeout":
-                            dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnState.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.bullet_black;
+                            dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnState.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.bullet_black;
                             break;
                         default:
-                            dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnState.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.bullet_orange;
+                            dataGridViewMachines.Rows[dataGridViewMachines.Rows.Count - 1].Cells[ColumnState.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.bullet_orange;
                             break;
                     }
                 }
@@ -246,7 +246,7 @@ namespace Droid.Infra.UI
             }
             else if (e.ColumnIndex == ColumnStartStop.Index)
             {
-                dataGridViewMachines.Rows[e.RowIndex].Cells[ColumnStartStop.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.arrow_rotate_clockwise;
+                dataGridViewMachines.Rows[e.RowIndex].Cells[ColumnStartStop.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.arrow_rotate_clockwise;
                 StopStartMachine(machine);
             }
             else if (e.ColumnIndex == ColumnActive.Index)

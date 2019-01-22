@@ -53,7 +53,7 @@ namespace Droid.Infra.UI
                         if (_adapter.SysEvent[i].EntryType.ToString() != "Information")
                         { 
                             dataGridViewEvents.Rows.Add();
-                            dataGridViewEvents.Rows[dataGridViewEvents.Rows.Count - 1].Cells[ColumnLevel.Index].Value = _adapter.SysEvent[i].EntryType.ToString() == "Error" ? Tools4Libraries.Resources.ResourceIconSet16Default.exclamation : Tools4Libraries.Resources.ResourceIconSet16Default.error;
+                            dataGridViewEvents.Rows[dataGridViewEvents.Rows.Count - 1].Cells[ColumnLevel.Index].Value = _adapter.SysEvent[i].EntryType.ToString() == "Error" ? Tools.Utilities.UI.Resources.ResourceIconSet16Default.exclamation : Tools.Utilities.UI.Resources.ResourceIconSet16Default.error;
                             dataGridViewEvents.Rows[dataGridViewEvents.Rows.Count - 1].Cells[ColumnDescription.Index].Value = _adapter.SysEvent[i].Message;
                             dataGridViewEvents.Rows[dataGridViewEvents.Rows.Count - 1].Cells[ColumnDate.Index].Value = _adapter.SysEvent[i].TimeGenerated;
                             dataGridViewEvents.Rows[dataGridViewEvents.Rows.Count - 1].Cells[ColumnSource.Index].Value = _adapter.SysEvent[i].Source;

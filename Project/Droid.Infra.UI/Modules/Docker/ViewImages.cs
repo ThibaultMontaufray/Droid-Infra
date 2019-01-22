@@ -83,8 +83,8 @@ namespace Droid.Infra.UI.Modules.Docker.View
                 dataGridViewImages.Rows[dataGridViewImages.Rows.Count - 1].Cells[ColumnSize.Index].Value = img.Size;
                 dataGridViewImages.Rows[dataGridViewImages.Rows.Count - 1].Cells[ColumnTag.Index].Value = img.Tag;
                 dataGridViewImages.Rows[dataGridViewImages.Rows.Count - 1].Cells[ColumnCreated.Index].Value = img.Created;
-                dataGridViewImages.Rows[dataGridViewImages.Rows.Count - 1].Cells[ColumnDelete.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.cross;
-                dataGridViewImages.Rows[dataGridViewImages.Rows.Count - 1].Cells[ColumnInspect.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.zoom;
+                dataGridViewImages.Rows[dataGridViewImages.Rows.Count - 1].Cells[ColumnDelete.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.cross;
+                dataGridViewImages.Rows[dataGridViewImages.Rows.Count - 1].Cells[ColumnInspect.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.zoom;
                 dataGridViewImages.Rows[dataGridViewImages.Rows.Count - 1].Height = 48;
                 dataGridViewImages.Rows[dataGridViewImages.Rows.Count - 1].Tag = img;
             }

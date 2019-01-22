@@ -52,10 +52,10 @@ namespace Droid.Infra.UI.Modules.Docker.View
                     dataGridViewCompose.Rows[dataGridViewCompose.Rows.Count - 1].Cells[ColumnPath.Index].Value = item.CurrentDockerCompose?.Path;
                     dataGridViewCompose.Rows[dataGridViewCompose.Rows.Count - 1].Cells[ColumnStatus.Index].Value = item.Status;
                     dataGridViewCompose.Rows[dataGridViewCompose.Rows.Count - 1].Cells[ColumnIcon.Index].Value = Properties.Resources.docker_compose_small;
-                    dataGridViewCompose.Rows[dataGridViewCompose.Rows.Count - 1].Cells[ColumnStop.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.control_play;
-                    dataGridViewCompose.Rows[dataGridViewCompose.Rows.Count - 1].Cells[ColumnPause.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.control_pause;
-                    dataGridViewCompose.Rows[dataGridViewCompose.Rows.Count - 1].Cells[ColumnDelete.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.cross;
-                    dataGridViewCompose.Rows[dataGridViewCompose.Rows.Count - 1].Cells[ColumnInspect.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.zoom;
+                    dataGridViewCompose.Rows[dataGridViewCompose.Rows.Count - 1].Cells[ColumnStop.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.control_play;
+                    dataGridViewCompose.Rows[dataGridViewCompose.Rows.Count - 1].Cells[ColumnPause.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.control_pause;
+                    dataGridViewCompose.Rows[dataGridViewCompose.Rows.Count - 1].Cells[ColumnDelete.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.cross;
+                    dataGridViewCompose.Rows[dataGridViewCompose.Rows.Count - 1].Cells[ColumnInspect.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.zoom;
                 }
             }
         }

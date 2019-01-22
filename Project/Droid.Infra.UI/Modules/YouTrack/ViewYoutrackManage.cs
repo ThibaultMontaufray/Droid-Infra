@@ -125,14 +125,14 @@ namespace Droid.Infra.UI.Modules.YouTrack.View
                     }
                 }
 
-                datatable.Rows.Add(prio, item.Id, item.Summary, tagStr, assignees, Tools4Libraries.Resources.ResourceIconSet16Default.eye, item);
+                datatable.Rows.Add(prio, item.Id, item.Summary, tagStr, assignees, Tools.Utilities.UI.Resources.ResourceIconSet16Default.eye, item);
                 //_superGridViewIssues.Rows[_superGridViewIssues.Rows.Count - 1].Cells[ColumnPriority.Index].Style.ForeColor = ColorTranslator.FromHtml(((Issue)item).GetField("Priority").Color.Foreground ?? "#000000");
                 //_superGridViewIssues.Rows[_superGridViewIssues.Rows.Count - 1].Cells[ColumnPriority.Index].Style.BackColor = ColorTranslator.FromHtml(((Issue)item).GetField("Priority").Color.Background ?? "#FFFFFF");
                 //_superGridViewIssues.Rows[_superGridViewIssues.Rows.Count - 1].Cells[ColumnPriority.Index].Value = prio;
                 //_superGridViewIssues.Rows[_superGridViewIssues.Rows.Count - 1].Cells[ColumnId.Index].Value = item.Id;
                 //_superGridViewIssues.Rows[_superGridViewIssues.Rows.Count - 1].Cells[ColumnTags.Index].Value = tagStr;
                 //_superGridViewIssues.Rows[_superGridViewIssues.Rows.Count - 1].Cells[ColumnTitle.Index].Value = item.Summary;
-                //_superGridViewIssues.Rows[_superGridViewIssues.Rows.Count - 1].Cells[ColumnInspect.Index].Value = Tools4Libraries.Resources.ResourceIconSet16Default.eye;
+                //_superGridViewIssues.Rows[_superGridViewIssues.Rows.Count - 1].Cells[ColumnInspect.Index].Value = Tools.Utilities.UI.Resources.ResourceIconSet16Default.eye;
                 //_superGridViewIssues.Rows[_superGridViewIssues.Rows.Count - 1].Tag = item;
             }
             //_superGridViewIssues.Sort(ColumnPriority, System.ComponentModel.ListSortDirection.Ascending);
