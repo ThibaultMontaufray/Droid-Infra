@@ -2,8 +2,10 @@
 using System.Windows.Forms;
 using System.Linq;
 using Tools.Utilities;
-using Droid.Infra.Modules.Docker.Model;
-using Droid.Infra.Modules.Docker.Controler;
+//using Droid.Infra.Modules.Docker.Model;
+//using Droid.Infra.Modules.Docker.Controler;
+using Tools.Utilities.UI;
+using Microsoft.VisualBasic.Devices;
 
 namespace Droid.Infra.UI.Modules.Docker.View
 {

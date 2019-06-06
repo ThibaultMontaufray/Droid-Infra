@@ -7,6 +7,8 @@ using System.Runtime.Serialization.Json;
 using System.Xml;
 using System.Xml.Serialization;
 using Tools.Utilities.UI;
+using Droid.Infra;
+using Droid.Infra.UI.Infra.View;
 
 namespace Droid.Infra.UI
 {

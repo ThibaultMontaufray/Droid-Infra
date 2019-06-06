@@ -50,8 +50,9 @@ namespace Droid.Infra
             try
             {
                 var body = delivery.Body;
-                var message = Encoding.UTF8.GetString(body);
-                message = delivery.RoutingKey.Split('_')[1] + '|' + message;
+                //var message = Encoding.UTF8.GetString(body);
+                //message = delivery.RoutingKey.Split('_')[1] + '|' + message;
+                var message = delivery.RoutingKey.Split('_')[1] + "|" + DateTime.Now + "|" + Encoding.UTF8.GetString(body);
                 Console.WriteLine(" [x] Received {0}", message.Replace("\n", "\\n"));
                 Message?.Invoke(message, null);
             }
@@ -62,17 +63,26 @@ namespace Droid.Infra
         }
         private void OpenConnection()
         {
+            int _port;
             if (_factory != null)
             {
                 if (_connection == null || !_connection.IsOpen)
-                { 
-                    _connection = _factory.CreateConnection();
-                    _channel = _connection.CreateModel();
-                    _channel.QueueDeclare(queue: _queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
-                    var consumer = new EventingBasicConsumer(_channel);
-                    consumer.Received += Consumer_Received;
-                    _channel.BasicConsume(queue: _queueName, autoAck: true, consumer: consumer);
-                    Console.WriteLine(string.Format(" [open] RabbitMQ receiver connected to {0}.", _queueName));
+                {
+                    _factory.HostName = System.Configuration.ConfigurationManager.AppSettings["RABBIT_HOST"];
+                    _factory.UserName = System.Configuration.ConfigurationManager.AppSettings["RABBIT_USER"];
+                    _factory.Password = System.Configuration.ConfigurationManager.AppSettings["RABBIT_PSWD"];
+
+                    if (int.TryParse(System.Configuration.ConfigurationManager.AppSettings["RABBIT_PORT"], out _port))
+                    {
+                        _factory.Port = _port;
+                        _connection = _factory.CreateConnection();
+                        _channel = _connection.CreateModel();
+                        _channel.QueueDeclare(queue: _queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
+                        var consumer = new EventingBasicConsumer(_channel);
+                        consumer.Received += Consumer_Received;
+                        _channel.BasicConsume(queue: _queueName, autoAck: true, consumer: consumer);
+                        Console.WriteLine(string.Format(" [open] RabbitMQ receiver connected to {0}.", _queueName));
+                    }
                 }
             }
         }

@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using RabbitMQHare;
 using Newtonsoft.Json.Linq;
 using System.Timers;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.FileExtensions;
+using Microsoft.Extensions.Configuration.Json;
 
 namespace Droid.Infra
 {
@@ -18,6 +21,7 @@ namespace Droid.Infra
         public static event EventHandler QueueAdded;
         public static event EventHandler QueueRemoved;
 
+        private static IConfiguration config;
         private static int _port;
         private static Timer _timer;
         private static bool _daemonStarted;
@@ -62,8 +66,8 @@ namespace Droid.Infra
                 try
                 {
                     List<string> queues = new List<string>();
-                    WebClient webClient = new WebClient { Credentials = new NetworkCredential(ConfigurationManager.AppSettings["RABBIT_USER"], ConfigurationManager.AppSettings["RABBIT_PSWD"]) };
-                    string response = webClient.DownloadString(string.Format("http://{0}:15672/api/queues/%2F", ConfigurationManager.AppSettings["RABBIT_HOST"]));
+                    WebClient webClient = new WebClient { Credentials = new NetworkCredential(config["RABBIT_USER"], config["RABBIT_PSWD"]) };
+                    string response = webClient.DownloadString(string.Format("http://{0}:15672/api/queues/%2F", config["RABBIT_HOST"]));
                     return (RabbitQueue[])Newtonsoft.Json.JsonConvert.DeserializeObject(response, typeof(RabbitQueue[]));
                 }
                 catch (Exception exp)
@@ -92,13 +96,13 @@ namespace Droid.Infra
         {
             ConnectionFactory factory = new ConnectionFactory();
 
-            factory.HostName = System.Configuration.ConfigurationManager.AppSettings["RABBIT_HOST"];
-            factory.UserName = System.Configuration.ConfigurationManager.AppSettings["RABBIT_USER"];
-            factory.Password = System.Configuration.ConfigurationManager.AppSettings["RABBIT_PSWD"];
+            factory.HostName = config["RABBIT_HOST"];
+            factory.UserName = config["RABBIT_USER"];
+            factory.Password = config["RABBIT_PSWD"];
 
-            if (int.TryParse(System.Configuration.ConfigurationManager.AppSettings["RABBIT_PORT"], out _port))
+            if (int.TryParse(config["RABBIT_PORT"], out _port))
             {
-                factory = new ConnectionFactory() { Endpoint = new AmqpTcpEndpoint(System.Configuration.ConfigurationManager.AppSettings["RABBIT_HOST"], _port) };
+                factory.Port = _port;
                 using (var connection = factory.CreateConnection())
                 {
                     using (var channel = connection.CreateModel())
@@ -112,18 +116,26 @@ namespace Droid.Infra
         {
             ConnectionFactory factory = new ConnectionFactory();
 
-            factory.HostName = System.Configuration.ConfigurationManager.AppSettings["RABBIT_HOST"];
-            factory.UserName = System.Configuration.ConfigurationManager.AppSettings["RABBIT_USER"];
-            factory.Password = System.Configuration.ConfigurationManager.AppSettings["RABBIT_PSWD"];
+            factory.HostName = config["RABBIT_HOST"];
+            factory.UserName = config["RABBIT_USER"];
+            factory.Password = config["RABBIT_PSWD"];
 
-            if (int.TryParse(System.Configuration.ConfigurationManager.AppSettings["RABBIT_PORT"], out _port))
+            if (int.TryParse(config["RABBIT_PORT"], out _port))
             {
-                factory = new ConnectionFactory() { Endpoint = new AmqpTcpEndpoint(System.Configuration.ConfigurationManager.AppSettings["RABBIT_HOST"], _port) };
+                factory.Port = _port;
                 using (var connection = factory.CreateConnection())
                 {
                     using (var channel = connection.CreateModel())
                     {
-                        return channel.MessageCount(queueName);
+                        try
+                        {
+                            return channel.MessageCount(queueName);
+                        }
+                        catch (Exception exp)
+                        {
+                            Console.WriteLine(exp.Message);
+                            return uint.MinValue;
+                        }
                     }
                 }
             }
@@ -135,13 +147,13 @@ namespace Droid.Infra
             {
                 ConnectionFactory factory = new ConnectionFactory();
 
-                factory.HostName = System.Configuration.ConfigurationManager.AppSettings["RABBIT_HOST"];
-                factory.UserName = System.Configuration.ConfigurationManager.AppSettings["RABBIT_USER"];
-                factory.Password = System.Configuration.ConfigurationManager.AppSettings["RABBIT_PSWD"];
+                factory.HostName = config["RABBIT_HOST"];
+                factory.UserName = config["RABBIT_USER"];
+                factory.Password = config["RABBIT_PSWD"];
 
-                if (int.TryParse(System.Configuration.ConfigurationManager.AppSettings["RABBIT_PORT"], out _port))
+                if (int.TryParse(config["RABBIT_PORT"], out _port))
                 {
-                    factory = new ConnectionFactory() { Endpoint = new AmqpTcpEndpoint(System.Configuration.ConfigurationManager.AppSettings["RABBIT_HOST"], _port) };
+                    factory.Port = _port;
                     using (var connection = factory.CreateConnection())
                     {
                         using (var channel = connection.CreateModel())
@@ -164,13 +176,13 @@ namespace Droid.Infra
             {
                 ConnectionFactory factory = new ConnectionFactory();
 
-                factory.HostName = System.Configuration.ConfigurationManager.AppSettings["RABBIT_HOST"];
-                factory.UserName = System.Configuration.ConfigurationManager.AppSettings["RABBIT_USER"];
-                factory.Password = System.Configuration.ConfigurationManager.AppSettings["RABBIT_PSWD"];
+                factory.HostName = config["RABBIT_HOST"];
+                factory.UserName = config["RABBIT_USER"];
+                factory.Password = config["RABBIT_PSWD"];
 
-                if (int.TryParse(System.Configuration.ConfigurationManager.AppSettings["RABBIT_PORT"], out _port))
+                if (int.TryParse(config["RABBIT_PORT"], out _port))
                 {
-                    factory = new ConnectionFactory() { Endpoint = new AmqpTcpEndpoint(System.Configuration.ConfigurationManager.AppSettings["RABBIT_HOST"], _port) };
+                    factory.Port = _port;
                     using (var connection = factory.CreateConnection())
                     {
                         using (var channel = connection.CreateModel())
@@ -241,6 +253,11 @@ namespace Droid.Infra
         #region Methods private
         private static void Init()
         {
+            config = new ConfigurationBuilder().AddJsonFile("appsettings.json", true, true).Build();
+
+            Console.WriteLine("Rabbit user : " + config["RABBIT_USER"]);
+            Console.WriteLine("Rabbit host : " + config["RABBIT_HOST"]);
+
             _timer = new Timer();
             _timer.Interval = 1000;
             _timer.Elapsed += _timer_Elapsed;
@@ -254,14 +271,21 @@ namespace Droid.Infra
         }
         private static void ProcessDaemon()
         {
-            CleanOldQueues();
-
-            var newQueues = QueuesNames;
-            if (_lastKnownQueues == null || _lastKnownQueues.Except(newQueues).ToList().Any() || newQueues.Except(_lastKnownQueues).ToList().Any())
+            try
             {
-                QueueAdded?.Invoke(newQueues, null);
+                CleanOldQueues();
+
+                var newQueues = QueuesNames;
+                if (newQueues != null && _lastKnownQueues == null || _lastKnownQueues.Except(newQueues).Any() || newQueues.Except(_lastKnownQueues).Any())
+                {
+                    QueueAdded?.Invoke(newQueues, null);
+                }
+                _lastKnownQueues = newQueues;
             }
-            _lastKnownQueues = newQueues;
+            catch (Exception exp)
+            {
+                Console.WriteLine(exp.Message);
+            }
         }
         private static void CleanOldQueues()
         {

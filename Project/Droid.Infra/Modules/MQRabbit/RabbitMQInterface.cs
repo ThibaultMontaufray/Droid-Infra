@@ -24,14 +24,30 @@ namespace Droid.Infra
         {
             get
             {
-                return ServiceAdapter.Exist(SERVICENAME);
+                try
+                {
+                    return Environment.OSVersion.Platform.ToString().Contains("Win") ? ServiceAdapter.Exist(SERVICENAME) : false;
+                }
+                catch (Exception exp)
+                {
+                    Console.WriteLine(exp.Message);
+                    return false;
+                }
             }
         }
         public bool IsRunning
         {
             get
             {
-                return IsInstalled && ServiceAdapter.GetStatus(SERVICENAME) == "Running";
+                try
+                {
+                    return Environment.OSVersion.Platform.ToString().Contains("Win") ? IsInstalled && ServiceAdapter.GetStatus(SERVICENAME) == "Running" : false;
+                }
+                catch (Exception exp)
+                {
+                    Console.WriteLine(exp.Message);
+                    return false;
+                }
             }
         }
         public string Info
@@ -42,8 +58,9 @@ namespace Droid.Infra
                 {
                     return System.Text.Encoding.UTF8.GetString((byte[])_factory?.ClientProperties["information"]);
                 }
-                catch
+                catch (Exception exp)
                 {
+                    Console.WriteLine(exp.Message);
                     return string.Empty;
                 }
             }
@@ -56,8 +73,9 @@ namespace Droid.Infra
                 {
                     return System.Text.Encoding.UTF8.GetString((byte[])_factory?.ClientProperties["product"]);
                 }
-                catch
+                catch (Exception exp)
                 {
+                    Console.WriteLine(exp.Message);
                     return string.Empty;
                 }
             }
@@ -70,8 +88,9 @@ namespace Droid.Infra
                 {
                     return System.Text.Encoding.UTF8.GetString((byte[])_factory?.ClientProperties["platform"]);
                 }
-                catch
+                catch (Exception exp)
                 {
+                    Console.WriteLine(exp.Message);
                     return string.Empty;
                 }
             }
@@ -84,8 +103,9 @@ namespace Droid.Infra
                 {
                     return System.Text.Encoding.UTF8.GetString((byte[])_factory?.ClientProperties["version"]);
                 }
-                catch
+                catch (Exception exp)
                 {
+                    Console.WriteLine(exp.Message);
                     return string.Empty;
                 }
             }
@@ -98,8 +118,9 @@ namespace Droid.Infra
                 {
                     return System.Text.Encoding.UTF8.GetString((byte[])_factory?.ClientProperties["copyright"]);
                 }
-                catch
+                catch (Exception exp)
                 {
+                    Console.WriteLine(exp.Message);
                     return string.Empty;
                 }
             }
@@ -112,8 +133,9 @@ namespace Droid.Infra
                 {
                     return _factory?.HostName ?? string.Empty;
                 }
-                catch
+                catch (Exception exp)
                 {
+                    Console.WriteLine(exp.Message);
                     return string.Empty;
                 }
             }
@@ -126,8 +148,9 @@ namespace Droid.Infra
                 {
                     return _factory?.Password ?? string.Empty;
                 }
-                catch
+                catch (Exception exp)
                 {
+                    Console.WriteLine(exp.Message);
                     return string.Empty;
                 }
             }
@@ -140,8 +163,9 @@ namespace Droid.Infra
                 {
                     return _factory?.UserName ?? string.Empty;
                 }
-                catch
+                catch (Exception exp)
                 {
+                    Console.WriteLine(exp.Message);
                     return string.Empty;
                 }
             }
@@ -154,8 +178,9 @@ namespace Droid.Infra
                 {
                     return _factory?.Port.ToString() ?? string.Empty;
                 }
-                catch
+                catch (Exception exp)
                 {
+                    Console.WriteLine(exp.Message);
                     return string.Empty;
                 }
             }
@@ -168,8 +193,9 @@ namespace Droid.Infra
                 {
                     return _factory?.Protocol.ToString() ?? string.Empty;
                 }
-                catch
+                catch (Exception exp)
                 {
+                    Console.WriteLine(exp.Message);
                     return string.Empty;
                 }
             }
@@ -182,8 +208,9 @@ namespace Droid.Infra
                 {
                     return _factory?.SocketReadTimeout.ToString() ?? string.Empty;
                 }
-                catch
+                catch (Exception exp)
                 {
+                    Console.WriteLine(exp.Message);
                     return string.Empty;
                 }
             }
@@ -196,8 +223,9 @@ namespace Droid.Infra
                 {
                     return _factory?.SocketWriteTimeout.ToString() ?? string.Empty;
                 }
-                catch
+                catch (Exception exp)
                 {
+                    Console.WriteLine(exp.Message);
                     return string.Empty;
                 }
             }
@@ -206,8 +234,16 @@ namespace Droid.Infra
         {
             get
             {
-                Task.Run(() => ScanPath());
-                return _serverPath;
+                try
+                {
+                    Task.Run(() => ScanPath());
+                    return _serverPath;
+                }
+                catch (Exception exp)
+                {
+                    Console.WriteLine(exp.Message);
+                    return string.Empty;
+                }
             }
         }
         #endregion
@@ -242,6 +278,7 @@ namespace Droid.Infra
         {
             try
             {
+                if (!Environment.OSVersion.Platform.ToString().Contains("Win")) { return false; }
                 if (!IsRunning) { ServiceAdapter.StartService(SERVICENAME); }
                 return IsRunning;
             }
@@ -269,20 +306,27 @@ namespace Droid.Infra
 
         private void ScanPath()
         {
-            Console.WriteLine("Start searching server exe path : " + DateTime.Now.ToString());
-            DriveInfo[] allDrives = DriveInfo.GetDrives();
-            foreach (DriveInfo drive in allDrives.Where(d => d.DriveType == DriveType.Fixed).OrderByDescending(d => d.Name))
+            try
             {
-                if (drive.IsReady)
+                Console.WriteLine("Start searching server exe path : " + DateTime.Now.ToString());
+                DriveInfo[] allDrives = DriveInfo.GetDrives();
+                foreach (DriveInfo drive in allDrives.Where(d => d.DriveType == DriveType.Fixed).OrderByDescending(d => d.Name))
                 {
-                    DirectoryInfo scanDir = new DirectoryInfo(drive.Name);
-                    if (ScanFolder(scanDir))
-                    { 
-                        break;
+                    if (drive.IsReady)
+                    {
+                        DirectoryInfo scanDir = new DirectoryInfo(drive.Name);
+                        if (ScanFolder(scanDir))
+                        {
+                            break;
+                        }
                     }
                 }
+                Console.WriteLine("Finish searching server exe path : " + DateTime.Now.ToString());
             }
-            Console.WriteLine("Finish searching server exe path : " + DateTime.Now.ToString());
+            catch (Exception exp)
+            {
+                Console.WriteLine(exp.Message);
+            }
         }
         private bool ScanFolder(DirectoryInfo folder)
         {
@@ -349,33 +393,44 @@ namespace Droid.Infra
         }
         private async Task<string> ExecuteCommand(string cmd)
         {
-            if (string.IsNullOrEmpty(_serverPath)) { await new Task(() => ScanPath()); }
-
-            string result = string.Empty;
-            ProcessStartInfo psi = new ProcessStartInfo();
-            psi.WorkingDirectory = _serverPath;
-            psi.FileName = @"C:\Windows\System32\cmd.exe";
-            psi.UseShellExecute = false;
-            psi.Verb = "runas";
-            psi.Arguments = "/c " + cmd;
-            psi.RedirectStandardOutput = true;
-            psi.CreateNoWindow = true;
-
-            using (Process process = new Process())
+            try
             {
-                process.StartInfo = psi;
-                process.OutputDataReceived += process_OutputDataReceived;
-                process.ErrorDataReceived += process_ErrorDataReceived;
-                process.Start();
-
-                process.WaitForExit(300000); // max 5 min to execute
-
-                using (StreamReader reader = process.StandardOutput)
+                string result = string.Empty;
+                if (System.Environment.OSVersion.Platform.ToString().Contains("Win"))
                 {
-                    result = reader.ReadToEnd();
+                    if (string.IsNullOrEmpty(_serverPath)) { await new Task(() => ScanPath()); }
+
+                    ProcessStartInfo psi = new ProcessStartInfo();
+                    psi.WorkingDirectory = _serverPath;
+                    psi.FileName = @"C:\Windows\System32\cmd.exe";
+                    psi.UseShellExecute = false;
+                    psi.Verb = "runas";
+                    psi.Arguments = "/c " + cmd;
+                    psi.RedirectStandardOutput = true;
+                    psi.CreateNoWindow = true;
+
+                    using (Process process = new Process())
+                    {
+                        process.StartInfo = psi;
+                        process.OutputDataReceived += process_OutputDataReceived;
+                        process.ErrorDataReceived += process_ErrorDataReceived;
+                        process.Start();
+
+                        process.WaitForExit(300000); // max 5 min to execute
+
+                        using (StreamReader reader = process.StandardOutput)
+                        {
+                            result = reader.ReadToEnd();
+                        }
+                    }
                 }
+                return result;
             }
-            return result;
+            catch (Exception exp)
+            {
+                Console.WriteLine(exp.Message);
+                return string.Empty;
+            }
         }
         #endregion
 

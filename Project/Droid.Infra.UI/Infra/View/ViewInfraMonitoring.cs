@@ -11,6 +11,7 @@ using Tools.Utilities;
 using System.IO;
 using Droid.Web;
 using System.Reflection;
+using Tools.Utilities.UI;
 
 namespace Droid.Infra.UI.Infra.View
 {

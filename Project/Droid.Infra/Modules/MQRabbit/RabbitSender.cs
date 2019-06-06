@@ -8,6 +8,8 @@ namespace Droid.Infra
     public class RabbitSender : RabbitMQInterface
     {
         #region Attributes
+        private IConnection _connection;
+        private IModel _channel;
         #endregion
 
         #region Properties
@@ -24,24 +26,38 @@ namespace Droid.Infra
         {
             try
             {
-                using (var connection = _factory.CreateConnection())
+                int _port;
+                if (_factory != null)
                 {
-                    using (var channel = connection.CreateModel())
+                    if (_connection == null || !_connection.IsOpen)
                     {
+                        _factory.HostName = System.Configuration.ConfigurationManager.AppSettings["RABBIT_HOST"];
+                        _factory.UserName = System.Configuration.ConfigurationManager.AppSettings["RABBIT_USER"];
+                        _factory.Password = System.Configuration.ConfigurationManager.AppSettings["RABBIT_PSWD"];
 
-                        channel.QueueDeclare(queue: _queueName,
-                                             durable: false,
-                                             exclusive: false,
-                                             autoDelete: false,
-                                             arguments: null);
-                        
-                        var body = Encoding.UTF8.GetBytes(message);
+                        if (int.TryParse(System.Configuration.ConfigurationManager.AppSettings["RABBIT_PORT"], out _port))
+                        {
+                            _factory.Port = _port;
+                            using (var connection = _factory.CreateConnection())
+                            {
+                                using (_channel = connection.CreateModel())
+                                {
+                                    _channel.QueueDeclare(queue: _queueName,
+                                                         durable: false,
+                                                         exclusive: false,
+                                                         autoDelete: false,
+                                                         arguments: null);
 
-                        channel.BasicPublish(exchange: string.Empty,
-                                             routingKey: _queueName,
-                                             basicProperties: null,
-                                             body: body);
-                        Console.WriteLine(" [x] Sent {0}", message.Replace("\n", "\\n"));
+                                    var body = Encoding.UTF8.GetBytes(message);
+
+                                    _channel.BasicPublish(exchange: string.Empty,
+                                                         routingKey: _queueName,
+                                                         basicProperties: null,
+                                                         body: body);
+                                    Console.WriteLine(" [x] Sent {0}", message.Replace("\n", "\\n"));
+                                }
+                            }
+                        }
                     }
                 }
             }

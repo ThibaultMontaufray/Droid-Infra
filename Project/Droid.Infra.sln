@@ -3,10 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Droid.Infra.UI", "Droid.Infra.UI\Droid.Infra.UI.csproj", "{6827572C-022E-4C94-8E6C-4F4FC7AEAB18}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FBE96590-61D5-4EA7-8D07-7FA9B501C0D6} = {FBE96590-61D5-4EA7-8D07-7FA9B501C0D6}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest.Infra", "UnitTestProject\UnitTest.Infra.csproj", "{0502E480-EFF4-4EF5-9823-5DD0638EE4C3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FBE96590-61D5-4EA7-8D07-7FA9B501C0D6} = {FBE96590-61D5-4EA7-8D07-7FA9B501C0D6}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Droid.Infra", "Droid.Infra\Droid.Infra.csproj", "{FBE96590-61D5-4EA7-8D07-7FA9B501C0D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Droid.Infra", "Droid.Infra\Droid.Infra.csproj", "{FBE96590-61D5-4EA7-8D07-7FA9B501C0D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

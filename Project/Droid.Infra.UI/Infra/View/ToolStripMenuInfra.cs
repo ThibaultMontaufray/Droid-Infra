@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Tools.Utilities;
 using Tools.Utilities.UI;
+using Droid.Infra;
 
 namespace Droid.Infra.UI
 {
-    public class ToolStripMenuInfra : TSM
+    public class ToolStripMenuInfra : Tools.Utilities.UI.TSM
     {
         #region Enum
         //public enum INFRA_MODULE

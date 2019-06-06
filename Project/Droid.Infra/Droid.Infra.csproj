@@ -5,7 +5,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Authors>Thibault MONTAUFRAY</Authors>
-    <Version>1.0.14</Version>
+    <Version>1.0.17</Version>
     <Company>Servodroid</Company>
     <PackageLicenseUrl>https://raw.githubusercontent.com/ThibaultMontaufray/Tools4Libraries/master/License</PackageLicenseUrl>
     <Copyright>Copyright 2016</Copyright>
@@ -34,6 +34,8 @@
     <PackageReference Include="Dapplo.Registry" Version="0.6.2" />
     <PackageReference Include="Docker.DotNet" Version="3.125.2" />
     <PackageReference Include="Droid.Web" Version="1.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
     <PackageReference Include="Microsoft.Web.Administration" Version="11.1.0" />
     <PackageReference Include="Npgsql" Version="4.0.4" />
