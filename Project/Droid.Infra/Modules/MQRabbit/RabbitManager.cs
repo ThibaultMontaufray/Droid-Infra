@@ -21,7 +21,7 @@ namespace Droid.Infra
         public static event EventHandler QueueAdded;
         public static event EventHandler QueueRemoved;
 
-        private static IConfiguration config;
+        private static IConfiguration _config = new ConfigurationBuilder().AddJsonFile("appsettings.json", true, true).Build();
         private static int _port;
         private static Timer _timer;
         private static bool _daemonStarted;
@@ -39,8 +39,8 @@ namespace Droid.Infra
                 try
                 {
                     List<string> queues = new List<string>();
-                    WebClient webClient = new WebClient { Credentials = new NetworkCredential(ConfigurationManager.AppSettings["RABBIT_USER"], ConfigurationManager.AppSettings["RABBIT_PSWD"]) };
-                    string response = webClient.DownloadString(string.Format("http://{0}:15672/api/queues/%2F", ConfigurationManager.AppSettings["RABBIT_HOST"]));
+                    WebClient webClient = new WebClient { Credentials = new NetworkCredential(_config["RABBIT_USER"], _config["RABBIT_PSWD"]) };
+                    string response = webClient.DownloadString(string.Format("http://{0}:15672/api/queues/%2F", _config["RABBIT_HOST"]));
                     JArray tab = (JArray)Newtonsoft.Json.JsonConvert.DeserializeObject(response);
                     if (tab != null)
                     {
@@ -66,8 +66,8 @@ namespace Droid.Infra
                 try
                 {
                     List<string> queues = new List<string>();
-                    WebClient webClient = new WebClient { Credentials = new NetworkCredential(config["RABBIT_USER"], config["RABBIT_PSWD"]) };
-                    string response = webClient.DownloadString(string.Format("http://{0}:15672/api/queues/%2F", config["RABBIT_HOST"]));
+                    WebClient webClient = new WebClient { Credentials = new NetworkCredential(_config["RABBIT_USER"], _config["RABBIT_PSWD"]) };
+                    string response = webClient.DownloadString(string.Format("http://{0}:15672/api/queues/%2F", _config["RABBIT_HOST"]));
                     return (RabbitQueue[])Newtonsoft.Json.JsonConvert.DeserializeObject(response, typeof(RabbitQueue[]));
                 }
                 catch (Exception exp)
@@ -96,11 +96,11 @@ namespace Droid.Infra
         {
             ConnectionFactory factory = new ConnectionFactory();
 
-            factory.HostName = config["RABBIT_HOST"];
-            factory.UserName = config["RABBIT_USER"];
-            factory.Password = config["RABBIT_PSWD"];
+            factory.HostName = _config["RABBIT_HOST"];
+            factory.UserName = _config["RABBIT_USER"];
+            factory.Password = _config["RABBIT_PSWD"];
 
-            if (int.TryParse(config["RABBIT_PORT"], out _port))
+            if (int.TryParse(_config["RABBIT_PORT"], out _port))
             {
                 factory.Port = _port;
                 using (var connection = factory.CreateConnection())
@@ -116,27 +116,34 @@ namespace Droid.Infra
         {
             ConnectionFactory factory = new ConnectionFactory();
 
-            factory.HostName = config["RABBIT_HOST"];
-            factory.UserName = config["RABBIT_USER"];
-            factory.Password = config["RABBIT_PSWD"];
+            factory.HostName = _config["RABBIT_HOST"];
+            factory.UserName = _config["RABBIT_USER"];
+            factory.Password = _config["RABBIT_PSWD"];
 
-            if (int.TryParse(config["RABBIT_PORT"], out _port))
+            if (int.TryParse(_config["RABBIT_PORT"], out _port))
             {
-                factory.Port = _port;
-                using (var connection = factory.CreateConnection())
+                try
                 {
-                    using (var channel = connection.CreateModel())
+                    factory.Port = _port;
+                    using (var connection = factory.CreateConnection())
                     {
-                        try
+                        using (var channel = connection.CreateModel())
                         {
-                            return channel.MessageCount(queueName);
-                        }
-                        catch (Exception exp)
-                        {
-                            Console.WriteLine(exp.Message);
-                            return uint.MinValue;
+                            try
+                            {
+                                return channel.MessageCount(queueName);
+                            }
+                            catch (Exception exp)
+                            {
+                                Console.WriteLine(exp.Message);
+                                return uint.MinValue;
+                            }
                         }
                     }
+                }
+                catch (Exception exp)
+                {
+                    Console.WriteLine(exp.Message);
                 }
             }
             return 0;
@@ -147,11 +154,11 @@ namespace Droid.Infra
             {
                 ConnectionFactory factory = new ConnectionFactory();
 
-                factory.HostName = config["RABBIT_HOST"];
-                factory.UserName = config["RABBIT_USER"];
-                factory.Password = config["RABBIT_PSWD"];
+                factory.HostName = _config["RABBIT_HOST"];
+                factory.UserName = _config["RABBIT_USER"];
+                factory.Password = _config["RABBIT_PSWD"];
 
-                if (int.TryParse(config["RABBIT_PORT"], out _port))
+                if (int.TryParse(_config["RABBIT_PORT"], out _port))
                 {
                     factory.Port = _port;
                     using (var connection = factory.CreateConnection())
@@ -176,11 +183,11 @@ namespace Droid.Infra
             {
                 ConnectionFactory factory = new ConnectionFactory();
 
-                factory.HostName = config["RABBIT_HOST"];
-                factory.UserName = config["RABBIT_USER"];
-                factory.Password = config["RABBIT_PSWD"];
+                factory.HostName = _config["RABBIT_HOST"];
+                factory.UserName = _config["RABBIT_USER"];
+                factory.Password = _config["RABBIT_PSWD"];
 
-                if (int.TryParse(config["RABBIT_PORT"], out _port))
+                if (int.TryParse(_config["RABBIT_PORT"], out _port))
                 {
                     factory.Port = _port;
                     using (var connection = factory.CreateConnection())
@@ -204,9 +211,9 @@ namespace Droid.Infra
             {
                 DateTime date = DateTime.MaxValue;
                 DateTime dateTmp;
-                WebClient webClient = new WebClient { Credentials = new NetworkCredential(ConfigurationManager.AppSettings["RABBIT_USER"], ConfigurationManager.AppSettings["RABBIT_PSWD"]) };
-                //string response = webClient.DownloadString(string.Format("http://{0}:15672/api/queues/%2F", ConfigurationManager.AppSettings["RABBIT_HOST"]));
-                string response = webClient.DownloadString(string.Format("http://{0}:15672/api/queues?name=" + queueName, ConfigurationManager.AppSettings["RABBIT_HOST"]));
+                WebClient webClient = new WebClient { Credentials = new NetworkCredential(_config["RABBIT_USER"], _config["RABBIT_PSWD"]) };
+                //string response = webClient.DownloadString(string.Format("http://{0}:15672/api/queues/%2F", _config["RABBIT_HOST"]));
+                string response = webClient.DownloadString(string.Format("http://{0}:15672/api/queues?name=" + queueName, _config["RABBIT_HOST"]));
                 JArray tab = (JArray)Newtonsoft.Json.JsonConvert.DeserializeObject(response);
                 if (tab != null)
                 {
@@ -253,10 +260,8 @@ namespace Droid.Infra
         #region Methods private
         private static void Init()
         {
-            config = new ConfigurationBuilder().AddJsonFile("appsettings.json", true, true).Build();
-
-            Console.WriteLine("Rabbit user : " + config["RABBIT_USER"]);
-            Console.WriteLine("Rabbit host : " + config["RABBIT_HOST"]);
+            Console.WriteLine("Rabbit user : " + _config["RABBIT_USER"]);
+            Console.WriteLine("Rabbit host : " + _config["RABBIT_HOST"]);
 
             _timer = new Timer();
             _timer.Interval = 1000;

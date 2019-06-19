@@ -1,4 +1,5 @@
-﻿using RabbitMQ.Client;
+﻿using Microsoft.Extensions.Configuration;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Exceptions;
 using System;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Droid.Infra
     public class RabbitSender : RabbitMQInterface
     {
         #region Attributes
+        private IConfiguration _config = new ConfigurationBuilder().AddJsonFile("appsettings.json", true, true).Build();
         private IConnection _connection;
         private IModel _channel;
         #endregion
@@ -31,11 +33,11 @@ namespace Droid.Infra
                 {
                     if (_connection == null || !_connection.IsOpen)
                     {
-                        _factory.HostName = System.Configuration.ConfigurationManager.AppSettings["RABBIT_HOST"];
-                        _factory.UserName = System.Configuration.ConfigurationManager.AppSettings["RABBIT_USER"];
-                        _factory.Password = System.Configuration.ConfigurationManager.AppSettings["RABBIT_PSWD"];
+                        _factory.HostName = _config["RABBIT_HOST"];
+                        _factory.UserName = _config["RABBIT_USER"];
+                        _factory.Password = _config["RABBIT_PSWD"];
 
-                        if (int.TryParse(System.Configuration.ConfigurationManager.AppSettings["RABBIT_PORT"], out _port))
+                        if (int.TryParse(_config["RABBIT_PORT"], out _port))
                         {
                             _factory.Port = _port;
                             using (var connection = _factory.CreateConnection())

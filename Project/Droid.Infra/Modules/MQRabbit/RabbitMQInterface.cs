@@ -1,4 +1,5 @@
-﻿using RabbitMQ.Client;
+﻿using Microsoft.Extensions.Configuration;
+using RabbitMQ.Client;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -13,6 +14,8 @@ namespace Droid.Infra
         #region Attributes
         private const string SERVICENAME = "RabbitMQ";
         private string _serverPath = string.Empty;
+
+        private IConfiguration _config = new ConfigurationBuilder().AddJsonFile("appsettings.json", true, true).Build();
 
         protected ConnectionFactory _factory;
         protected string _queueName;
@@ -291,11 +294,11 @@ namespace Droid.Infra
         private void InitConnectionRabbit()
         {
             int port;
-            if (int.TryParse(System.Configuration.ConfigurationManager.AppSettings["RABBIT_PORT"], out port))
+            if (int.TryParse(_config["RABBIT_PORT"], out port))
             {
                 _factory = new ConnectionFactory()
                 {
-                    Endpoint = new AmqpTcpEndpoint(System.Configuration.ConfigurationManager.AppSettings["RABBIT_HOST"], port)
+                    Endpoint = new AmqpTcpEndpoint(_config["RABBIT_HOST"], port)
                 };
             }
         }
