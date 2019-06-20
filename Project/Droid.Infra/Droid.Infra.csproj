@@ -21,10 +21,17 @@
 
   <ItemGroup>
     <None Remove="Infra\Model\InfraMonitoring.html" />
+    <None Remove="Modules\Computer\Lib\FirewallAPI.dll" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Infra\Model\InfraMonitoring.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\Computer\Lib\FirewallAPI.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
