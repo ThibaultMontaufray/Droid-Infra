@@ -17,6 +17,7 @@
     <Description>Interface for soft integration (docker, github, jenkins, jira, syncany...). Allow you to create your own private cloud with syncany</Description>
     <AssemblyVersion>1.0.18.0</AssemblyVersion>
     <FileVersion>1.0.18.0</FileVersion>
+    <Configurations>Debug;Release;netcore</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

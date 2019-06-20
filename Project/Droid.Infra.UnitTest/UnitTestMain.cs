@@ -1,7 +1,9 @@
-using Droid.Infra;
 using NUnit.Framework;
+using System;
+using Microsoft.Extensions.Configuration;
+using Droid.Infra;
 
-namespace UnitTestProject
+namespace Droid.Infra.UnitTest
 {
     [TestFixture]
     public class UnitTest
@@ -51,9 +53,9 @@ namespace UnitTestProject
         {
             try
             {
-                JiraAdapter jira = new JiraAdapter("", "", "");
-                jira.CreateIssue("");
-                jira.DeleteIssue("");
+                //JiraAdapter jira = new JiraAdapter("", "", "");
+                //jira.CreateIssue("");
+                //jira.DeleteIssue("");
                 Assert.IsTrue(true);
             }
             catch (System.Exception exp)
