@@ -5,7 +5,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Authors>Thibault MONTAUFRAY</Authors>
-    <Version>1.0.18</Version>
+    <Version>1.0.19</Version>
     <Company>Servodroid</Company>
     <PackageLicenseUrl>https://raw.githubusercontent.com/ThibaultMontaufray/Tools4Libraries/master/License</PackageLicenseUrl>
     <Copyright>Copyright 2016</Copyright>
@@ -15,8 +15,8 @@
     <RepositoryType>github</RepositoryType>
     <PackageTags>Servodroid mqrabbit infra docker github jenkins jira syncany cloud</PackageTags>
     <Description>Interface for soft integration (docker, github, jenkins, jira, syncany...). Allow you to create your own private cloud with syncany</Description>
-    <AssemblyVersion>1.0.18.0</AssemblyVersion>
-    <FileVersion>1.0.18.0</FileVersion>
+    <AssemblyVersion>1.0.19.0</AssemblyVersion>
+    <FileVersion>1.0.19.0</FileVersion>
     <Configurations>Debug;Release;netcore</Configurations>
   </PropertyGroup>
 
