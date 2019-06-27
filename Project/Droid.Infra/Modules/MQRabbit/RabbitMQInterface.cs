@@ -269,10 +269,11 @@ namespace Droid.Infra
         protected void InitConnection()
         {
             if (_adminMode) { InitAdmin(); }
-            if (InitServiceRabbit())
-            {
-                InitConnectionRabbit();
-            }
+            //if (InitServiceRabbit())
+            //{
+            //    InitConnectionRabbit();    
+            //}
+            InitConnectionRabbit();
         }
         #endregion
 
