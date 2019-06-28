@@ -21,7 +21,7 @@ namespace Droid.Infra
         public static event EventHandler QueueAdded;
         public static event EventHandler QueueRemoved;
 
-        private static IConfiguration _config = new ConfigurationBuilder().AddJsonFile("appsettings.json", true, true).Build();
+        private static IConfiguration _config = new ConfigurationBuilder().AddJsonFile("appsettings.json", false, true).Build();
         private static int _port;
         private static Timer _timer;
         private static bool _daemonStarted;

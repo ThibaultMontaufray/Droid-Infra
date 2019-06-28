@@ -12,7 +12,7 @@ namespace Droid.Infra
     public class RabbitReceive : RabbitMQInterface
     {
         #region Attributes
-        private IConfiguration _config = new ConfigurationBuilder().AddJsonFile("appsettings.json", true, true).Build();
+        private IConfiguration _config = new ConfigurationBuilder().AddJsonFile("appsettings.json", false, true).Build();
 
         public event EventHandler Message;
         private IConnection _connection;
